@@ -1,4 +1,4 @@
-{% load staticfiles compress  %}
+{% load static compress  %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,29 +8,21 @@
   <meta name="author" content="King's Digital Lab">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   {% compress css %}
   <link rel="stylesheet" type="text/x-scss" href="{% static 'scss/main.scss' %}">
   {% endcompress %}
+  <link rel="stylesheet" type="text/x-scss" href="{% static 'scss/main.scss' %}">
 </head>
 <body>
   <header>
-    {% include 'includes/header.html' %}
   </header>
-
-  <nav>
-    {% include 'includes/navigation.html' %}
-  </nav>
-
   <main>
-    {% block title %}{% endblock %}
-    {% block main %}
-    {% endblock %}
+    {% block title %}{% endblock title %}
+    {% block main %}{% endblock main %}
   </main>
 
   <footer>
     {% block footer %}
-    {% include 'includes/footer.html' %}
     {% endblock %}
   </footer>
 

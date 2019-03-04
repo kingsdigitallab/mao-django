@@ -1,0 +1,52 @@
+{% extends "mao_era/base.html" %}
+{% load wagtailcore_tags %}
+
+{% block meta_title %}{{ page.title }}{% endblock meta_title %}
+
+{% block main %}
+<article>
+  <h2>{{ page.title }}</h2>
+
+  <p>{{ page.byline }}</p>
+
+  <div class="summary">
+    <a id="summary" href="#summary">{{ page.summary }}</a>
+  </div>
+
+  <hr>
+
+  <div class="keywords">
+    <ul>
+      {% for tag in page.tags.all %}
+      <li>{{ tag }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <hr>
+
+  {{ page.biography }}
+
+  <hr>
+
+  <div class="timeline">
+    <h3 id="timeline">Timeline</h3>
+  </div>
+
+  <hr>
+
+  <div class="relatedobjects">
+    <h3 id="relatedobjects">Related Objects</h3>
+
+    <ul>
+      {% for object in page.related_objects.all %}
+      <li>{{ object }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</article>
+
+<div class="sidebar">
+  <h4>CONTENT NAVIGATION</h4>
+</div>
+{% endblock main %}

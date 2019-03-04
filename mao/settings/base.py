@@ -101,6 +101,8 @@ INSTALLED_APPS += [    # your project apps here
     'taggit',
     'modelcluster',
     'wagtail.search',
+    'mao_era',
+    'search',
 ]
 
 INTERNAL_IPS = ['127.0.0.1']
@@ -175,12 +177,8 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-
-
-
     'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
-
 ]
 
 ROOT_URLCONF = PROJECT_NAME + '.urls'
@@ -308,11 +306,12 @@ AC_TOKEN = ''
 
 AUTH_LDAP_REQUIRE_GROUP = (
     (
-        LDAPGroupQuery('cn=kdl-staff,' + LDAP_BASE_OU) |
+        LDAPGroupQuery('cn=kdl-staff,' + LDAP_BASE_OU) |  # noqa
         LDAPGroupQuery('cn=mao,' + LDAP_BASE_OU)
     )
 )
 WAGTAIL_SITE_NAME = PROJECT_TITLE
+WAGTAILIMAGES_IMAGE_MODEL = 'mao_era.SourceImage'
 ITEMS_PER_PAGE = 10
 WAGTAILSEARCH_BACKENDS = {
     'default': {

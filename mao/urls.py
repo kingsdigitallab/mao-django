@@ -1,24 +1,24 @@
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path, re_path
+
+from search import views as search_views
+
 from kdl_ldap.signal_handlers import \
-    register_signal_handlers as kdl_ldap_register_signal_hadlers
+    register_signal_handlers as kdl_ldap_register_signal_handlers
 
-kdl_ldap_register_signal_hadlers()
 
+kdl_ldap_register_signal_handlers()
 
 admin.autodiscover()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
     path('digger/', include('activecollab_digger.urls')),
-
-
-    path('wagtail/', include('wagtail.admin.urls')),
     path('documents/', include('wagtail.documents.urls')),
+    path('search/', search_views.search, name='search'),
+    path('wagtail/', include('wagtail.admin.urls')),
     path('', include('wagtail.core.urls')),
-    path('search/', include('wagtail.search.urls')),
 
 ]
 
