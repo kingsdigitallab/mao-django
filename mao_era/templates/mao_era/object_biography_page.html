@@ -1,5 +1,5 @@
 {% extends "mao_era/base.html" %}
-{% load wagtailcore_tags %}
+{% load mao_era_tags wagtailcore_tags wagtailimages_tags %}
 
 {% block meta_title %}{{ page.title }}{% endblock meta_title %}
 
@@ -7,15 +7,45 @@
 <article>
   <h2>{{ page.title }}</h2>
 
-  <p>{{ page.byline }}</p>
+  <h5>Author: {{ page.byline }}</h5>
 
-  <div class="summary">
-    <a id="summary" href="#summary">{{ page.summary }}</a>
+  <div class="summary" id="summary">{{ page.summary }}</div>
+
+  <hr>
+
+  {{ page.biography }}
+
+  <hr>
+
+  <div class="sources" id="sources">
+    <h3>Sources</h3>
+
+    <div class="key">
+      <ul>
+        <li>⧉ <span>IMAGE</span></li>
+        <li>а <span>TEXT</span></li>
+        <li>▸ <span>VIDEO</span></li>
+        <li>♪ <span>AUDIO</span></li>
+        <li>▤ <span>PDF</span></li>
+      </ul>
+    </div>
+
+    <ol>
+      {% for biography_source in page.sources.all %}
+      <li>
+        {% with source=biography_source.source %}
+        <a href="{% pageurl source %}">{% display_source_title source %}</a>
+        {% endwith %}
+      </li>
+      {% endfor %}
+    </ol>
   </div>
 
   <hr>
 
-  <div class="keywords">
+  <div class="keywords" id="keywords">
+    <h3>Keywords</h3>
+
     <ul>
       {% for tag in page.tags.all %}
       <li>{{ tag }}</li>
@@ -25,28 +55,81 @@
 
   <hr>
 
-  {{ page.biography }}
-
-  <hr>
-
-  <div class="timeline">
-    <h3 id="timeline">Timeline</h3>
+  <div class="timeline" id="timeline">
+    <h3>Timeline</h3>
   </div>
 
   <hr>
 
-  <div class="relatedobjects">
-    <h3 id="relatedobjects">Related Objects</h3>
+  <div class="relatedobjects" id="relatedobjects">
+    <h3>Related Objects</h3>
 
     <ul>
       {% for object in page.related_objects.all %}
-      <li>{{ object }}</li>
+      <li>
+        <a href="{% pageurl object %}">
+          {% image object.featured_image original %}
+          <div class="photo-data">
+            <h3>{{ object.title }}</h3>
+            <p>{{ object.summary }}</p>
+          </div>
+        </a>
+      </li>
       {% endfor %}
     </ul>
   </div>
 </article>
 
 <div class="sidebar">
-  <h4>CONTENT NAVIGATION</h4>
+  <div class="tabs-object">
+    <input id="tab1" type="radio" name="tabs" checked="checked">
+    <label for="tab1"><span>Structure</span></label>
+
+    <input id="tab2" type="radio" name="tabs">
+    <label for="tab2"><span>Source</span></label>
+
+    <section id="content1" class="tab-content">
+      <ul>
+        <li>
+          <a href="#summary" class="name-active">
+            <h5>Summary</h5>
+          </a>
+        </li>
+        <li>
+          <a href="#sources">
+            <h5>Sources</h5>
+          </a>
+        </li>
+        <li>
+          <a href="#keywords">
+            <h5>Keywords</h5>
+          </a>
+        </li>
+        <li>
+          <a href="#timeline">
+            <h5>Timeline</h5>
+          </a>
+        </li>
+        <li>
+          <a href="#relatedobjects">
+            <h5>Related Objects</h5>
+          </a>
+        </li>
+      </ul>
+    </section>
+    <section id="content2" class="tab-content">
+      <ul>
+        {% for biography_source in page.sources.all %}
+        <li>
+          {% with source=biography_source.source %}
+          <a href="{% pageurl source %}">
+            <h5>Source {{ forloop.counter }} <span>{% display_source_title source %}</span></h5>
+          </a>
+          {% endwith %}
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+  </div>
 </div>
 {% endblock main %}

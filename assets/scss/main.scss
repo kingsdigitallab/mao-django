@@ -553,7 +553,11 @@ article {
   p{
   //font-family: 'Montserrat', sans-serif;
   }
-  
+  ol,ul{
+    li{
+      margin:0 0 1rem -20px;
+    }
+   }
   .keywords{
     width:100%;
     float:left;
@@ -566,12 +570,48 @@ article {
       color:$white;
       padding:0.3rem 0.5rem 0.2rem 0.5rem;
       list-style-type:none;
-      margin-bottom:0.5rem;
+      margin:0 0.1rem 0.5rem 0;
       font-size:0.9rem;
       font-family: 'Montserrat', sans-serif;
+      cursor: pointer;
+      &:hover{
+        background:darken($primary-color,35%);
+      }
       }
     }
   }/* end .keywords */
+    .footnotes{
+    width:100%;
+    float:left;
+  }/* end .footnotes */  
+  .sources{
+    .key{
+    width:100%;
+    float:left;
+      ul{
+        margin: 0 0 0 -40px;
+        text-align:left;
+    li{
+      background:darken($primary-color,25%);
+      display:inline-block;
+      color:$white;
+      padding:0.2rem 0.6rem 0.2rem 0.6rem;
+      list-style-type:none;
+      margin:0 0.1rem 0.5rem 0;
+      font-family: 'Montserrat', sans-serif;
+      cursor: pointer;
+      span{
+        font-size:0.7rem;
+        display: inline-block;
+        vertical-align: middle;
+      }
+      &:hover{
+        background:darken($primary-color,35%);
+      }
+      }
+    }
+  }/* end .key */
+  }/* end .sources */
   .location{
     width:100%;
     float:left;
@@ -590,19 +630,13 @@ article {
         width:100%;
       }
     }
-    ol{
-      margin-top:0;
-    }
   }/* end .location */
   .timeline{
     width:100%;
     float:left;
     img{width:100%;}
   }/* end .timeline */  
-  .footnotes{
-    width:100%;
-    float:left;
-  }/* end .footnotes */  
+
   .furtherreading{
     width:100%;
     float:left;
@@ -782,6 +816,39 @@ article {
   right: 0;
   text-align: center;
   overflow:scroll;
+   .tabs-object {
+  	margin: 0 auto;
+  	position: relative;
+  	input, section {
+  		clear: both;
+  		padding-top: 10px;
+  		display: none;
+  	}
+  	label {
+  		font-size: 0.7rem;
+  		display: block;
+  		padding: 0.2rem;
+      margin:0.5rem 1rem 1rem 0;
+  		cursor: pointer;
+  		text-decoration: none;
+  		text-align: center;
+  		color: lighten($primary-color,15%);
+      display:inline-block;
+      text-transform:uppercase;
+      font-family: 'Montserrat', sans-serif;
+  	}
+  	#tab1:checked ~ #content1,
+  	#tab2:checked ~ #content2,
+    #tab3:checked ~ #content3,
+    #tab4:checked ~ #content4{
+  		display: block;
+  	}
+  	[id^="tab"]:checked + label {
+  		color:$white;
+        border-bottom:1px solid;
+
+  	}
+  }
   .name-active{
     h5{
       color:$white;
@@ -815,7 +882,7 @@ article {
     padding: 0;
     li{
       text-align: left;
-      margin-bottom:30px;
+      margin-bottom:20px;
       display:block;
       float:left;
       width:100%; 
@@ -830,9 +897,9 @@ article {
         font-size:1.1rem;
         font-weight:normal;         
         &:before {
-          //border-radius: 50%;
-          background-color: lighten($primary-color,20%);
-          border: 2px solid lighten($primary-color,20%);
+          border-radius: 50%;
+          background-color: $darkgray;
+          border: 1px solid lighten($primary-color,20%);
           content: '';
           height: 9px;
           width: 9px;
@@ -840,6 +907,7 @@ article {
           display: block;
           z-index:5;
           margin-bottom: -0.75rem;
+          border-radius:50%;
         } 
       }/* end h5 */
       h6{
@@ -865,7 +933,7 @@ article {
         position: relative;
         margin:0.2rem 0 0.5rem 0;
         text-transform:none;
-        font-size:0.7rem;
+        font-size:0.9rem;
         color:lighten($primary-color,20%);
         display:block;
          font-family: 'Montserrat', sans-serif;
@@ -877,7 +945,7 @@ article {
         margin-left: 5px;
         padding-right:2px;
         padding-bottom:20rem;
-        padding-top: 0.3rem;
+        padding-top: 0.35rem;
         z-index:-1;
       }	 
       &:last-child{
@@ -908,4 +976,15 @@ article {
       }
     }/* end li */
   }/* end ul */
+  section{
+  &#content2{
+    ul{
+      li{
+        &:after{
+           padding-top: 2.2rem;
+         }	 
+      }
+    }
+  }
+  }
 }/* end .sidebar-nav */

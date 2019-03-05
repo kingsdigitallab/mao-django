@@ -52,6 +52,7 @@ class SourcePage(Page):
     SOURCE_TYPE_CHOICES = (
         ('audio', 'Audio'),
         ('image', 'Image'),
+        ('pdf', 'PDF'),
         ('text', 'Text'),
         ('video', 'Video'),
     )
@@ -130,11 +131,10 @@ class ObjectBiographyPage(Page):
         blank=True, max_length=11,
         validators=[RegexValidator(regex=DATE_REGEX, message=DATE_MESSAGE)])
     tags = ClusterTaggableManager(through=ObjectBiographyTag, blank=True)
-    featured_image = ParentalKey(
-        SourcePage, on_delete=models.PROTECT,
-        related_name='featured_biographies', unique=True)
-    related_objects = ParentalManyToManyField('mao_era.ObjectBiographyPage',
-                                              blank=True)
+    featured_image = models.ForeignKey(
+        SourceImage, on_delete=models.PROTECT,
+        related_name='featured_biographies')
+    related_objects = ParentalManyToManyField('self', blank=True)
 
     content_panels = Page.content_panels + [
         FieldPanel('byline'),
