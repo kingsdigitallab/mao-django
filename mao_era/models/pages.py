@@ -13,6 +13,7 @@ from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Orderable, Page
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.images.models import AbstractRendition
+from wagtail.search.query import MatchAll
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
@@ -234,7 +235,10 @@ class HomePage(Page):
                     query = query & models.Q(tags__name=tag)
             biographies = biographies.filter(query)
         # Search.
-        query = request.GET.get('q', '')
+        querystring = request.GET.get('q', '')
+        query = querystring
+        if not query:
+            query = MatchAll()
         results = biographies.search(query)
         # Facets.
         facets = {}
@@ -249,6 +253,6 @@ class HomePage(Page):
             'biographies': results,
             'facets': facets,
             'page': self,
-            'q': query,
+            'q': querystring,
         }
         return render(request, self.template, context)
