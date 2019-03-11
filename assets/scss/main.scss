@@ -583,6 +583,7 @@ article {
     .footnotes{
     width:100%;
     float:left;
+    font-size:0.9rem;
   }/* end .footnotes */  
   .sources{
     .key{
@@ -612,10 +613,11 @@ article {
     }
   }/* end .key */
   }/* end .sources */
-  .location{
+  .geography{
     width:100%;
     float:left;
-    .location-map{
+    font-size:1.1rem;
+    .geography-map{
       width:40%;
       margin-right:2%;
       float:left;        
@@ -623,7 +625,7 @@ article {
         width:100%;
       }
     }
-    .location-data{
+    .geography-data{
       width:58%;
       float:left;        
       img{
@@ -640,24 +642,32 @@ article {
   .furtherreading{
     width:100%;
     float:left;
+    font-size:1.1rem;
   }/* end .readinglist */  
   .relatedobjects{
     width:100%;
     float:left;
+    font-size:0.9rem;
     ul{
       margin-left:-40px;
       list-style-type:none;
       li{
-        width:100%;
+        width:46%;
+        margin-right:2%;
         float:left;
         margin-bottom:1rem;
+        margin-left:0;
+        //text-align:left;
+        h3{
+          font-size:1.1rem;
+        }
         img{
-          width:15%;
-          margin-right:5%;
+          width:25%;
+          margin-right:3%;
           float:left;
         }
         .photo-data{
-          width:80%;
+          width:72%;
           float:left;
         }
       }
@@ -732,61 +742,74 @@ article {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
         width:95%;
-        .align-left{
+        .source-section{
+          display: block;
+    float: left;
+    width: 100%;
+    border-top: 1px dashed $lightgray;
+    padding: 2rem 0;
+          h5{   
+    font-style: normal;
+    margin: 0 0 0.5rem 0;
+          }
+                  .align-left{
           width:70%;
           float: left;
           margin:0 3% 0 0;
         }
-        .metadata{        background:lighten($lightgray,5%);
-          margin-top:2rem;
-          width:100%;
-          float:left;
-          padding:1rem;
-           margin-top:0;
-            background:lighten($lightgray,5%);
-            width:27%;
-            float:left;
-            padding:0.5rem 1rem;
-            text-align:left;
-            font-size:0.8rem;
-          dl dt,
-          dl dd {
-            display:block;
-            vertical-align:top;
-            padding:0;
-            margin:0;
-          }
-          dl dt{
-            font-weight:600;
-            width:28%;
-            padding: 0 2% 0.5em 0;
-          }
-
-          dl dd{
-            margin-right:-1px;
-            width:70%;
-            padding: 0 0 0.5em 0;
-          }
-        }
-        figure{
-          &.align-left{
-            width:70%;
-            float: left;
-            margin:0 3% 0 0;
-            img{
+          .metadata{        background:lighten($lightgray,5%);
+            margin-top:2rem;
             width:100%;
+            float:left;
+            padding:1rem;
+             margin-top:0;
+              background:lighten($lightgray,5%);
+              width:27%;
+              float:left;
+              padding:0.5rem 1rem;
+              text-align:left;
+              font-size:0.8rem;
+            dl dt,
+            dl dd {
+              display:block;
+              vertical-align:top;
+              padding:0;
+              margin:0;
+            }
+            dl dt{
+              width: 28%;
+              padding: 0 2% 0 0;
+              font-size: 0.6rem;
+              text-transform: uppercase;
+              display: inline;
+            }
+
+            dl dd{
+              margin-right:-1px;
+              padding: 0 0 1rem 0;
+              font-size: 0.9rem;
             }
           }
-          &.align-right{
-            width:70%;
-            float: right;
-            margin:0 0 0 3%;
-            img{
+          figure{
+            &.align-left{
+              width:70%;
+              float: left;
+              margin:0 3% 0 0;
+              img{
               width:100%;
-            }
-          }
-        }
-      }
+              }
+            }/* end .align-left */
+            &.align-right{
+              width:70%;
+              float: right;
+              margin:0 0 0 3%;
+              img{
+                width:100%;
+              }
+            }/* end .align-right */
+          }/* end figure */
+        }/* end .meta-data */
+      }/* end .source-section */
       .close{
         background: $primary-color;
         color:white;
@@ -799,8 +822,8 @@ article {
         text-decoration:none;
         top:0;
         z-index: 1;
-      }
-    }
+      }/* end .close */
+    }/* end .modal-overlay */
   }/* modal */
 }
 
@@ -899,11 +922,12 @@ article {
         &:before {
           border-radius: 50%;
           background-color: $darkgray;
-          border: 1px solid lighten($primary-color,20%);
+          //border: 1px solid lighten($primary-color,20%);
+          border: 1px solid lighten($gray,10%);
           content: '';
-          height: 9px;
-          width: 9px;
-          margin-left:-15px;
+          height: 7px;
+          width: 7px;
+          margin-left:-14px;
           display: block;
           z-index:5;
           margin-bottom: -0.75rem;
@@ -941,7 +965,8 @@ article {
       &:after{
         content: '';
         border: none;
-        border-left: 1px solid lighten($primary-color,10%);
+        //border-left: 1px solid lighten($primary-color,10%);
+        border-left: 1px solid $gray;
         margin-left: 5px;
         padding-right:2px;
         padding-bottom:20rem;
@@ -976,15 +1001,4 @@ article {
       }
     }/* end li */
   }/* end ul */
-  section{
-  &#content2{
-    ul{
-      li{
-        &:after{
-           padding-top: 2.2rem;
-         }	 
-      }
-    }
-  }
-  }
 }/* end .sidebar-nav */

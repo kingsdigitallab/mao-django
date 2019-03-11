@@ -101,6 +101,7 @@ INSTALLED_APPS += [    # your project apps here
     'taggit',
     'modelcluster',
     'wagtail.search',
+    'wagtail.contrib.postgres_search',
     'mao_era',
     'search',
 ]
@@ -315,10 +316,8 @@ WAGTAILIMAGES_IMAGE_MODEL = 'mao_era.SourceImage'
 ITEMS_PER_PAGE = 10
 WAGTAILSEARCH_BACKENDS = {
     'default': {
-        'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch5',
-        'AUTO_UPDATE': False,
-        'URLS': ['http://127.0.0.1:9200'],
-        'INDEX': 'mao_wagtail',
-        'TIMEOUT': 5,
+        'BACKEND': 'wagtail.contrib.postgres_search.backend',
+        'AUTO_UPDATE': True,
+        'SEARCH_CONFIG': 'english',
     }
 }

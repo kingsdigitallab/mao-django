@@ -1,0 +1,89 @@
+{% extends "mao_era/base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block meta_title %}{{ page.title }}{% endblock meta_title %}
+
+{% block main %}
+<section id="search">
+  <form method="get">
+    <div class="search-field">
+      <input name="q" value="{{ q }}">
+      <button class="search-icon"></button>
+    </div>
+    <div class="search-filters">
+      <div class="filter">
+        <input type="checkbox" id="filter-nav">
+        <label aria-label="Filter list" for="filter-nav" class="filter-label">Filters</label> 
+        <div class="filter-drawer">
+          <div class="filter-content">
+            <h2>Filters</h2>
+            <form action="">
+              <h3>Date Range</h3>
+              <label>From <input type="text" name=""></label>
+              <br>
+              <label>To <input type="text" name=""></label>
+              <h3>Category 1</h3>
+              {% for facet in facets %}
+              <label>
+                <input type="checkbox" name="tag" value="{{ facet.0 }}">
+                {{ facet.0 }} <span>({{ facet.1 }})</span>
+              </label>
+              {% endfor %}
+              <button aria-label="clear filters">Reset</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
+
+<div class="tabs">
+  <input id="tab1" type="radio" name="tabs" checked="checked">
+  <label for="tab1"><span>Grid</span></label>
+  <input id="tab2" type="radio" name="tabs">
+  <label for="tab2"><span>List</span></label>
+
+  <section id="content1" class="tab-content">
+    {% for biography in biographies %}
+    <a href="{% pageurl biography %}">
+      <div class="photo">
+        <div class="photo-image">
+          {% image biography.featured_image original %}
+        </div>
+        <div class="photo-data">
+          <h2>{{ biography.title }}</h2>
+          <p class="summary">{{ biography.summary }}</p>
+          <ul class="keywords">
+            {% for tag in biography.tags.all %}
+            <li>{{ tag }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </section>
+
+  <section id="content2" class="tab-content">
+    {% for biography in biographies %}
+    <a href="{% pageurl biography %}">
+      <div class="photo">
+        <div class="photo-image">
+          {% image biography.featured_image original %}
+        </div>
+        <div class="photo-data">
+          <h2>{{ biography.title }}</h2>
+          <ul class="keywords">
+            {% for tag in biography.tags.all %}
+            <li>{{ tag }}</li>
+            {% endfor %}
+          </ul>
+          <p class="summary">{{ biography.summary }}</p>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </section>
+</div>
+{% endblock main %}

@@ -1,10 +1,11 @@
 from django import forms
 from django.core.validators import RegexValidator
 from django.db import models
+from django.shortcuts import render
 
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.contrib.taggit import ClusterTaggableManager
-from taggit.models import TaggedItemBase
+from taggit.models import Tag, TaggedItemBase
 from wagtail.admin.edit_handlers import (
     FieldPanel, InlinePanel, PageChooserPanel, StreamFieldPanel
 )
@@ -124,6 +125,7 @@ class ObjectBiographyPage(Page):
     byline = models.CharField(max_length=100)
     summary = models.TextField()
     biography = StreamField(BiographyStreamBlock())
+    further_reading = RichTextField(blank=True)
     date_start = models.CharField(
         max_length=11,
         validators=[RegexValidator(regex=DATE_REGEX, message=DATE_MESSAGE)])
@@ -140,6 +142,7 @@ class ObjectBiographyPage(Page):
         FieldPanel('byline'),
         FieldPanel('summary'),
         StreamFieldPanel('biography'),
+        FieldPanel('further_reading'),
         FieldPanel('date_start'),
         FieldPanel('date_end'),
         InlinePanel('sources', label='sources'),
@@ -151,10 +154,19 @@ class ObjectBiographyPage(Page):
 
     search_fields = Page.search_fields + [
         index.SearchField('biography'),
+        index.SearchField('summary'),
+        index.FilterField('name'),
         index.FilterField('tags'),
     ]
 
     subpage_types = []
+
+    def serve(self, request):
+        context = {
+            'home': self.get_parent(),
+            'page': self,
+        }
+        return render(request, self.template, context)
 
 
 class ObjectBiographyEvent(models.Model):
@@ -208,3 +220,35 @@ class HomePage(Page):
     subpage_types = [
         ObjectBiographyPage, ProjectPage, SourcePage, TimelinePage
     ]
+
+    def serve(self, request):
+        biographies = ObjectBiographyPage.objects.live()
+        # Filter by tags.
+        tags = request.GET.getlist('tag')
+        if tags:
+            query = None
+            for tag in tags:
+                if query is None:
+                    query = models.Q(tags__name=tag)
+                else:
+                    query = query & models.Q(tags__name=tag)
+            biographies = biographies.filter(query)
+        # Search.
+        query = request.GET.get('q', '')
+        results = biographies.search(query)
+        # Facets.
+        facets = {}
+        # Trying to facet on empty search results generates an
+        # exception. Helpful.
+        if results:
+            raw_facets = results.facet('tags')
+            facets = []
+            for (tag_id, count) in raw_facets.items():
+                facets.append((str(Tag.objects.get(id=tag_id)), count))
+        context = {
+            'biographies': results,
+            'facets': facets,
+            'page': self,
+            'q': query,
+        }
+        return render(request, self.template, context)

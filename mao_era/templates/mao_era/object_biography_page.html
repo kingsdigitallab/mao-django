@@ -48,7 +48,7 @@
 
     <ul>
       {% for tag in page.tags.all %}
-      <li>{{ tag }}</li>
+      <li><a href="{% pageurl home %}?tag={{ tag }}">{{ tag }}</li>
       {% endfor %}
     </ul>
   </div>
@@ -57,6 +57,14 @@
 
   <div class="timeline" id="timeline">
     <h3>Timeline</h3>
+  </div>
+
+  <hr>
+
+  <div class="furtherreading" id="furtherreading">
+    <h3>Further Reading</h3>
+
+    {{ page.further_reading|richtext }}
   </div>
 
   <hr>
@@ -91,29 +99,22 @@
     <section id="content1" class="tab-content">
       <ul>
         <li>
-          <a href="#summary" class="name-active">
-            <h5>Summary</h5>
-          </a>
+          <a href="#summary" class="name-active"><h5>Summary</h5></a>
         </li>
         <li>
-          <a href="#sources">
-            <h5>Sources</h5>
-          </a>
+          <a href="#sources"><h5>Sources</h5></a>
         </li>
         <li>
-          <a href="#keywords">
-            <h5>Keywords</h5>
-          </a>
+          <a href="#keywords"><h5>Keywords</h5></a>
         </li>
         <li>
-          <a href="#timeline">
-            <h5>Timeline</h5>
-          </a>
+          <a href="#timeline"><h5>Timeline</h5></a>
         </li>
         <li>
-          <a href="#relatedobjects">
-            <h5>Related Objects</h5>
-          </a>
+          <a href="#furtherreading"><h5>Further Reading</h5></a>
+        </li>
+        <li>
+          <a href="#relatedobjects"><h5>Related Objects</h5></a>
         </li>
       </ul>
     </section>
