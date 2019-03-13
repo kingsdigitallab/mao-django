@@ -1,6 +1,5 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 <figure class="align-{{ value.image_align }}">
   {% image value.image original %}
-  <figcaption>{{ value.image.caption|richtext }}</figcaption>
+  <figcaption>{{ value.image.caption }}</figcaption>
 </figure>
-{{ value.text|richtext }}

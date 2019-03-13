@@ -7,13 +7,35 @@
 <article>
   <h2>{{ page.title }}</h2>
 
-  <h5>Author: {{ page.byline }}</h5>
+  <h5>{{ page.byline }}</h5>
 
   <div class="summary" id="summary">{{ page.summary }}</div>
 
   <hr>
 
+  <div class="keywords" id="keywords">
+    <h3>Keywords</h3>
+
+    <ul>
+      {% for tag in page.tags.all %}
+      <li><a href="{% pageurl home %}?tag={{ tag }}">{{ tag }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <hr>
+
   {{ page.biography }}
+
+  <hr>
+
+  <div class="footnotes" id="footnotes" style="clear: both;">
+    <h3>Footnotes</h3>
+
+    <ol>
+      {{ page.footnotes }}
+    </ol>
+  </div>
 
   <hr>
 
@@ -39,18 +61,6 @@
       </li>
       {% endfor %}
     </ol>
-  </div>
-
-  <hr>
-
-  <div class="keywords" id="keywords">
-    <h3>Keywords</h3>
-
-    <ul>
-      {% for tag in page.tags.all %}
-      <li><a href="{% pageurl home %}?tag={{ tag }}">{{ tag }}</li>
-      {% endfor %}
-    </ul>
   </div>
 
   <hr>
@@ -102,10 +112,18 @@
           <a href="#summary" class="name-active"><h5>Summary</h5></a>
         </li>
         <li>
-          <a href="#sources"><h5>Sources</h5></a>
+          <a href="#keywords"><h5>Keywords</h5></a>
+        </li>
+        {% for block in page.biography %}
+        <li>
+          <a href="#section-{{ forloop.counter }}"><h5>{{ block.value.heading }}</h5></a>
+        </li>
+        {% endfor %}
+        <li>
+          <a href="#footnotes"><h5>Footnotes</h5></a>
         </li>
         <li>
-          <a href="#keywords"><h5>Keywords</h5></a>
+          <a href="#sources"><h5>Sources</h5></a>
         </li>
         <li>
           <a href="#timeline"><h5>Timeline</h5></a>

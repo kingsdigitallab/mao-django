@@ -1,7 +1,8 @@
 from django import forms
 
 from wagtail.core.blocks import (
-    FieldBlock, RichTextBlock, StreamBlock, StructBlock
+    CharBlock, FieldBlock, IntegerBlock, RichTextBlock, StreamBlock,
+    StructBlock, TextBlock
 )
 from wagtail.images.blocks import ImageChooserBlock
 
@@ -13,17 +14,50 @@ class AlignmentChoiceBlock(FieldBlock):
     ))
 
 
-class TextImageBlock(StructBlock):
+class FootnoteBlock(StructBlock):
+
+    number = IntegerBlock(min_value=1)
+    footnote = TextBlock()
+
+    class Meta:
+        template = 'mao_era/blocks/footnote_block.html'
+
+
+class ImageBlock(StructBlock):
 
     image = ImageChooserBlock()
     image_align = AlignmentChoiceBlock()
-    text = RichTextBlock()
 
     class Meta:
-        template = 'mao_era/blocks/text_image_block.html'
+        template = 'mao_era/blocks/image_block.html'
+
+
+class SectionContentBlock(StreamBlock):
+
+    text = RichTextBlock()
+    image = ImageBlock()
+
+
+class SectionBlock(StructBlock):
+
+    heading = CharBlock()
+    content = SectionContentBlock()
+
+    class Meta:
+        template = 'mao_era/blocks/section_block.html'
 
 
 class BiographyStreamBlock(StreamBlock):
 
-    text = RichTextBlock()
-    text_with_image = TextImageBlock()
+    section = SectionBlock()
+
+    class Meta:
+        template = 'mao_era/blocks/biography_block.html'
+
+
+class FootnotesStreamBlock(StreamBlock):
+
+    footnote = FootnoteBlock()
+
+    class Meta:
+        template = 'mao_era/blocks/footnotes_block.html'

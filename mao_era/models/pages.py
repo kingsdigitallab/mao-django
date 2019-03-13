@@ -11,14 +11,13 @@ from wagtail.admin.edit_handlers import (
 )
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Orderable, Page
-from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.images.models import AbstractRendition
 from wagtail.search.query import MatchAll
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
-from .blocks import BiographyStreamBlock
+from .blocks import BiographyStreamBlock, FootnotesStreamBlock
 from .images import AbstractImage
 
 
@@ -29,17 +28,24 @@ DATE_MESSAGE = 'Enter a valid date (YYYY, YYYY-MM, or YYYY-MM-DD)'
 @register_snippet
 class Event(models.Model):
 
-    name = models.CharField(max_length=50)
     date_start = models.CharField(
         max_length=11,
         validators=[RegexValidator(regex=DATE_REGEX, message=DATE_MESSAGE)])
     date_end = models.CharField(
         blank=True, max_length=11,
         validators=[RegexValidator(regex=DATE_REGEX, message=DATE_MESSAGE)])
-    note = RichTextField(blank=True)
+    description = RichTextField(blank=True)
 
     def __str__(self):
         return self.name
+
+
+@register_snippet
+class Place(models.Model):
+
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    address = models.CharField(max_length=100)
 
 
 class ObjectBiographyTag(TaggedItemBase):
@@ -81,18 +87,29 @@ class SourcePage(Page):
 
 class SourceImage(AbstractImage, Orderable):
 
-    caption = RichTextField(blank=True)
+    # Wagtail will silently fail to show a RichTextField in the
+    # editing image upload interface.
+    caption = models.CharField(blank=True, max_length=100)
+    source = ParentalKey(SourcePage, blank=True, null=True,
+                         on_delete=models.CASCADE, related_name='images')
 
     admin_form_fields = (
         'title',
-        'caption',
         'file',
         'collection',
         'focal_point_x',
         'focal_point_y',
         'focal_point_width',
         'focal_point_height',
+        'caption',
+        'source',
     )
+
+    panels = [
+        FieldPanel('title'),
+        FieldPanel('caption'),
+        FieldPanel('file'),
+    ]
 
 
 class SourceImageRendition(AbstractRendition):
@@ -106,50 +123,30 @@ class SourceImageRendition(AbstractRendition):
         )
 
 
-class SourcePageImage(models.Model):
-
-    source = ParentalKey(SourcePage, on_delete=models.CASCADE,
-                         related_name='images')
-    image = models.ForeignKey(SourceImage, on_delete=models.CASCADE,
-                              related_name='sources')
-
-    panels = [
-        ImageChooserPanel('image')
-    ]
-
-    class Meta:
-        unique_together = ('source', 'image')
-
-
 class ObjectBiographyPage(Page):
 
     byline = models.CharField(max_length=100)
     summary = models.TextField()
     biography = StreamField(BiographyStreamBlock())
+    footnotes = StreamField(FootnotesStreamBlock(), blank=True)
     further_reading = RichTextField(blank=True)
-    date_start = models.CharField(
-        max_length=11,
-        validators=[RegexValidator(regex=DATE_REGEX, message=DATE_MESSAGE)])
-    date_end = models.CharField(
-        blank=True, max_length=11,
-        validators=[RegexValidator(regex=DATE_REGEX, message=DATE_MESSAGE)])
-    tags = ClusterTaggableManager(through=ObjectBiographyTag, blank=True)
     featured_image = models.ForeignKey(
         SourceImage, on_delete=models.PROTECT,
         related_name='featured_biographies')
+    tags = ClusterTaggableManager(through=ObjectBiographyTag, blank=True)
     related_objects = ParentalManyToManyField('self', blank=True)
 
     content_panels = Page.content_panels + [
         FieldPanel('byline'),
         FieldPanel('summary'),
-        StreamFieldPanel('biography'),
-        FieldPanel('further_reading'),
-        FieldPanel('date_start'),
-        FieldPanel('date_end'),
-        InlinePanel('sources', label='sources'),
-        FieldPanel('featured_image'),
-        InlinePanel('events', label='events'),
         FieldPanel('tags'),
+        StreamFieldPanel('biography'),
+        StreamFieldPanel('footnotes'),
+        FieldPanel('further_reading'),
+        InlinePanel('sources', label='sources'),
+        InlinePanel('events', label='events'),
+        InlinePanel('places', label='places'),
+        FieldPanel('featured_image'),
         FieldPanel('related_objects', widget=forms.CheckboxSelectMultiple),
     ]
 
@@ -183,6 +180,21 @@ class ObjectBiographyEvent(models.Model):
 
     class Meta:
         unique_together = ('biography', 'event')
+
+
+class ObjectBiographyPlace(models.Model):
+
+    biography = ParentalKey(ObjectBiographyPage, on_delete=models.CASCADE,
+                            related_name='places')
+    place = models.ForeignKey(Place, on_delete=models.CASCADE,
+                              related_name='biographies')
+
+    panels = [
+        SnippetChooserPanel('place')
+    ]
+
+    class Meta:
+        unique_together = ('biography', 'place')
 
 
 class ObjectBiographySource(models.Model):

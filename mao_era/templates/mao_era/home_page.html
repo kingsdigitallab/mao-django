@@ -5,7 +5,7 @@
 
 {% block main %}
 <section id="search">
-  <form method="get">
+  <form action="" method="get">
     <div class="search-field">
       <input name="q" value="{{ q }}">
       <button class="search-icon"></button>
@@ -17,20 +17,14 @@
         <div class="filter-drawer">
           <div class="filter-content">
             <h2>Filters</h2>
-            <form action="">
-              <h3>Date Range</h3>
-              <label>From <input type="text" name=""></label>
-              <br>
-              <label>To <input type="text" name=""></label>
-              <h3>Category 1</h3>
-              {% for facet in facets %}
-              <label>
-                <input type="checkbox" name="tag" value="{{ facet.0 }}">
-                {{ facet.0 }} <span>({{ facet.1 }})</span>
-              </label>
-              {% endfor %}
-              <button aria-label="clear filters">Reset</button>
-            </form>
+
+            {% for facet in facets %}
+            <label>
+              <input type="checkbox" name="tag" value="{{ facet.0 }}">
+              {{ facet.0 }} <span>({{ facet.1 }})</span>
+            </label>
+            {% endfor %}
+            <button aria-label="clear filters">Reset</button>
           </div>
         </div>
       </div>
