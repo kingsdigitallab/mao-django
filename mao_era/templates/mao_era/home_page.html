@@ -40,21 +40,28 @@
 
   <section id="content1" class="tab-content">
     {% for biography in biographies %}
-    <a href="{% pageurl biography %}">
+    
       <div class="photo">
-        <div class="photo-image">
-          {% image biography.featured_image original %}
-        </div>
-        <div class="photo-data">
-          <h2>{{ biography.title }}</h2>
-          <p class="summary">{{ biography.summary }}</p>
-          <ul class="keywords">
-            {% for tag in biography.tags.all %}
-            <li>{{ tag }}</li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
+        <a href="#{% pageurl biography %}">
+          <div class="photo-image">
+            {% image biography.featured_image original %}
+          </div><!--end .photo-image-->
+        </a>
+        <div class="modal-overlay" id={% pageurl biography %}>
+          <div class="modal-content">
+          <a href="#" class="modal-close">&#10005;</a>
+            <h3>{{ biography.title }}</h3>
+            <p>{{ biography.summary }}</p>
+            <a class="readmore" href="{% pageurl biography %}">Read more ></a>
+            <ul class="keywords">
+              <h5>KEYWORDS</h5>
+              {% for tag in biography.tags.all %}
+              <li>{{ tag }}</li>
+              {% endfor %}
+            </ul>
+          </div><!--end .modal-content-->
+        </div><!--end .modal-overlay-->
+      </div><!--end .photo-->
     </a>
     {% endfor %}
   </section>
@@ -68,12 +75,13 @@
         </div>
         <div class="photo-data">
           <h2>{{ biography.title }}</h2>
+          <p class="summary">{{ biography.summary }}</p>
           <ul class="keywords">
+          <h6>KEYWORDS</h6>
             {% for tag in biography.tags.all %}
             <li>{{ tag }}</li>
             {% endfor %}
           </ul>
-          <p class="summary">{{ biography.summary }}</p>
         </div>
       </div>
     </a>

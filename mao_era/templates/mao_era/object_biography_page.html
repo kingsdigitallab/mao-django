@@ -77,24 +77,8 @@
     {{ page.further_reading|richtext }}
   </div>
 
-  <hr>
 
-  <div class="relatedobjects" id="relatedobjects">
-    <h3>Related Objects</h3>
-
-    <ul>
-      {% for object in page.related_objects.all %}
-      <li>
-        <a href="{% pageurl object %}">
-          {% image object.featured_image original %}
-          <div class="photo-data">
-            <h3>{{ object.title }}</h3>
-            <p>{{ object.summary }}</p>
-          </div>
-        </a>
-      </li>
-      {% endfor %}
-    </ul>
+    
   </div>
 </article>
 
@@ -105,6 +89,9 @@
 
     <input id="tab2" type="radio" name="tabs">
     <label for="tab2"><span>Source</span></label>
+
+    <input id="tab3" type="radio" name="tabs">
+    <label for="tab3"><span>Related</span></label>
 
     <section id="content1" class="tab-content">
       <ul>
@@ -131,9 +118,6 @@
         <li>
           <a href="#furtherreading"><h5>Further Reading</h5></a>
         </li>
-        <li>
-          <a href="#relatedobjects"><h5>Related Objects</h5></a>
-        </li>
       </ul>
     </section>
     <section id="content2" class="tab-content">
@@ -148,6 +132,22 @@
         </li>
         {% endfor %}
       </ul>
+    </section>
+
+    <section id="content3" class="tab-content relatedobjects">
+      <ul>
+      {% for object in page.related_objects.all %}
+      <li>
+        <a href="{% pageurl object %}">
+
+            <h3>{{ object.title }}</h3>
+            {% image object.featured_image original %}
+            <p>{{ object.summary }}</p>
+
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
     </section>
   </div>
 </div>
