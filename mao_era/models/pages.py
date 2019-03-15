@@ -1,3 +1,5 @@
+import json
+
 from django import forms
 from django.core.validators import RegexValidator
 from django.db import models
@@ -28,6 +30,7 @@ DATE_MESSAGE = 'Enter a valid date (YYYY, YYYY-MM, or YYYY-MM-DD)'
 @register_snippet
 class Event(models.Model):
 
+    title = models.CharField(max_length=50)
     date_start = models.CharField(
         max_length=11,
         validators=[RegexValidator(regex=DATE_REGEX, message=DATE_MESSAGE)])
@@ -37,15 +40,20 @@ class Event(models.Model):
     description = RichTextField(blank=True)
 
     def __str__(self):
-        return self.name
+        return self.title
 
 
 @register_snippet
 class Place(models.Model):
 
+    title = models.CharField(max_length=50)
     latitude = models.FloatField()
     longitude = models.FloatField()
     address = models.CharField(max_length=100)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.title
 
 
 class ObjectBiographyTag(TaggedItemBase):
@@ -66,20 +74,21 @@ class SourcePage(Page):
     )
 
     source_type = models.CharField(max_length=5, choices=SOURCE_TYPE_CHOICES)
-    copyright_statement = RichTextField()
-    origin = RichTextField()
-    text = RichTextField(blank=True)
-    source_url = models.URLField(blank=True)
-    text_file = models.FileField(blank=True, null=True)
+    date = models.CharField(max_length=20)
+    creator = models.TextField()
+    publisher = models.TextField()
+    rights = models.TextField(blank=True)
 
     content_panels = Page.content_panels + [
         FieldPanel('source_type'),
-        FieldPanel('copyright_statement'),
-        FieldPanel('origin'),
-        FieldPanel('text'),
-        FieldPanel('source_url'),
-        FieldPanel('text_file'),
+        FieldPanel('date'),
+        FieldPanel('creator'),
+        FieldPanel('publisher'),
+        FieldPanel('rights'),
+        InlinePanel('pdfs', label='PDFs'),
         InlinePanel('images', label='images'),
+        InlinePanel('texts', label='texts'),
+        InlinePanel('urls', label='external resources (audio/video)'),
     ]
 
     subpage_types = []
@@ -89,7 +98,6 @@ class SourceImage(AbstractImage, Orderable):
 
     # Wagtail will silently fail to show a RichTextField in the
     # editing image upload interface.
-    caption = models.CharField(blank=True, max_length=100)
     source = ParentalKey(SourcePage, blank=True, null=True,
                          on_delete=models.CASCADE, related_name='images')
 
@@ -101,13 +109,11 @@ class SourceImage(AbstractImage, Orderable):
         'focal_point_y',
         'focal_point_width',
         'focal_point_height',
-        'caption',
         'source',
     )
 
     panels = [
         FieldPanel('title'),
-        FieldPanel('caption'),
         FieldPanel('file'),
     ]
 
@@ -121,6 +127,42 @@ class SourceImageRendition(AbstractRendition):
         unique_together = (
             ('image', 'filter_spec', 'focal_point_key'),
         )
+
+
+class SourcePDF(Orderable):
+
+    source = ParentalKey(SourcePage, related_name='pdfs')
+    title = models.CharField(max_length=255)
+    text_file = models.FileField()
+
+    panels = [
+        FieldPanel('title'),
+        FieldPanel('text_file'),
+    ]
+
+
+class SourceText(Orderable):
+
+    source = ParentalKey(SourcePage, related_name='texts')
+    title = models.CharField(max_length=255)
+    text = RichTextField()
+
+    panels = [
+        FieldPanel('title'),
+        FieldPanel('text'),
+    ]
+
+
+class SourceURL(Orderable):
+
+    source = ParentalKey(SourcePage, related_name='urls')
+    title = models.CharField(max_length=255)
+    source_url = models.URLField(blank=True, verbose_name='URL')
+
+    panels = [
+        FieldPanel('title'),
+        FieldPanel('source_url'),
+    ]
 
 
 class ObjectBiographyPage(Page):
@@ -159,9 +201,19 @@ class ObjectBiographyPage(Page):
 
     subpage_types = []
 
+    def get_map_markers(self):
+        markers = []
+        for place in Place.objects.filter(biographies__biography=self):
+            popup = '<b>{}</b><br><i>{}</i><p>{}</p>'.format(
+                place.title, place.address, place.description)
+            markers.append({'latlng': [place.latitude, place.longitude],
+                            'popup': popup})
+        return json.dumps(markers)
+
     def serve(self, request):
         context = {
             'home': self.get_parent(),
+            'map_markers': self.get_map_markers(),
             'page': self,
         }
         return render(request, self.template, context)

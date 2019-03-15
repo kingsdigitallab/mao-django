@@ -1,7 +1,11 @@
 {% extends "mao_era/base.html" %}
-{% load mao_era_tags wagtailcore_tags wagtailimages_tags %}
+{% load mao_era_tags static wagtailcore_tags wagtailimages_tags %}
 
 {% block meta_title %}{{ page.title }}{% endblock meta_title %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'vendor/leaflet/leaflet.css' %}">
+{% endblock extra_css %}
 
 {% block main %}
 <article>
@@ -65,6 +69,18 @@
 
   <hr>
 
+  <div class="geography" id="geography">
+    <h3>Geography</h3>
+
+    <div class="geography-map" id="map" style="height: 200px;">
+    </div>
+
+    <div class="geography-data">
+    </div>
+  </div>
+
+  <hr>
+
   <div class="timeline" id="timeline">
     <h3>Timeline</h3>
   </div>
@@ -75,10 +91,6 @@
     <h3>Further Reading</h3>
 
     {{ page.further_reading|richtext }}
-  </div>
-
-
-    
   </div>
 </article>
 
@@ -113,6 +125,9 @@
           <a href="#sources"><h5>Sources</h5></a>
         </li>
         <li>
+          <a href="#geography"><h5>Geography</h5></a>
+        </li>
+        <li>
           <a href="#timeline"><h5>Timeline</h5></a>
         </li>
         <li>
@@ -139,11 +154,9 @@
       {% for object in page.related_objects.all %}
       <li>
         <a href="{% pageurl object %}">
-
-            <h3>{{ object.title }}</h3>
-            {% image object.featured_image original %}
-            <p>{{ object.summary }}</p>
-
+          <h3>{{ object.title }}</h3>
+          {% image object.featured_image original %}
+          <p>{{ object.summary }}</p>
         </a>
       </li>
       {% endfor %}
@@ -152,3 +165,18 @@
   </div>
 </div>
 {% endblock main %}
+
+{% block footer_scripts %}
+<script src="{% static 'vendor/leaflet/leaflet.js' %}"></script>
+<script>
+  var map = L.map('map').setView([35, 110], 3);
+  L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}.png', {
+    attribution: 'Tiles Courtesy of <a href="http://www.esri.com/software/arcgis/arcgisonline/maps/maps-and-map-layers" target="_blank">Esri</a>'
+  }).addTo(map);
+  var map_markers = {{ map_markers|safe }};
+  for (i = 0; i < map_markers.length; i++) {
+      marker = L.marker(map_markers[i].latlng).addTo(map);
+      marker.bindPopup(map_markers[i].popup);
+  }
+</script>
+{% endblock footer_scripts %}
