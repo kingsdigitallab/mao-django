@@ -18,7 +18,7 @@ class AnchorSource extends React.Component {
         const content = editorState.getCurrentContent();
 
         // This is very basic – we do not even support editing existing anchors.
-        const fragment = window.prompt('Fragment identifier:');
+        const fragment = window.prompt('Fragment identifier\n("#footnote-" followed by number, eg "#footnote-1"):');
 
         // Uses the Draft.js API to create a new entity with the right data.
         const contentWithEntity = content.createEntity(
