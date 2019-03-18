@@ -4,6 +4,7 @@ from django import forms
 from django.core.validators import RegexValidator
 from django.db import models
 from django.shortcuts import render
+from django.urls import reverse
 
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.contrib.taggit import ClusterTaggableManager
@@ -41,6 +42,19 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
+
+    def convert_date(self, date):
+        """Returns `date` as a dictionary keyed by "year", "month", and
+        "day". The date must be an ISO date format string, specifying
+        a year, and optionally a month and day.
+
+        """
+        data = {'year': int(date[:4])}
+        if len(date) > 4:
+            data['month'] = int(date[5:7])
+        if len(date) > 7:
+            data['day'] = int(date[8:10])
+        return data
 
 
 @register_snippet
@@ -215,6 +229,7 @@ class ObjectBiographyPage(Page):
             'home': self.get_parent(),
             'map_markers': self.get_map_markers(),
             'page': self,
+            'timeline_url': reverse('biography-timeline', args=[self.id]),
         }
         return render(request, self.template, context)
 

@@ -15,6 +15,7 @@ urlpatterns = [
     path('digger/', include('activecollab_digger.urls')),
     path('documents/', include('wagtail.documents.urls')),
     path('wagtail/', include('wagtail.admin.urls')),
+    path('mao_era/', include('mao_era.urls')),
     path('', include('wagtail.core.urls')),
 
 ]
