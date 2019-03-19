@@ -73,20 +73,22 @@
   <div class="geography" id="geography">
     <h3>Geography</h3>
 
-    <div class="geography-map" id="map" style="height: 200px;"></div>
+    <div id="map" style="height: 200px;"></div>
 
     {% for place in places %}
-    <div class="accordion">
-      <input id="map-tab-{{ forloop.counter }}" type="checkbox" name="tabs">
-      <a class="map-item" href="#" id="map-marker-{{ forloop.counter }}">
-        <label for="map-tab-{{ forloop.counter }}">
-          <h4>{{ place.title }}</h4>
-          <h5>{{ place.address }}</h5>
-        </label>
-      </a>
-      <div class="content">{{ place.description|richtext }}</div>
-    </div>
-    {% endfor %}
+    <div class="accordion-wrapper">
+      <div class="accordion">
+        <input id="map-tab-{{ forloop.counter }}" type="checkbox" name="tabs">
+        <a class="map-item" href="#" id="map-marker-{{ forloop.counter }}">
+          <label for="map-tab-{{ forloop.counter }}">
+            <h4>{{ place.title }}</h4>
+            <h5>{{ place.address }}</h5>
+          </label>
+        </a>
+        <div class="content">{{ place.description|richtext }}</div>
+      </div>
+      {% endfor %}
+      </div>
     </div>
   </div>
 
@@ -107,7 +109,41 @@
   </div>
 </article>
 
-<div class="sidebar">
+<!-- TO: Will Remove. Just for testing 
+<div class="osd-drawer">
+       <input type="checkbox" id="first-drawer" />
+       <label aria-label="Image Modifiers" class="first-label" for="first-drawer">
+            <span>Content</span>
+        </label>
+
+        <input type="checkbox" id="second-drawer" />
+        <label aria-label="Transcript" class="second-label" for="second-drawer">
+            <span>Source</span>
+        </label>
+
+        <input type="checkbox" id="third-drawer" />
+        <label aria-label="Essay" class="third-label" for="third-drawer">
+            <span>Related</span>
+        </label>
+        
+        <div class="drawer first-list">
+            <h2>Image Modifiers</h2>
+        </div><
+        
+        <div class="drawer second-list">
+             <h2>Transcription</h2>
+        </div>
+
+        <div class="drawer third-list">
+             <h2>Essay</h2>
+        </div>
+
+       
+
+    </div><!-- end .osd-drawer -->
+
+
+  <div class="sidebar">
   <div class="tabs-object">
     <input id="tab1" type="radio" name="tabs" checked="checked">
     <label for="tab1"><span>Structure</span></label>
