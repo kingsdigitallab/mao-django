@@ -64,7 +64,7 @@ class Place(models.Model):
     latitude = models.FloatField()
     longitude = models.FloatField()
     address = models.CharField(max_length=100)
-    description = models.TextField()
+    description = RichTextField()
 
     def __str__(self):
         return self.title
@@ -215,20 +215,23 @@ class ObjectBiographyPage(Page):
 
     subpage_types = []
 
-    def get_map_markers(self):
+    def get_map_markers(self, places):
         markers = []
-        for place in Place.objects.filter(biographies__biography=self):
-            popup = '<b>{}</b><br><i>{}</i><p>{}</p>'.format(
+        for idx, place in enumerate(places):
+            popup = '<h4>{}</h4><h5>{}</h5>'.format(
                 place.title, place.address, place.description)
             markers.append({'latlng': [place.latitude, place.longitude],
-                            'popup': popup})
+                            'popup': popup,
+                            'title': 'map-marker-{}'.format(idx + 1)})
         return json.dumps(markers)
 
     def serve(self, request):
+        places = Place.objects.filter(biographies__biography=self)
         context = {
             'home': self.get_parent(),
-            'map_markers': self.get_map_markers(),
+            'map_markers': self.get_map_markers(places),
             'page': self,
+            'places': places,
             'timeline_url': reverse('biography-timeline', args=[self.id]),
         }
         return render(request, self.template, context)

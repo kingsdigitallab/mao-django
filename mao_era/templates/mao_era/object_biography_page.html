@@ -73,10 +73,20 @@
   <div class="geography" id="geography">
     <h3>Geography</h3>
 
-    <div class="geography-map" id="map" style="height: 200px;">
-    </div>
+    <div class="geography-map" id="map" style="height: 200px;"></div>
 
-    <div class="geography-data">
+    {% for place in places %}
+    <div class="accordion">
+      <input id="map-tab-{{ forloop.counter }}" type="checkbox" name="tabs">
+      <a class="map-item" href="#" id="map-marker-{{ forloop.counter }}">
+        <label for="map-tab-{{ forloop.counter }}">
+          <h4>{{ place.title }}</h4>
+          <h5>{{ place.address }}</h5>
+        </label>
+      </a>
+      <div class="content">{{ place.description|richtext }}</div>
+    </div>
+    {% endfor %}
     </div>
   </div>
 
@@ -172,20 +182,7 @@
 {% block footer_scripts %}
 <script src="{% static 'vendor/leaflet/leaflet.js' %}"></script>
 <script src="{% static 'vendor/timeline/js/timeline.js' %}"></script>
-<script>
-  // Map.
-  var map = L.map('map').setView([35, 110], 3);
-  L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}.png', {
-    attribution: 'Tiles Courtesy of <a href="http://www.esri.com/software/arcgis/arcgisonline/maps/maps-and-map-layers" target="_blank">Esri</a>'
-  }).addTo(map);
-  var map_markers = {{ map_markers|safe }};
-  for (i = 0; i < map_markers.length; i++) {
-      marker = L.marker(map_markers[i].latlng).addTo(map);
-      marker.bindPopup(map_markers[i].popup);
-  }
-</script>
-<script>
-  // Timeline.
-  timeline = new TL.Timeline('timeline-embed', '{{ timeline_url }}');
-</script>
+<script>var map_marker_data = {{ map_markers|safe }};</script>
+<script src="{% static 'js/map.js' %}"></script>
+<script>timeline = new TL.Timeline('timeline-embed', '{{ timeline_url }}');</script>
 {% endblock footer_scripts %}
