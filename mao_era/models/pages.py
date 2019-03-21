@@ -88,17 +88,9 @@ class SourcePage(Page):
     )
 
     source_type = models.CharField(max_length=5, choices=SOURCE_TYPE_CHOICES)
-    date = models.CharField(max_length=20)
-    creator = models.TextField()
-    publisher = models.TextField()
-    rights = models.TextField(blank=True)
 
     content_panels = Page.content_panels + [
         FieldPanel('source_type'),
-        FieldPanel('date'),
-        FieldPanel('creator'),
-        FieldPanel('publisher'),
-        FieldPanel('rights'),
         InlinePanel('pdfs', label='PDFs'),
         InlinePanel('images', label='images'),
         InlinePanel('texts', label='texts'),
@@ -108,7 +100,29 @@ class SourcePage(Page):
     subpage_types = []
 
 
-class SourceImage(AbstractImage, Orderable):
+class Resource(Orderable):
+
+    title = models.CharField(max_length=255)
+    date = models.CharField(blank=True, max_length=20)
+    creator = models.TextField(blank=True)
+    publisher = models.TextField(blank=True)
+    rights = models.TextField(blank=True)
+    description = RichTextField(blank=True)
+
+    class Meta:
+        abstract = True
+
+    panels = [
+        FieldPanel('title'),
+        FieldPanel('creator'),
+        FieldPanel('publisher'),
+        FieldPanel('date'),
+        FieldPanel('rights'),
+        FieldPanel('description'),
+    ]
+
+
+class ImageResource(AbstractImage, Resource):
 
     # Wagtail will silently fail to show a RichTextField in the
     # editing image upload interface.
@@ -123,18 +137,22 @@ class SourceImage(AbstractImage, Orderable):
         'focal_point_y',
         'focal_point_width',
         'focal_point_height',
+        'creator',
+        'publisher',
+        'date',
+        'rights',
+        'description',
         'source',
     )
 
-    panels = [
-        FieldPanel('title'),
+    panels = Resource.panels + [
         FieldPanel('file'),
     ]
 
 
-class SourceImageRendition(AbstractRendition):
+class ImageResourceRendition(AbstractRendition):
 
-    image = models.ForeignKey(SourceImage, on_delete=models.CASCADE,
+    image = models.ForeignKey(ImageResource, on_delete=models.CASCADE,
                               related_name='renditions')
 
     class Meta:
@@ -143,38 +161,32 @@ class SourceImageRendition(AbstractRendition):
         )
 
 
-class SourcePDF(Orderable):
+class PDFResource(Resource):
 
     source = ParentalKey(SourcePage, related_name='pdfs')
-    title = models.CharField(max_length=255)
     text_file = models.FileField()
 
-    panels = [
-        FieldPanel('title'),
+    panels = Resource.panels + [
         FieldPanel('text_file'),
     ]
 
 
-class SourceText(Orderable):
+class TextResource(Resource):
 
     source = ParentalKey(SourcePage, related_name='texts')
-    title = models.CharField(max_length=255)
     text = RichTextField()
 
-    panels = [
-        FieldPanel('title'),
+    panels = Resource.panels + [
         FieldPanel('text'),
     ]
 
 
-class SourceURL(Orderable):
+class URLResource(Resource):
 
     source = ParentalKey(SourcePage, related_name='urls')
-    title = models.CharField(max_length=255)
     source_url = models.URLField(blank=True, verbose_name='URL')
 
-    panels = [
-        FieldPanel('title'),
+    panels = Resource.panels + [
         FieldPanel('source_url'),
     ]
 
@@ -187,7 +199,7 @@ class ObjectBiographyPage(Page):
     footnotes = StreamField(FootnotesStreamBlock(), blank=True)
     further_reading = RichTextField(blank=True)
     featured_image = models.ForeignKey(
-        SourceImage, on_delete=models.PROTECT,
+        ImageResource, on_delete=models.PROTECT,
         related_name='featured_biographies')
     tags = ClusterTaggableManager(through=ObjectBiographyTag, blank=True)
     related_objects = ParentalManyToManyField('self', blank=True)

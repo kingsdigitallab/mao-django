@@ -1,6 +1,6 @@
 """Near verbatim copy of wagtail.images.models.AbstractImage, only
 with the tags field removed, since this caused problems when saving a
-new image via an InlinePanel."""
+new image via an InlinePanel, and the title removed."""
 
 from contextlib import contextmanager
 import hashlib
@@ -25,7 +25,6 @@ from willow.image import Image as WillowImage
 
 
 class AbstractImage(CollectionMember, index.Indexed, models.Model):
-    title = models.CharField(max_length=255, verbose_name=_('title'))
     file = models.ImageField(
         verbose_name=_('file'), upload_to=get_upload_to, width_field='width',
         height_field='height'
