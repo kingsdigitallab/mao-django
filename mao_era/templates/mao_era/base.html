@@ -16,7 +16,48 @@
   <body>
     <div class="wrapper">
       <header>
+      <a href="/">The Mao Era in Objects</a>
+      <nav>
+          <input type="checkbox" id="menu">
+          <label aria-label="Menu" class="menu-label" for="menu">
+          </label>
+          <div class="menu-list">
+            <ul>
+              <li class="">
+                  <a href="/">
+                      Home
+                  </a>
+              </li>
+              <li class="">
+                  <a href="/about/">
+                      Project Information
+                  </a>
+              </li>
+              <li class="">
+                  <a href="">
+                      Timeline
+                  </a>
+              </li>
+              <li class="">
+                  <a href="">
+                      Essays
+                  </a>
+              </li>             
+               <li class="">
+                  <a href="">
+                    Teaching Resource
+                  </a>
+              </li> 
+               <li class="">
+                  <a href="">
+                    Site Search
+                  </a>
+              </li>                
+            </ul>
+          </div>
+      </nav>
       </header>
+
       <main>
         {% block title %}{% endblock title %}
         {% block main %}{% endblock main %}

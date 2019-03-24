@@ -1106,210 +1106,237 @@ ol,ul{
 }/* end .sidebar-nav */
 
 
-/**** DRAWER ****/
-.osd-drawer{
-  display: inline-block;
-  text-align:left;
-  width:100%;
-    position: fixed;
-    top:calc(100% - 120px);
-    right:0;
-    background:$black;
-    padding:2rem;
-  input{
-    &[type="checkbox"]{
-      display:none;
-      &:checked{
-        ~ label{ /* Slides label out but hidden */
-          //right:460px;
-          //visibility: hidden;
-        }/* end label */
-      }/* end :checked */
-    }/* end [type="checkbox"] */
-    &:checked{ 
-      + label:after { /* adds close button */
-        content: "✕";
-        position: fixed;
-        right: 0;
-   		top:100px;
-        color: white;
-        background: black;
-        z-index: 3;
-        padding:3px 0 0 0;
-        font-size: 1.7rem;
-        line-height: 1.8;
-        visibility: visible;
-        z-index:9;
-     	display: block;
-        padding:10px;
-      }
-      /* First */
-      &#first-drawer{ /* First */
-        &[type="checkbox"]{
-          &:checked{
-            ~ .first-list{ /* Slides drawer out */
-              margin:0;
-            }/* end .first-list */
-          }/* end :checked */
-        }/* end [type="checkbox"] */
-      }/* end #first-drawer */
+/**** OSD ****/
+.osd-wrapper{
+	display: inline-block;
+	text-align:left;
+	width:100%;
 
-      /* Second */
-      &#second-drawer{ /* Second */
-        &[type="checkbox"]{
-          &:checked{
-            ~ .second-list{ /* Slides drawer out */
-              margin:0;
-            }/* end .second-list */
-          }/* end :checked */
-        }/* end [type="checkbox"] */
-      }/* end #first-drawer */
+	right:0;
+	background:$black;
+	padding:2rem;
+	.osd-labels{
+		position: fixed;
+		top:calc(100% - 120px);
+		input{
+			&[type="checkbox"]{
+			display:none;
+				&:checked{
+					~ label{ /* Slides label out but hidden */
+					  //right:460px;
+					  //visibility: hidden;
+					}/* end label */
+									 ~ .osd-labels{ 
+				  position: relative;
+				top: -80vh;
+				visibility: visible;
+				z-index: 9;
+				display: block;
+				} /* end .osd-labels*/
+				}/* end :checked */
+			}/* end [type="checkbox"] */
+			&:checked{ 
+				+ label:after { /* adds close button */
+				content: "✕";
+				position: fixed;
+				right: 0;
+				top:100px;
+				color: white;
+				background: black;
+				z-index: 3;
+				padding:3px 0 0 0;
+				font-size: 1.7rem;
+				line-height: 1.8;
+				visibility: visible;
+				z-index:9;
+				display: block;
+				padding:10px;
+				} /* end label:after */
+				+ label{ /* adds close button */  
+				position: relative;
+				top: -80vh;
+				visibility: visible;
+				z-index: 9;
+				display: block;
+				 ~ .osd-labels{ 
+				  position: relative;
+				top: -80vh;
+				visibility: visible;
+				z-index: 9;
+				display: block;
+				} /* end .osd-labels*/
+				} /* end label */
+				
 
-      /* Third */
-      &#third-drawer{ /* Third */
-        &[type="checkbox"]{
-          &:checked{
-            ~ .third-list{ /* Slides drawer out */
-              margin:0;
-            }/* end .second-list */
-          }/* end :checked */
-        }/* end [type="checkbox"] */
-      }/* end #first-drawer */
-    }/* :checked */
-  }/* end input */
+			}/* end checked */
 
+			/* First */
+			&#first-drawer{ /* First */
+				&[type="checkbox"]{
+				  &:checked{
+				    ~ .first-list{ /* Slides drawer out */
+				      margin:0;
+				    }/* end .first-list */
+				  }/* end :checked */
+				}/* end [type="checkbox"] */
+				 ~ .osd-labels{ /* reduces and pushes image to left */
+				position: absolute;
+				top: -80vh;
+				visibility: visible;
+				z-index: 9;
+				display: block;
+				} /* end .osd-image */
+			}/* end #first-drawer */
 
+			/* Second */
+			&#second-drawer{ /* Second */
+				&[type="checkbox"]{
+				  &:checked{
+				    ~ .second-list{ /* Slides drawer out */
+				      margin:0;
+				    }/* end .second-list */
+				  }/* end :checked */
+				}/* end [type="checkbox"] */
+			}/* end #second-drawer */
 
-  /* Label */
-  label{
-    float: left;
-    width: 33.33%;
-    border: 1px solid grey;
-    text-align: center;
-    line-height: 1.1rem;
-    -moz-transition:all 200ms ease-in;
-    -webkit-transition:all 200ms ease-in;
-    -o-transition:all 200ms ease-in;
-    transition:all 200ms ease-in;
-    cursor: pointer;  
-    &.first-label{ /* First label*/
-    	top:0;
-    }/* end .first-label */
-    &.second-label{ /* Second label*/
-     
-    }/* end .second-label */   
-    &.third-label{ /* Third label*/
-     
-    }/* end .second-label */ 
-  }/* end label */
-
-  .drawer{
-    position:fixed;
-    bottom:-30%;
-    right:0;
-    width:100%;
-    height:100%;
-    margin:0 0 -100% 0;
-    -moz-transition:all 200ms ease-in;
-    -webkit-transition:all 200ms ease-in;
-    -o-transition:all 200ms ease-in;
-    transition:all 200ms ease-in;
-    z-index:2;
-    background: $black;
-    padding: 0 15px 15px 15px;
-    color: white;
-  }/* end .drawer */
- }
+			/* Third */
+			&#third-drawer{ /* Third */
+				&[type="checkbox"]{
+				  &:checked{
+				    ~ .third-list{ /* Slides drawer out */
+				      margin:0;
+				    }/* end .second-list */
+				  }/* end :checked */
+				}/* end [type="checkbox"] */
+			}/* end #third-drawer */
+		}/* end input */
+		/* Label */
+		label{
+			float: left;
+			width: 33.33%;
+			border: 1px solid grey;
+			text-align: center;
+			line-height: 1.1rem;
+			-moz-transition:all 200ms ease-in;
+			-webkit-transition:all 200ms ease-in;
+			-o-transition:all 200ms ease-in;
+			transition:all 200ms ease-in;
+			cursor: pointer;  
+			&.first-label{ /* First label*/
+			}/* end .first-label */
+			&.second-label{ /* Second label*/
+			}/* end .second-label */   
+			&.third-label{ /* Third label*/
+			}/* end .second-label */ 
+		}/* end label */
+	} /* end osd-labels */
+	.drawer{
+		position:fixed;
+		bottom:-30%;
+		right:0;
+		width:100%;
+		height:100%;
+		margin:0 0 -100% 0;
+		-moz-transition:all 200ms ease-in;
+		-webkit-transition:all 200ms ease-in;
+		-o-transition:all 200ms ease-in;
+		transition:all 200ms ease-in;
+		z-index:2;
+		background: $black;
+		padding: 0 15px 15px 15px;
+		color: white;
+	}/* end .drawer */
+ }/* end .osd-wrapper */
 
 
 @media screen and (max-width: 800px) {
 	.sidebar{
 		width: 100%;
-		top:calc(100% - 120px);
-		#tab1:checked ~ #content1,
-		#tab2:checked ~ #content2,
-		#tab3:checked ~ #content3{
-			display: block;
+		display: none;
+		//qtop:calc(100% - 120px);
+		input{
+			&[type="checkbox"]{
+				display:none;
+				&:checked{
+					~ label{ /* Slides label out but hidden */
+		      			//right:460px;
+		      		//visibility: hidden;
+					}/* end label */
+				}/* end :checked */
+			}/* end [type="checkbox"] */
+			/* adds close button */
+			&:checked{ 
+			 /* + label:after { 
+			    content: "✕";
+			    position: fixed;
+			    right: 0;
+					top:100px;
+			    color: white;
+			    background: black;
+			    z-index: 3;
+			    padding:3px 0 0 0;
+			    font-size: 1.7rem;
+			    line-height: 1.8;
+			    visibility: visible;
+			    z-index:9;
+			 	display: block;
+			    padding:10px;
+			  } */
+			  /* First */
+				&#tab2{ /* First */
+					&[type="checkbox"]{
+						&:checked{
+							~ .tab-content{ /* Slides drawer out */
+							margin:0;
+							position:fixed;
+							bottom:-30%;
+							right:0;
+							width:100%;
+							height:100%;
+							margin:0 0 -100% 0;
+							-moz-transition:all 200ms ease-in;
+							-webkit-transition:all 200ms ease-in;
+							-o-transition:all 200ms ease-in;
+							transition:all 200ms ease-in;
+							z-index:2;
+							background: $black;
+							padding: 0 15px 15px 15px;
+							color: white;
+					 		}/* end .first-list */
+						}/* end :checked */
+					}/* end [type="checkbox"] */
+				}/* end #first-drawer */
+
+				/* Second */
+				&#second-drawer{ /* Second */
+					&[type="checkbox"]{
+						&:checked{
+							~ .second-list{ /* Slides drawer out */
+								margin:0;
+							}/* end .second-list */
+						}/* end :checked */
+					}/* end [type="checkbox"] */
+				}/* end #first-drawer */
+
+				.tab-content{ /* Slides drawer out */
+					margin:0;
+					position:fixed;
+					bottom:-30%;
+					right:0;
+					width:100%;
+					height:100%;
+					margin:0 0 -100% 0;
+					-moz-transition:all 200ms ease-in;
+					-webkit-transition:all 200ms ease-in;
+					-o-transition:all 200ms ease-in;
+					transition:all 200ms ease-in;
+					z-index:2;
+					background: $black;
+					padding: 0 15px 15px 15px;
+					color: white;
+			 	}/* end .first-list */
+			}
 		}
-  input{
-    &[type="checkbox"]{
-      display:none;
-      &:checked{
-        ~ label{ /* Slides label out but hidden */
-          //right:460px;
-          //visibility: hidden;
-        }/* end label */
-      }/* end :checked */
-    }/* end [type="checkbox"] */
-
-    /* adds close button */
-    &:checked{ 
-     /* + label:after { 
-        content: "✕";
-        position: fixed;
-        right: 0;
-   		top:100px;
-        color: white;
-        background: black;
-        z-index: 3;
-        padding:3px 0 0 0;
-        font-size: 1.7rem;
-        line-height: 1.8;
-        visibility: visible;
-        z-index:9;
-     	display: block;
-        padding:10px;
-      } */
-      /* First */
-      &#tab1{ /* First */
-        &[type="checkbox"]{
-          &:checked{
-            ~ .tab-content{ /* Slides drawer out */
-              margin:0;
-              position:fixed;
-    bottom:-30%;
-    right:0;
-    width:100%;
-    height:100%;
-    margin:0 0 -100% 0;
-    -moz-transition:all 200ms ease-in;
-    -webkit-transition:all 200ms ease-in;
-    -o-transition:all 200ms ease-in;
-    transition:all 200ms ease-in;
-    z-index:2;
-    background: $black;
-    padding: 0 15px 15px 15px;
-    color: white;
-            }/* end .first-list */
-          }/* end :checked */
-        }/* end [type="checkbox"] */
-      }/* end #first-drawer */
-
-      /* Second */
-      &#second-drawer{ /* Second */
-        &[type="checkbox"]{
-          &:checked{
-            ~ .second-list{ /* Slides drawer out */
-              margin:0;
-            }/* end .second-list */
-          }/* end :checked */
-        }/* end [type="checkbox"] */
-      }/* end #first-drawer */
-
-      /* Third */
-      &#third-drawer{ /* Third */
-        &[type="checkbox"]{
-          &:checked{
-            ~ .third-list{ /* Slides drawer out */
-              margin:0;
-            }/* end .second-list */
-          }/* end :checked */
-        }/* end [type="checkbox"] */
-      }/* end #first-drawer */
-    }/* :checked */
-  }/* end input */
-
-
 	}
 	article{
 		width:100%;
