@@ -4,7 +4,7 @@
 {% block meta_title %}{{ page.title }}{% endblock meta_title %}
 
 {% block main %}
-<article>
+<div class="source-page"> 
   <h1>{% display_source_title page %}</h1>
 
   {% for resource in page.resources %}
@@ -32,5 +32,5 @@
     </div>
   </div>
   {% endfor %}
-</article>
+</div>
 {% endblock main %}

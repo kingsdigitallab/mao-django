@@ -14,76 +14,75 @@
     {% block extra_css %}{% endblock extra_css %}
   </head>
   <body>
-    <div class="wrapper">
-      <header>
-      <a href="/">The Mao Era in Objects</a>
-      <nav>
-          <input type="checkbox" id="menu">
-          <label aria-label="Menu" class="menu-label" for="menu">
-          </label>
-          <div class="menu-list">
-            <ul>
-              <li class="">
-                  <a href="/">
-                      Home
-                  </a>
+    <header>
+    <a href="/">The Mao Era in Objects</a>
+    <nav>
+        <input type="checkbox" id="menu">
+        <label aria-label="Menu" class="menu-label" for="menu">
+        </label>
+        <div class="menu-list">
+          <ul>
+            <li class="">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            <li class="">
+                <a href="/about/">
+                    Project Information
+                </a>
+            </li>
+            <li class="">
+                <a href="">
+                    Timeline
+                </a>
+            </li>
+            <li class="">
+                <a href="">
+                    Essays
+                </a>
+            </li>             
+             <li class="">
+                <a href="">
+                  Teaching Resource
+                </a>
+                <ul>
+                  <li>
+                    <a href="">
+                      Sub Item 1 
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">
+                      Sub Item 2
+                    </a>
+                  </li>
+                             <li>
+                    <a href="">
+                      Sub Item 3
+                    </a>
+                  </li>         
+              </ul> 
               </li>
-              <li class="">
-                  <a href="/about/">
-                      Project Information
-                  </a>
-              </li>
-              <li class="">
-                  <a href="">
-                      Timeline
-                  </a>
-              </li>
-              <li class="">
-                  <a href="">
-                      Essays
-                  </a>
-              </li>             
-               <li class="">
-                  <a href="">
-                    Teaching Resource
-                  </a>
-                  <ul>
-                    <li>
-                      <a href="">
-                        Sub Item 1 
-                      </a>
-                    </li>
-                    <li>
-                      <a href="">
-                        Sub Item 2
-                      </a>
-                    </li>
-                               <li>
-                      <a href="">
-                        Sub Item 3
-                      </a>
-                    </li>         
-              </li> 
-               <li class="">
-                  <a href="">
-                    Site Search
-                  </a>
-              </li>                
-            </ul>
-          </div>
-      </nav>
-      </header>
+             <li class="">
+                <a href="">
+                  Site Search
+                </a>
+            </li>                
+          </ul>
+        </div>
+    </nav>
+    </header>
 
-      <main>
-        {% block title %}{% endblock title %}
-        {% block main %}{% endblock main %}
-      </main>
+    <main>
+      {% block title %}{% endblock title %}
+      {% block main %}{% endblock main %}
+    </main>
 
-      <footer>
-        {% block footer %}
-        {% endblock %}
-      </footer>
-    </div>
+    <footer>
+      {% block footer %}
+      {% endblock %}
+    </footer>
 
     {% compress js %}
     <script src="{% static 'vendor/jquery/dist/jquery.min.js' %}"></script>
