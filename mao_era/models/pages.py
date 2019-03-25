@@ -99,6 +99,19 @@ class SourcePage(Page):
 
     subpage_types = []
 
+    def resources(self):
+        """Returns a QuerySet of all resources of the type specified for this
+        source."""
+        source_type = self.source_type
+        if source_type == 'image':
+            return self.images.all()
+        elif source_type == 'pdfs':
+            return self.pdfs.all()
+        elif source_type == 'text':
+            return self.texts.all()
+        else:
+            return self.urls.all()
+
 
 class Resource(Orderable):
 
@@ -196,7 +209,7 @@ class ObjectBiographyPage(Page):
     byline = models.CharField(max_length=100)
     summary = models.TextField()
     biography = StreamField(BiographyStreamBlock())
-    footnotes = StreamField(FootnotesStreamBlock(), blank=True)
+    footnotes = StreamField(FootnotesStreamBlock(), blank=True, null=True)
     further_reading = RichTextField(blank=True)
     featured_image = models.ForeignKey(
         ImageResource, on_delete=models.PROTECT,

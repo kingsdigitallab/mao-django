@@ -1,0 +1,36 @@
+{% extends "mao_era/base.html" %}
+{% load mao_era_tags static wagtailcore_tags wagtailimages_tags %}
+
+{% block meta_title %}{{ page.title }}{% endblock meta_title %}
+
+{% block main %}
+<article>
+  <h1>{% display_source_title page %}</h1>
+
+  {% for resource in page.resources %}
+  <div class="source-section">
+    {% if resource.file %}
+    <figure class="align-left">
+      {% image resource original %}
+    </figure>
+    {% endif %}
+    <div class="metadata">
+      <dl>
+        <dt>Title</dt>
+        <dd>{{ resource.title }}</dd>
+        <dt>Date</dt>
+        <dd>{{ resource.date }}</dd>
+        <dt>Creator</dt>
+        <dd>{{ resource.creator }}</dd>
+        <dt>Publisher</dt>
+        <dd>{{ resource.publisher }}</dd>
+        <dt>Rights</dt>
+        <dd>{{ resource.rights }}</dd>
+        <dt>Description</dt>
+        <dd>{{ resource.description|richtext }}</dd>
+      </dl>
+    </div>
+  </div>
+  {% endfor %}
+</article>
+{% endblock main %}
