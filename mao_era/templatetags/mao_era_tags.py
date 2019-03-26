@@ -10,3 +10,13 @@ def display_source_title(source):
         'source_type': source.source_type,
         'title': source.title,
     }
+
+
+@register.simple_tag(takes_context=True)
+def get_site_root(context):
+    return context['request'].site.root_page
+
+
+@register.simple_tag
+def get_menu_pages(parent):
+    return parent.get_children().live().in_menu()

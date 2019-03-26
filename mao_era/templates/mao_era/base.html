@@ -1,4 +1,4 @@
-{% load static compress  %}
+{% load compress mao_era_tags static wagtailcore_tags %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -15,63 +15,37 @@
   </head>
   <body>
     <header>
-    <a href="/">The Mao Era in Objects</a>
-    <nav>
+      <a href="/">The Mao Era in Objects</a>
+      <nav>
         <input type="checkbox" id="menu">
-        <label aria-label="Menu" class="menu-label" for="menu">
-        </label>
+        <label aria-label="Menu" class="menu-label" for="menu"></label>
         <div class="menu-list">
           <ul>
-            <li class="">
-                <a href="/">
-                    Home
-                </a>
+            <li>
+              <a href="/">Home</a>
             </li>
-            <li class="">
-                <a href="/about/">
-                    Project Information
-                </a>
+            {% get_site_root as site_root %}
+            {% get_menu_pages site_root as menu_pages %}
+            {% for menu_page in menu_pages %}
+            <li>
+              <a href="{% pageurl menu_page %}">{{ menu_page.title }}</a>
+              {% get_menu_pages menu_page as menu_page_children %}
+              {% if menu_page_children %}
+              <ul>
+                {% for menu_page_child in menu_page_children %}
+                <li>
+                  <a href="{% pageurl menu_page_child %}">
+                    {{ menu_page_child.title }}
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+              {% endif %}
             </li>
-            <li class="">
-                <a href="">
-                    Timeline
-                </a>
-            </li>
-            <li class="">
-                <a href="">
-                    Essays
-                </a>
-            </li>             
-             <li class="">
-                <a href="">
-                  Teaching Resource
-                </a>
-                <ul>
-                  <li>
-                    <a href="">
-                      Sub Item 1 
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      Sub Item 2
-                    </a>
-                  </li>
-                             <li>
-                    <a href="">
-                      Sub Item 3
-                    </a>
-                  </li>         
-              </ul> 
-              </li>
-             <li class="">
-                <a href="">
-                  Site Search
-                </a>
-            </li>                
+            {% endfor %}
           </ul>
         </div>
-    </nav>
+      </nav>
     </header>
 
     <main>
