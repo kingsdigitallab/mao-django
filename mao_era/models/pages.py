@@ -309,7 +309,13 @@ class ObjectBiographySource(models.Model):
 
 class ProjectPage(Page):
 
-    pass
+    body = RichTextField()
+
+    content_panels = Page.content_panels + [
+        FieldPanel('body', classname='full'),
+    ]
+
+    subpage_types = ['mao_era.ProjectPage']
 
 
 class TimelinePage(Page):

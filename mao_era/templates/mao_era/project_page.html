@@ -1,0 +1,15 @@
+{% extends "mao_era/base.html" %}
+{% load wagtailcore_tags %}
+
+{% block meta_title %}{{ page.title }}{% endblock meta_title %}
+
+
+{% block main %}
+<div class="object-page">
+  <article>
+    <h1>{{ page.title }}</h1>
+
+    {{ page.body|richtext }}
+  </article>
+</div>
+{% endblock main %}
