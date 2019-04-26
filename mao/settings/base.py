@@ -103,7 +103,6 @@ INSTALLED_APPS += [    # your project apps here
     'wagtail.search',
     'wagtail.contrib.postgres_search',
     'mao_era',
-    'search',
 ]
 
 INTERNAL_IPS = ['127.0.0.1']
