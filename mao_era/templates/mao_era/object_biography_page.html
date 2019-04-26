@@ -49,7 +49,7 @@
       <div class="key">
         <ul>
           <li>⧉ <span>IMAGE</span></li>
-          <li>а <span>TEXT</span></li>
+          <li><small>文 </small><span>TEXT</span></li>
           <li>▸ <span>VIDEO</span></li>
           <li>♪ <span>AUDIO</span></li>
           <li>▤ <span>PDF</span></li>
@@ -100,7 +100,17 @@
     </div>
   </article>
 
-  <div class="sidebar">
+
+
+
+  <div class="sidebar-wrapper">
+  <div class="sidebar-label">
+   <input type="checkbox" id="page-content" />
+   <label aria-label="page content" class="page-content" for="page-content">
+   <span>Structure</span><span>Source</span><span>Related</span>
+  </label>
+  <div class="drawer">
+      <div class="tabs-wrapper">
     <div class="tabs-object">
       <input id="tab1" type="radio" name="tabs" checked="checked">
       <label for="tab1"><span>Structure</span></label>
@@ -169,8 +179,15 @@
         </ul>
       </section>
     </div>
+  </div><!-- end side-bar -->
   </div>
+
 </div>
+
+
+
+</div><!-- end .osd-drawer -->
+</div> <!-- end .object-page -->
 {% endblock main %}
 
 

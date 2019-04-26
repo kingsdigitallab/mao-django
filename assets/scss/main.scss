@@ -94,7 +94,7 @@ header {
 	height:3rem;
 	padding: 0.7rem 3% 0 3%;
 	font-family: 'Josefin Sans', sans-serif;
-	z-index:1;
+	z-index:1000;
 	a {
 		font-size: 2rem;
 		text-transform:uppercase;
@@ -779,45 +779,45 @@ section#search {
 			margin-right:2%;
 			overflow: auto;
 			height:400px !important;
-		/* Leaflet */
-		.leaflet-popup-content-wrapper{
-			color:$white;
-			background:$black; 
-			border-radius:0;
-			text-align:center;
-			font-family: 'Josefin Sans', sans-serif;
-			h4{
-				font-size: 1.2rem;
-				font-weight: normal; 
-				margin:1.3rem 0 0 0;
+			/* Leaflet */
+			.leaflet-popup-content-wrapper{
+				color:$white;
+				background:$black; 
+				border-radius:0;
+				text-align:center;
+				font-family: 'Josefin Sans', sans-serif;
+				h4{
+					font-size: 1.2rem;
+					font-weight: normal; 
+					margin:1.3rem 0 0 0;
+				}
+				h5{
+					font-size: 0.9rem;
+					color: lighten($primary-color,20%);
+					font-weight: normal;
+					margin:0.2rem 0 0.5rem 0;
+				}
 			}
-			h5{
-				font-size: 0.9rem;
-				color: lighten($primary-color,20%);
-				font-weight: normal;
-				margin:0.2rem 0 0.5rem 0;
+
+			.leaflet-popup-tip {
+			    background:$black; 
+			    box-shadow: none;
+			    height:60px;
+			    transform: rotate(0);
+			    width:0;
 			}
-		}
 
-	.leaflet-popup-tip {
-	    background:$black; 
-	    box-shadow: none;
-	    height:60px;
-	    transform: rotate(0);
-	    width:0;
-	}
+			.point-icon{
+			  background-color: $secondary-color;
+			  border-radius: 50%;
+			  width:15px !important;
+			  height:15px !important;
+			  box-shadow: 0 0 7px $secondary-color;
+			  transition: all 1s;
+			  opacity:0.85;
+			}
 
-	.point-icon{
-	  background-color: $secondary-color;
-	  border-radius: 50%;
-	  width:15px !important;
-	  height:15px !important;
-	  box-shadow: 0 0 7px $secondary-color;
-	  transition: all 1s;
-	  opacity:0.85;
-	}
-
-	}
+		}/* end map */
 		/* Accordion styles */
 		.accordion-wrapper{ 
 			float:left;
@@ -910,316 +910,23 @@ section#search {
 	} /* end article */
 
 	/* SIDEBAR NAVIGATION */
-	.sidebar{
-		margin-top:3rem;
-		padding:1rem 0 0 0;
-		background:$darkgray;
-		height:100%;
-		width: 20rem;
-		position: fixed;
-		top: 0;
-		right: 0;
-		text-align: center;
-		overflow:scroll;
-		.tabs-object {
-			margin: 0 auto;
-			position: relative;
-			input, section {
-				clear: both;
-				padding-top: 10px;
-				display: none;
-			}
-			label {
-				font-size: 0.7rem;
-				display: block;
-				padding: 0.2rem;
-				margin:0.5rem 1rem 1rem 0;
-				cursor: pointer;
-				text-decoration: none;
-				text-align: center;
-				color: lighten($primary-color,15%);
-				display:inline-block;
-				text-transform:uppercase;
-				font-family: 'Montserrat', sans-serif;
-			}
-			#tab1:checked ~ #content1,
-			#tab2:checked ~ #content2,
-			#tab3:checked ~ #content3{
-				display: block;
-			}
-			[id^="tab"]:checked + label {
-				color:$white;
-				border-bottom:1px solid;
-
-			}
-		}/* end .tabs-object */
-		.name-active{
-			h2{
-				color:$white;
-				&:before {
-					border: 2px solid $white;
-					background-color: $white;
-				} 
-			}
-			h6{
-				color:$white;
-				&:before {
-					border: 2px solid $white;
-				} 
-			}
-			span{
-				color:$white;
-			}
-		}/* .name-active */
-		h4{
-			color:$white;
-			border-top:1px solid;
-			border-bottom:1px solid;
-			display:inline-block;
-			padding:0.4rem 0 0.2rem 0;
-			margin:0 0 1rem 0;
-		}
-		ul {
-			list-style-type: none;
-			margin-top: 1.5rem 0;
-			padding: 0;
-			li{
-				text-align: left;
-				margin-bottom:20px;
-				display:block;
-				float:left;
-				width:100%; 
-				padding-left:10%;
-				a {
-					text-decoration: none;
-				}/* end a */
-				h2{
-					color:lighten($primary-color,20%);
-					margin:0 0 0 1rem;
-					//text-transform:uppercase;
-					font-size:1.1rem;
-					font-weight:normal;         
-					&:before {
-						border-radius: 50%;
-						background-color: $darkgray;
-						border: 1px solid lighten($gray,10%);
-						content: '';
-						height: 7px;
-						width: 7px;
-						margin-left:-14px;
-						display: block;
-						z-index:5;
-						margin-bottom: -0.75rem;
-						border-radius:50%;
-					} /* end before */
-				}/* end h2 */
-				h3{
-					color:lighten($primary-color,20%);
-					margin:0 0 0 1rem;
-					text-transform:uppercase;
-					font-size:0.6rem;
-					font-weight:normal;         
-					font-family: 'Montserrat', sans-serif;
-				&:before {
-					border-radius: 50%;
-					background-color: $darkgray;
-					border: 1px solid lighten($primary-color,20%);
-					content: '';
-					height: 5px;
-					width: 5px;
-					margin-left:-13px;
-					display: block;
-					z-index:5;
-					margin-bottom: -0.55rem;
-					} 
-				}/* end h3 */
-				span {
-					position: relative;
-					margin:0.2rem 0 0.5rem 0;
-					text-transform:none;
-					font-size:0.9rem;
-					color:lighten($primary-color,20%);
-					display:block;
-					font-family: 'Montserrat', sans-serif;
-				}/* end span */
-				&:after{
-					content: '';
-					border: none;
-					//border-left: 1px solid lighten($primary-color,10%);
-					border-left: 1px solid $gray;
-					margin-left: 5px;
-					padding-right:2px;
-					padding-bottom:20rem;
-					padding-top: 0.35rem;
-					z-index:-1;
-				}	 
-				&:last-child{
-					&:after{
-						border-left: 1px solid $darkgray;
-					}	 
-				}/* end last-child */
-				&:hover{
-					h5{
-						color:lighten($primary-color,5%);
-						&:before {
-							border: 2px solid lighten($primary-color,10%);
-							background-color: lighten($primary-color,10%);
-						}
-					}
-					h6{
-						color:lighten($primary-color,5%);
-						&:before {
-							border: 1px solid lighten($primary-color,10%);
-						}
-					}
-					span{
-						color:lighten($primary-color,5%);
-					}
-				}/* end hover */
-			}/* end li */
-		}/* end ul */
-		.relatedobjects{
-			width:100%;
-			float:left;
-			font-size:0.9rem;
-			ul{
-				margin:0 0 0 -35px;
-				list-style-type:none;
-				li a{
-					width:100%;
-					float:left;
-					margin-bottom:1rem;
-					margin-left:0;
-					color:$white;
-					padding:1rem 2rem;
-					border-bottom:1px solid $gray;
-					h1{
-						font-size:1.1rem;
-						margin:0 0 1rem 0;
-					}
-					img{
-						width:100%;
-						float:left;
-						height:auto;
-						margin:0 0 1rem 0;
-					}
-					&:hover{
-						background: darken($primary-color,30%);
-					}
-				}/* end li a */
-			}/* end ul */
-		}/* end .relatedobjects */ 
-	}/* end .sidebar-nav */
-
-	/**** OSD ****/
-	.osd-wrapper{
+	.sidebar-wrapper{
 		display: inline-block;
 		text-align:left;
 		width:100%;
-
 		right:0;
 		background:$black;
-		padding:2rem;
-		.osd-labels{
+		.sidebar-label{
 			position: fixed;
-			top:calc(100% - 120px);
-			input{
-				&[type="checkbox"]{
-				display:none;
-					&:checked{
-						~ label{ /* Slides label out but hidden */
-						  //right:460px;
-						  //visibility: hidden;
-						}/* end label */
-										 ~ .osd-labels{ 
-					  position: relative;
-					top: -80vh;
-					visibility: visible;
-					z-index: 9;
-					display: block;
-					} /* end .osd-labels*/
-					}/* end :checked */
-				}/* end [type="checkbox"] */
-				&:checked{ 
-					+ label:after { /* adds close button */
-					content: "✕";
-					position: fixed;
-					right: 0;
-					top:100px;
-					color: white;
-					background: black;
-					z-index: 3;
-					padding:3px 0 0 0;
-					font-size: 1.7rem;
-					line-height: 1.8;
-					visibility: visible;
-					z-index:9;
-					display: block;
-					padding:10px;
-					} /* end label:after */
-					+ label{ /* adds close button */  
-					position: relative;
-					top: -80vh;
-					visibility: visible;
-					z-index: 9;
-					display: block;
-					 ~ .osd-labels{ 
-					  position: relative;
-					top: -80vh;
-					visibility: visible;
-					z-index: 9;
-					display: block;
-					} /* end .osd-labels*/
-					} /* end label */
-					
-
-				}/* end checked */
-
-				/* First */
-				&#first-drawer{ /* First */
-					&[type="checkbox"]{
-					  &:checked{
-					    ~ .first-list{ /* Slides drawer out */
-					      margin:0;
-					    }/* end .first-list */
-					  }/* end :checked */
-					}/* end [type="checkbox"] */
-					 ~ .osd-labels{ /* reduces and pushes image to left */
-					position: absolute;
-					top: -80vh;
-					visibility: visible;
-					z-index: 9;
-					display: block;
-					} /* end .osd-image */
-				}/* end #first-drawer */
-
-				/* Second */
-				&#second-drawer{ /* Second */
-					&[type="checkbox"]{
-					  &:checked{
-					    ~ .second-list{ /* Slides drawer out */
-					      margin:0;
-					    }/* end .second-list */
-					  }/* end :checked */
-					}/* end [type="checkbox"] */
-				}/* end #second-drawer */
-
-				/* Third */
-				&#third-drawer{ /* Third */
-					&[type="checkbox"]{
-					  &:checked{
-					    ~ .third-list{ /* Slides drawer out */
-					      margin:0;
-					    }/* end .second-list */
-					  }/* end :checked */
-					}/* end [type="checkbox"] */
-				}/* end #third-drawer */
-			}/* end input */
-			/* Label */
-			label{
+			top:calc(100vh - 3rem);
+			width:100%;
+			background: $black;
+			color:$white;
+			display: block;
+			z-index: 1000;
+			>label{
 				float: left;
-				width: 33.33%;
-				border: 1px solid grey;
+				width: 100%;
 				text-align: center;
 				line-height: 1.1rem;
 				-moz-transition:all 200ms ease-in;
@@ -1227,31 +934,274 @@ section#search {
 				-o-transition:all 200ms ease-in;
 				transition:all 200ms ease-in;
 				cursor: pointer;  
-				&.first-label{ /* First label*/
-				}/* end .first-label */
-				&.second-label{ /* Second label*/
-				}/* end .second-label */   
-				&.third-label{ /* Third label*/
-				}/* end .second-label */ 
+				padding:1rem;
+				display: none;
 			}/* end label */
-		} /* end osd-labels */
+			>input{
+				&[type="checkbox"]{
+				display:none;
+					&:checked{
+						~ label{ /* Slides label out but hidden */
+						  //right:460px;
+						  //visibility: hidden;
+						}/* end label */
+					}/* end :checked */
+				}/* end [type="checkbox"] */
+				&:checked{ 
+					+ label:after { /* close button */
+						content: "✕";
+						position: fixed;
+						right: 0;
+						top:3rem;
+						color: white;
+						background: black;
+						z-index: 3;
+						padding:3px 0 0 0;
+						font-size: 1.7rem;
+						line-height: 1.8;
+						visibility: visible;
+						z-index:9;
+						display: block;
+						padding:10px;
+					} /* end label:after */
+					+ label{ /* adds close button */  
+						position: relative;
+						top: calc(-100vh + 11rem);
+						visibility: visible;
+						z-index: 9;
+						display: block;
+					} /* end label */
+				}/* end checked */
+				/* First */
+				&#page-content{ /* First */
+					&[type="checkbox"]{
+						&:checked{
+							~ .drawer{ /* Slides drawer out */
+								top:3rem;
+								-moz-transition:all 600ms ease-in;
+								-webkit-transition:all 600ms ease-in;
+								-o-transition:all 600ms ease-in;
+								transition:all 600ms ease-in;
+							}/* end .drawer */
+						}/* end :checked */
+					}/* end [type="checkbox"] */
+				}/* end #page-content */
+			}/* end input */
+
+		} /* end .pagecontent-label */
 		.drawer{
 			position:fixed;
-			bottom:-30%;
+			top:190%;
 			right:0;
 			width:100%;
 			height:100%;
 			margin:0 0 -100% 0;
-			-moz-transition:all 200ms ease-in;
-			-webkit-transition:all 200ms ease-in;
-			-o-transition:all 200ms ease-in;
-			transition:all 200ms ease-in;
 			z-index:2;
 			background: $black;
 			padding: 0 15px 15px 15px;
 			color: white;
+				.tabs-wrapper{
+					margin-top:3rem;
+					padding:1rem 0 0 0;
+					background:$darkgray;
+					height:100%;
+					width: 20rem;
+					position: fixed;
+					top: 0;
+					right: 0;
+					text-align: center;
+					overflow:scroll;
+					.tabs-object {
+						margin: 0 auto;
+						position: relative;
+						input, section {
+							clear: both;
+							padding-top: 10px;
+							display: none;
+						}
+						label {
+							font-size: 0.7rem;
+							display: block;
+							padding: 0.2rem;
+							margin:0.5rem 1rem 1rem 0;
+							cursor: pointer;
+							text-decoration: none;
+							text-align: center;
+							color: lighten($primary-color,15%);
+							display:inline-block;
+							text-transform:uppercase;
+							font-family: 'Montserrat', sans-serif;
+						}
+						#tab1:checked ~ #content1,
+						#tab2:checked ~ #content2,
+						#tab3:checked ~ #content3{
+							display: block;
+						}
+						[id^="tab"]:checked + label {
+							color:$white;
+							border-bottom:1px solid;
+
+						}
+					}/* end .tabs-object */
+					.name-active{
+						h2{
+							color:$white;
+							&:before {
+								border: 2px solid $white;
+								background-color: $white;
+							} 
+						}
+						h6{
+							color:$white;
+							&:before {
+								border: 2px solid $white;
+							} 
+						}
+						span{
+							color:$white;
+						}
+					}/* .name-active */
+					h4{
+						color:$white;
+						border-top:1px solid;
+						border-bottom:1px solid;
+						display:inline-block;
+						padding:0.4rem 0 0.2rem 0;
+						margin:0 0 1rem 0;
+					}
+					ul {
+						list-style-type: none;
+						margin-top: 1.5rem 0;
+						padding: 0;
+						li{
+							text-align: left;
+							margin-bottom:20px;
+							display:block;
+							float:left;
+							width:100%; 
+							padding-left:10%;
+							a {
+								text-decoration: none;
+							}/* end a */
+							h2{
+								color:lighten($primary-color,20%);
+								margin:0 0 0 1rem;
+								//text-transform:uppercase;
+								font-size:1.1rem;
+								font-weight:normal;         
+								&:before {
+									border-radius: 50%;
+									background-color: $darkgray;
+									border: 1px solid lighten($gray,10%);
+									content: '';
+									height: 7px;
+									width: 7px;
+									margin-left:-14px;
+									display: block;
+									z-index:5;
+									margin-bottom: -0.75rem;
+									border-radius:50%;
+								} /* end before */
+							}/* end h2 */
+							h3{
+								color:lighten($primary-color,20%);
+								margin:0 0 0 1rem;
+								text-transform:uppercase;
+								font-size:0.6rem;
+								font-weight:normal;         
+								font-family: 'Montserrat', sans-serif;
+							&:before {
+								border-radius: 50%;
+								background-color: $darkgray;
+								border: 1px solid lighten($primary-color,20%);
+								content: '';
+								height: 5px;
+								width: 5px;
+								margin-left:-13px;
+								display: block;
+								z-index:5;
+								margin-bottom: -0.55rem;
+								} 
+							}/* end h3 */
+							span {
+								position: relative;
+								margin:0.2rem 0 0.5rem 0;
+								text-transform:none;
+								font-size:0.9rem;
+								color:lighten($primary-color,20%);
+								display:block;
+								font-family: 'Montserrat', sans-serif;
+							}/* end span */
+							&:after{
+								content: '';
+								border: none;
+								//border-left: 1px solid lighten($primary-color,10%);
+								border-left: 1px solid $gray;
+								margin-left: 5px;
+								padding-right:2px;
+								padding-bottom:20rem;
+								padding-top: 0.35rem;
+								z-index:-1;
+							}	 
+							&:last-child{
+								&:after{
+									border-left: 1px solid $darkgray;
+								}	 
+							}/* end last-child */
+							&:hover{
+								h5{
+									color:lighten($primary-color,5%);
+									&:before {
+										border: 2px solid lighten($primary-color,10%);
+										background-color: lighten($primary-color,10%);
+									}
+								}
+								h6{
+									color:lighten($primary-color,5%);
+									&:before {
+										border: 1px solid lighten($primary-color,10%);
+									}
+								}
+								span{
+									color:lighten($primary-color,5%);
+								}
+							}/* end hover */
+						}/* end li */
+					}/* end ul */
+					.relatedobjects{
+						width:100%;
+						float:left;
+						font-size:0.9rem;
+						ul{
+							margin:0 0 0 -35px;
+							list-style-type:none;
+							li a{
+								width:100%;
+								float:left;
+								margin-bottom:1rem;
+								margin-left:0;
+								color:$white;
+								padding:1rem 2rem;
+								border-bottom:1px solid $gray;
+								h1{
+									font-size:1.1rem;
+									margin:0 0 1rem 0;
+								}
+								img{
+									width:100%;
+									float:left;
+									height:auto;
+									margin:0 0 1rem 0;
+								}
+								&:hover{
+									background: darken($primary-color,30%);
+								}
+							}/* end li a */
+						}/* end ul */
+					}/* end .relatedobjects */ 
+				}/* end .tabs-wrapper */
 		}/* end .drawer */
-	 }/* end .osd-wrapper */
+	 }/* end .sidebar-wrapper */
 //}/* end .object-page */
 
 
@@ -1332,100 +1282,360 @@ section#search {
 
 
 @media screen and (max-width: 800px) {
+
+
+
 /**** OBJECT PAGE ****/
-	//.object-page{
-		.sidebar{
-			width: 100%;
-			display: none;
-		//qtop:calc(100% - 120px);
-		input{
-			&[type="checkbox"]{
-				display:none;
-				&:checked{
-					~ label{ /* Slides label out but hidden */
-		      			//right:460px;
-		      		//visibility: hidden;
-					}/* end label */
-				}/* end :checked */
-			}/* end [type="checkbox"] */
-			/* adds close button */
-			&:checked{ 
-			 /* + label:after { 
-			    content: "✕";
-			    position: fixed;
-			    right: 0;
-					top:100px;
-			    color: white;
-			    background: black;
-			    z-index: 3;
-			    padding:3px 0 0 0;
-			    font-size: 1.7rem;
-			    line-height: 1.8;
-			    visibility: visible;
-			    z-index:9;
-			 	display: block;
-			    padding:10px;
-			  } */
-			  /* First */
-				&#tab2{ /* First */
-					&[type="checkbox"]{
-						&:checked{
-							~ .tab-content{ /* Slides drawer out */
-								margin:0;
-								position:fixed;
-								bottom:-30%;
-								right:0;
-								width:100%;
-								height:100%;
-								margin:0 0 -100% 0;
-								-moz-transition:all 200ms ease-in;
-								-webkit-transition:all 200ms ease-in;
-								-o-transition:all 200ms ease-in;
-								transition:all 200ms ease-in;
-								z-index:2;
-								background: $black;
-								padding: 0 15px 15px 15px;
-								color: white;
-					 		}/* end .first-list */
-						}/* end :checked */
-					}/* end [type="checkbox"] */
-				}/* end #first-drawer */
-
-				/* Second */
-				&#second-drawer{ /* Second */
-					&[type="checkbox"]{
-						&:checked{
-							~ .second-list{ /* Slides drawer out */
-								margin:0;
-							}/* end .second-list */
-						}/* end :checked */
-					}/* end [type="checkbox"] */
-				}/* end #first-drawer */
-
-				.tab-content{ /* Slides drawer out */
-					margin:0;
-					position:fixed;
-					bottom:-30%;
-					right:0;
-					width:100%;
-					height:100%;
-					margin:0 0 -100% 0;
-					-moz-transition:all 200ms ease-in;
-					-webkit-transition:all 200ms ease-in;
-					-o-transition:all 200ms ease-in;
-					transition:all 200ms ease-in;
-					z-index:2;
-					background: $black;
-					padding: 0 15px 15px 15px;
-					color: white;
-			 	}/* end .first-list */
-			 }
-			}
-		}
+	.object-page{
 		article{
 			width:100%;
 		}
-	//}
+
+
+
+
+			  .geography{
+	  	width:100%;
+		float:left;
+		border-top: 1px dashed $lightgray;
+		padding:1rem 0;
+		/* Map */
+		#map{
+			width:100%;
+			margin-right:2%;
+		}/* end map */
+		/* Accordion styles */
+		.accordion-wrapper{ 
+			width:100%;
+			height:auto;
+		}/* end .accordion-wrapper */ 
+	  }/* end .geography */
+
+
+	/* SIDEBAR NAVIGATION */
+	.sidebar-wrapper{
+		display: inline-block;
+		text-align:left;
+		width:100%;
+		right:0;
+		background:$black;
+		.sidebar-label{
+			position: fixed;
+			top:calc(100vh - 3rem);
+			width:100%;
+			background: $darkgray;
+			color:lighten($primary-color,15%);
+			display: block;
+			>label{
+				float: left;
+				width: 100%;
+				text-align: center;
+				line-height: 1.1rem;
+				-moz-transition:all 200ms ease-in;
+				-webkit-transition:all 200ms ease-in;
+				-o-transition:all 200ms ease-in;
+				transition:all 200ms ease-in;
+				cursor: pointer;  
+				padding:1rem;
+				display: block;
+				span{
+					padding: 0.2rem 0.4rem;
+					margin: 0.5rem 1rem 1rem 0;
+					text-transform: uppercase;
+					font-family: 'Montserrat',sans-serif;
+					font-size: 0.7rem;
+					cursor: pointer;
+				}
+			}/* end label */
+			&:hover{
+				color:$white;
+			}
+			>input{
+				&[type="checkbox"]{
+				display:none;
+					&:checked{
+						~ label{ /* Slides label out but hidden */
+						  //right:460px;
+						  //visibility: hidden;
+						}/* end label */
+					}/* end :checked */
+				}/* end [type="checkbox"] */
+				&:checked{ 
+					+ label:after { /* close button */
+						content: "✕";
+						position: fixed;
+						right: 0;
+						top:3rem;
+						color: white;
+						background: black;
+						z-index: 3;
+						padding:3px 0 0 0;
+						font-size: 1.7rem;
+						line-height: 1.8;
+						visibility: visible;
+						z-index:9;
+						display: block;
+						padding:10px;
+					} /* end label:after */
+					+ label{ /* adds close button */  
+						position: relative;
+						top: calc(100vh + 11rem);
+						visibility: visible;
+						z-index: 9;
+						display: block;
+					} /* end label */
+				}/* end checked */
+				/* First */
+				&#page-content{ /* First */
+					&[type="checkbox"]{
+						&:checked{
+							~ .drawer{ /* Slides drawer out */
+								top:3rem;
+								-moz-transition:all 300ms ease-in;
+								-webkit-transition:all 300ms ease-in;
+								-o-transition:all 300ms ease-in;
+								transition:all 300ms ease-in;
+							}/* end .drawer */
+						}/* end :checked */
+					}/* end [type="checkbox"] */
+				}/* end #page-content */
+			}/* end input */
+
+		} /* end .pagecontent-label */
+		.drawer{
+			position:fixed;
+			top:190%;
+			right:0;
+			width:100%;
+			height:100%;
+			margin:0 0 -100% 0;
+			z-index:2;
+			background: $black;
+			padding: 0;
+			color: white;
+			-moz-transition:all 600ms ease-in;
+			-webkit-transition:all 600ms ease-in;
+			-o-transition:all 600ms ease-in;
+			transition:all 600ms ease-in;
+				.tabs-wrapper{
+					margin-top:0;
+					padding:1rem 0 0 0;
+					background:$darkgray;
+					height:100%;
+					width: 100%;
+					min-width: 10rem;
+					position: relative;
+					text-align: center;
+					overflow:scroll;
+					.tabs-object {
+						margin: 0 auto;
+						position: relative;
+						input, section {
+							clear: both;
+							padding-top: 10px;
+							display: none;
+						}
+						label {
+							font-size: 0.7rem;
+							display: block;
+							padding: 0.2rem;
+							margin:0.5rem 1rem 1rem 0;
+							cursor: pointer;
+							text-decoration: none;
+							text-align: center;
+							color: lighten($primary-color,15%);
+							display:inline-block;
+							text-transform:uppercase;
+							font-family: 'Montserrat', sans-serif;
+						}
+						#tab1:checked ~ #content1,
+						#tab2:checked ~ #content2,
+						#tab3:checked ~ #content3{
+							display: block;
+						}
+						[id^="tab"]:checked + label {
+							color:$white;
+							border-bottom:1px solid;
+
+						}
+					}/* end .tabs-object */
+					.name-active{
+						h2{
+							color:$white;
+							&:before {
+								border: 2px solid $white;
+								background-color: $white;
+							} 
+						}
+						h6{
+							color:$white;
+							&:before {
+								border: 2px solid $white;
+							} 
+						}
+						span{
+							color:$white;
+						}
+					}/* .name-active */
+					h4{
+						color:$white;
+						border-top:1px solid;
+						border-bottom:1px solid;
+						display:inline-block;
+						padding:0.4rem 0 0.2rem 0;
+						margin:0 0 1rem 0;
+					}
+					ul {
+						list-style-type: none;
+						margin-top: 1.5rem 0;
+						padding: 0;
+						margin-left: 10%;
+						li{
+							text-align: left;
+							margin-bottom:20px;
+							display:block;
+							float:left;
+							width:100%; 
+							padding-left:0;
+							a {
+								text-decoration: none;
+							}/* end a */
+							h2{
+								color:lighten($primary-color,20%);
+								margin:0 0 0 1rem;
+								//text-transform:uppercase;
+								font-size:1.1rem;
+								font-weight:normal;         
+								&:before {
+									border-radius: 50%;
+									background-color: $darkgray;
+									border: 1px solid lighten($gray,10%);
+									content: '';
+									height: 7px;
+									width: 7px;
+									margin-left:-14px;
+									display: block;
+									z-index:5;
+									margin-bottom: -0.75rem;
+									border-radius:50%;
+								} /* end before */
+							}/* end h2 */
+							h3{
+								color:lighten($primary-color,20%);
+								margin:0 0 0 1rem;
+								text-transform:uppercase;
+								font-size:0.6rem;
+								font-weight:normal;         
+								font-family: 'Montserrat', sans-serif;
+							&:before {
+								border-radius: 50%;
+								background-color: $darkgray;
+								border: 1px solid lighten($primary-color,20%);
+								content: '';
+								height: 5px;
+								width: 5px;
+								margin-left:-13px;
+								display: block;
+								z-index:5;
+								margin-bottom: -0.55rem;
+								} 
+							}/* end h3 */
+							span {
+								position: relative;
+								margin:0.2rem 0 0.5rem 0;
+								text-transform:none;
+								font-size:0.9rem;
+								color:lighten($primary-color,20%);
+								display:block;
+								font-family: 'Montserrat', sans-serif;
+							}/* end span */
+							&:after{
+								content: '';
+								border: none;
+								//border-left: 1px solid lighten($primary-color,10%);
+								border-left: 1px solid $gray;
+								margin-left: 5px;
+								padding-right:2px;
+								padding-bottom:20rem;
+								padding-top: 0.35rem;
+								z-index:-1;
+							}	 
+							&:last-child{
+								&:after{
+									border-left: 1px solid $darkgray;
+								}	 
+							}/* end last-child */
+							&:hover{
+								h5{
+									color:lighten($primary-color,5%);
+									&:before {
+										border: 2px solid lighten($primary-color,10%);
+										background-color: lighten($primary-color,10%);
+									}
+								}
+								h6{
+									color:lighten($primary-color,5%);
+									&:before {
+										border: 1px solid lighten($primary-color,10%);
+									}
+								}
+								span{
+									color:lighten($primary-color,5%);
+								}
+							}/* end hover */
+						}/* end li */
+					}/* end ul */
+					.relatedobjects{
+						width:100%;
+						float:left;
+						font-size:0.9rem;
+						ul{
+							margin:0;
+							list-style-type:none;
+							li a{
+								width:100%;
+								float:left;
+								margin-bottom:1rem;
+								margin-left:0;
+								color:$white;
+								padding:1rem 2rem;
+								border-bottom:1px solid $gray;
+								h1{
+									font-size:1.1rem;
+									margin:0 0 1rem 0;
+								}
+								img{
+									width:100%;
+									float:left;
+									height:auto;
+									margin:0 0 1rem 0;
+								}
+								&:hover{
+									background: darken($primary-color,30%);
+								}
+							}/* end li a */
+						}/* end ul */
+					}/* end .relatedobjects */ 
+				}/* end .tabs-wrapper */
+		}/* end .drawer */
+	 }/* end .sidebar-wrapper */
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1458,5 +1668,25 @@ section#search {
 
 
 
+@media screen and (max-width: 600px) {
 
+	/**** HEADER ****/
+	header {
+		padding: 0.5rem 3% 0 3%;
+		a {
+			font-size: 1rem;
+			max-width: 8rem;
+			display: block;
+		}
+		/**** NAVIGATION ****/
+		nav {
+			label {
+				&.menu-label {
+					right: 4rem;
+					font-size: 1rem;
+				}/* end .menu-label */
+			}/* end label */
+		}/* end nav */
+	}/* end header */
+}/* end media screen and (max-width: 400px) */
 
