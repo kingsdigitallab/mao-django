@@ -689,6 +689,7 @@ section#search {
 	ol,ul{
 		li{
 			margin:0 0 1rem -20px;
+			text-align: left;
 		}
 	}
 	.keywords{
@@ -790,6 +791,7 @@ section#search {
 					font-size: 1.2rem;
 					font-weight: normal; 
 					margin:1.3rem 0 0 0;
+					line-height: 1.2;
 				}
 				h5{
 					font-size: 0.9rem;
@@ -856,9 +858,14 @@ section#search {
 		    	line-height: 1.5;
 		    	cursor: pointer;
 		    	padding:0.5rem 1rem;
-		    	h4, h5{
+		    	text-align: left;
+		    	h5, h6{
 		    		margin:0;
-				}/* end h4, h5 */
+		    		line-height: 1.2;
+				}/* end h5, h6 */
+				h6{
+					font-weight: normal;
+				}
 				&:hover{
 					background: $lightgray;
 				}
@@ -883,6 +890,7 @@ section#search {
 		    	-webkit-transition: max-height .35s;
 		    	-o-transition: max-height .35s;
 		    	transition: max-height .35s;
+		    	font-size: 1rem;
 		    	.rich-text{
 		    		padding:0.5rem 0;
 		    	}
@@ -905,7 +913,7 @@ section#search {
 		float:left;
 		border-top: 1px dashed $lightgray;
 		padding:1rem 0;
-	  	font-size:1.1rem;
+	  	font-size:0.9rem;
 	  }/* end .readinglist */  
 	} /* end article */
 
@@ -1290,11 +1298,7 @@ section#search {
 		article{
 			width:100%;
 		}
-
-
-
-
-			  .geography{
+		.geography{
 	  	width:100%;
 		float:left;
 		border-top: 1px dashed $lightgray;

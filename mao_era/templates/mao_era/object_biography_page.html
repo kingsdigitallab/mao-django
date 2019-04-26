@@ -77,8 +77,8 @@
           <input id="map-tab-{{ forloop.counter }}" type="checkbox" name="tabs">
           <a class="map-item" href="#" id="map-marker-{{ forloop.counter }}">
             <label for="map-tab-{{ forloop.counter }}">
-              <h4>{{ place.title }}</h4>
-              <h5>{{ place.address }}</h5>
+              <h5>{{ place.title }}</h5>
+              <h6>{{ place.address }}</h6>
             </label>
           </a>
           <div class="content">{{ place.description|richtext }}</div>
