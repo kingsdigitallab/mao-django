@@ -34,7 +34,9 @@ class ImageBlock(StructBlock):
 
 class SectionContentBlock(StreamBlock):
 
-    text = RichTextBlock()
+    text = RichTextBlock(features=['bold', 'italic', 'superscript', 'ol', 'ul',
+                                   'link', 'document-link', 'image', 'embed',
+                                   'anchor', 'blockquote'])
     image = ImageBlock()
 
 
