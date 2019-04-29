@@ -14,6 +14,11 @@
       {% image resource original %}
     </figure>
     {% endif %}
+    {% if resource.text %}
+    <div class="align-left">
+      {{ resource.text|richtext }}
+    </div>
+    {% endif %}
     <div class="metadata">
       <dl>
         <dt>Title</dt>
