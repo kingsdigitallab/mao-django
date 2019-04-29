@@ -71,8 +71,8 @@
 
       <div id="map" style="height: 200px;"></div>
 
-      {% for place in places %}
       <div class="accordion-wrapper">
+        {% for place in places %}
         <div class="accordion">
           <input id="map-tab-{{ forloop.counter }}" type="checkbox" name="tabs">
           <a class="map-item" href="#" id="map-marker-{{ forloop.counter }}">
