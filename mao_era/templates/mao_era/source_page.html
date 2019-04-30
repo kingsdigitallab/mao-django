@@ -4,14 +4,14 @@
 {% block meta_title %}{{ page.title }}{% endblock meta_title %}
 
 {% block main %}
-<div class="source-page"> 
+<div class="source-page">
   <h1>{% display_source_title page %}</h1>
 
   {% for resource in page.resources %}
   <div class="source-section">
-    {% if resource.file %}
+    {% if resource.image %}
     <figure class="align-left">
-      {% image resource max-800-3000 %}
+      {% image resource.image max-800x3000 %}
     </figure>
     {% endif %}
     {% if resource.text %}

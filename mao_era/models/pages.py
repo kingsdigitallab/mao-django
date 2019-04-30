@@ -14,14 +14,13 @@ from wagtail.admin.edit_handlers import (
 )
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Orderable, Page
-from wagtail.images.models import AbstractRendition
+from wagtail.images.models import Image
 from wagtail.search.query import MatchAll
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
 from .blocks import BiographyStreamBlock, FootnotesStreamBlock
-from .images import AbstractImage
 
 
 DATE_REGEX = r'^(-)?\d{4}(-[01][0-9](-[0-3][0-9])?)?$'
@@ -135,43 +134,15 @@ class Resource(Orderable):
     ]
 
 
-class ImageResource(AbstractImage, Resource):
+class ImageResource(Resource):
 
-    # Wagtail will silently fail to show a RichTextField in the
-    # editing image upload interface.
-    source = ParentalKey(SourcePage, blank=True, null=True,
-                         on_delete=models.CASCADE, related_name='images')
-
-    admin_form_fields = (
-        'title',
-        'file',
-        'collection',
-        'focal_point_x',
-        'focal_point_y',
-        'focal_point_width',
-        'focal_point_height',
-        'creator',
-        'publisher',
-        'date',
-        'rights',
-        'description',
-        'source',
-    )
+    source = ParentalKey(SourcePage, related_name='images')
+    image = models.OneToOneField(Image, on_delete=models.CASCADE,
+                                 related_name='resource')
 
     panels = Resource.panels + [
-        FieldPanel('file'),
+        FieldPanel('image'),
     ]
-
-
-class ImageResourceRendition(AbstractRendition):
-
-    image = models.ForeignKey(ImageResource, on_delete=models.CASCADE,
-                              related_name='renditions')
-
-    class Meta:
-        unique_together = (
-            ('image', 'filter_spec', 'focal_point_key'),
-        )
 
 
 class PDFResource(Resource):
