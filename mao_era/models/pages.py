@@ -183,7 +183,7 @@ class ObjectBiographyPage(Page):
     footnotes = StreamField(FootnotesStreamBlock(), blank=True, null=True)
     further_reading = RichTextField(blank=True)
     featured_image = models.ForeignKey(
-        ImageResource, on_delete=models.PROTECT,
+        Image, blank=True, on_delete=models.PROTECT, null=True,
         related_name='featured_biographies')
     tags = ClusterTaggableManager(through=ObjectBiographyTag, blank=True)
     related_objects = ParentalManyToManyField('self', blank=True)
