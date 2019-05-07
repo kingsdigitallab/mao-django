@@ -14,6 +14,7 @@ from wagtail.admin.edit_handlers import (
 )
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Orderable, Page
+from wagtail.documents.models import Document
 from wagtail.images.models import Image
 from wagtail.search.query import MatchAll
 from wagtail.search import index
@@ -148,10 +149,11 @@ class ImageResource(Resource):
 class PDFResource(Resource):
 
     source = ParentalKey(SourcePage, related_name='pdfs')
-    text_file = models.FileField()
+    document = models.ForeignKey(Document, on_delete=models.PROTECT,
+                                 related_name='resources')
 
     panels = Resource.panels + [
-        FieldPanel('text_file'),
+        FieldPanel('document'),
     ]
 
 
