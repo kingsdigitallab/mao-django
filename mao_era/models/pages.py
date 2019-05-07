@@ -14,7 +14,9 @@ from wagtail.admin.edit_handlers import (
 )
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Orderable, Page
+from wagtail.documents.edit_handlers import DocumentChooserPanel
 from wagtail.documents.models import Document
+from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.images.models import Image
 from wagtail.search.query import MatchAll
 from wagtail.search import index
@@ -142,7 +144,7 @@ class ImageResource(Resource):
                                  related_name='resource')
 
     panels = Resource.panels + [
-        FieldPanel('image'),
+        ImageChooserPanel('image'),
     ]
 
 
@@ -153,7 +155,7 @@ class PDFResource(Resource):
                                  related_name='resources')
 
     panels = Resource.panels + [
-        FieldPanel('document'),
+        DocumentChooserPanel('document'),
     ]
 
 
