@@ -227,7 +227,9 @@ class ObjectBiographyPage(Page):
 
     def serve(self, request):
         places = Place.objects.filter(biographies__biography=self)
+        has_events = self.events.count() > 0
         context = {
+            'has_events': has_events,
             'home': self.get_parent(),
             'map_markers': self.get_map_markers(places),
             'page': self,
