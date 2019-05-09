@@ -226,6 +226,8 @@ class ObjectBiographyPage(Page):
             markers.append({'latlng': [place.latitude, place.longitude],
                             'popup': popup,
                             'title': 'map-marker-{}'.format(idx + 1)})
+        if not markers:
+            return ''
         return json.dumps(markers)
 
     def serve(self, request):
