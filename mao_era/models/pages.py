@@ -187,7 +187,7 @@ class ObjectBiographyPage(Page):
     byline = models.CharField(max_length=100)
     summary = models.TextField()
     biography = StreamField(BiographyStreamBlock())
-    footnotes = StreamField(FootnotesStreamBlock(), blank=True, null=True)
+    footnotes = StreamField(FootnotesStreamBlock(required=False), blank=True)
     further_reading = RichTextField(blank=True)
     featured_image = models.ForeignKey(
         Image, blank=True, on_delete=models.PROTECT, null=True,
