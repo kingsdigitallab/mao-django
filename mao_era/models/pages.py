@@ -90,9 +90,12 @@ class SourcePage(Page):
     )
 
     source_type = models.CharField(max_length=5, choices=SOURCE_TYPE_CHOICES)
+    description = RichTextField(blank=True,
+                                help_text='Description of whole source')
 
     content_panels = Page.content_panels + [
         FieldPanel('source_type'),
+        FieldPanel('description'),
         InlinePanel('pdfs', label='PDFs'),
         InlinePanel('images', label='images'),
         InlinePanel('texts', label='texts'),
