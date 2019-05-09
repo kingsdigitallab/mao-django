@@ -110,7 +110,7 @@ class SourcePage(Page):
         source_type = self.source_type
         if source_type == 'image':
             return self.images.all()
-        elif source_type == 'pdfs':
+        elif source_type == 'pdf':
             return self.pdfs.all()
         elif source_type == 'text':
             return self.texts.all()
