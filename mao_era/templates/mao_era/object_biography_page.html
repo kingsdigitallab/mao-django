@@ -66,6 +66,7 @@
       </ol>
     </div>
 
+    {% if map_markers %}
     <div class="geography" id="geography">
       <h2>Geography</h2>
 
@@ -86,6 +87,7 @@
         {% endfor %}
       </div>
     </div>
+    {% endif %}
 
     {% if has_events %}
     <div class="timeline" id="timeline">
@@ -142,9 +144,11 @@
           <li>
             <a href="#sources"><h2>Sources</h2></a>
           </li>
+          {% if map_markers %}
           <li>
             <a href="#geography"><h2>Geography</h2></a>
           </li>
+          {% endif %}
           {% if has_events %}
           <li>
             <a href="#timeline"><h2>Timeline</h2></a>
@@ -196,9 +200,11 @@
 
 
 {% block footer_scripts %}
+{% if map_markers %}
 <script src="{% static 'vendor/leaflet/leaflet.js' %}"></script>
 <script>var map_marker_data = {{ map_markers|safe }};</script>
 <script src="{% static 'js/map.js' %}"></script>
+{% endif %}
 {% if has_events %}
 <script src="{% static 'vendor/timeline/js/timeline.js' %}"></script>
 <script>timeline = new TL.Timeline('timeline-embed', '{{ timeline_url }}');</script>
