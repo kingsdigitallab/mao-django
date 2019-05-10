@@ -1234,11 +1234,12 @@ section#search {
 		.metadata{        
 			background:lighten($lightgray,5%);
 			margin-top:0;
-			width:27%;
-			float:left;
+			//width:27%;
+			//float:left;
 			padding:0.5rem 1rem;
 			text-align:left;
 			font-size:0.8rem;
+			overflow: auto;
 			dl dt,
 			dl dd {
 				display:block;
@@ -1262,11 +1263,11 @@ section#search {
 		}/* end .metadata */
 		figure{
 			&.align-left{
-				width:70%;
+				width:initial !important;
 				float: left;
 				margin:0 3% 0 0;
 				img{
-					width:100%;
+					//width:100%;
 					height:auto;
 				}
 	        }/* end .align-left */
