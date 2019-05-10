@@ -338,7 +338,10 @@ class HomePage(Page):
             raw_facets = results.facet('tags')
             facets = []
             for (tag_id, count) in raw_facets.items():
-                facets.append((str(Tag.objects.get(id=tag_id)), count))
+                try:
+                    facets.append((str(Tag.objects.get(id=tag_id)), count))
+                except Tag.DoesNotExist:
+                    pass
         context = {
             'biographies': results,
             'facets': facets,
