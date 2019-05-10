@@ -90,9 +90,12 @@ class SourcePage(Page):
     )
 
     source_type = models.CharField(max_length=5, choices=SOURCE_TYPE_CHOICES)
+    description = RichTextField(blank=True,
+                                help_text='Description of whole source')
 
     content_panels = Page.content_panels + [
         FieldPanel('source_type'),
+        FieldPanel('description'),
         InlinePanel('pdfs', label='PDFs'),
         InlinePanel('images', label='images'),
         InlinePanel('texts', label='texts'),
@@ -107,7 +110,7 @@ class SourcePage(Page):
         source_type = self.source_type
         if source_type == 'image':
             return self.images.all()
-        elif source_type == 'pdfs':
+        elif source_type == 'pdf':
             return self.pdfs.all()
         elif source_type == 'text':
             return self.texts.all()
@@ -184,7 +187,7 @@ class ObjectBiographyPage(Page):
     byline = models.CharField(max_length=100)
     summary = models.TextField()
     biography = StreamField(BiographyStreamBlock())
-    footnotes = StreamField(FootnotesStreamBlock(), blank=True, null=True)
+    footnotes = StreamField(FootnotesStreamBlock(required=False), blank=True)
     further_reading = RichTextField(blank=True)
     featured_image = models.ForeignKey(
         Image, blank=True, on_delete=models.PROTECT, null=True,
@@ -223,6 +226,8 @@ class ObjectBiographyPage(Page):
             markers.append({'latlng': [place.latitude, place.longitude],
                             'popup': popup,
                             'title': 'map-marker-{}'.format(idx + 1)})
+        if not markers:
+            return ''
         return json.dumps(markers)
 
     def serve(self, request):
