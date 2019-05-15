@@ -1230,6 +1230,26 @@ section#search {
 			width:70%;
 			float: left;
 			margin:0 3% 0 0;
+			.pdf{
+				a{
+					padding:0.5rem 1rem;
+					float:right;
+					margin:0 0 1rem 0.5rem;
+					font-size:0.8rem;
+					border:1px solid $gray;
+					&:hover{
+						background: $secondary-color;
+						border:1px solid $secondary-color;
+						color:$white;
+					}
+				}
+				embed{
+					height:60vh;
+				}
+			}
+			iframe{
+				height:60vh;
+			}
 		}
 		.metadata{        
 			background:lighten($lightgray,5%);
