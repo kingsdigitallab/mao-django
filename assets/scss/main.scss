@@ -328,11 +328,12 @@ section#search {
   			&:after {
   				content: "✕";
   				position: fixed;
-  				top: 20px;
+  				top: 60px;
   				left: 230px;
   				color: $white;
   				font-size:1.7rem;
-  				z-index: 501;        
+  				z-index: 501;    
+  				transition-delay: 2s;
   			}
   			&:hover{
   				&:after {
@@ -362,10 +363,11 @@ section#search {
   			-webkit-transition: all 200ms ease-in;
   			-o-transition: all 200ms ease-in;
   			transition: all 200ms ease-in;
+
   		}
   		.filter-drawer {
   			position:fixed;
-  			top:0;
+  			top:45px;
   			left:0;
   			width:270px;
   			height:100%;
@@ -413,6 +415,16 @@ section#search {
               		color: $white;
               	}
               }/* end button */
+              p{
+              	text-align: center;
+              	margin-top:0;
+              	text-transform: uppercase;
+              	font-size: 0.6rem;
+              	cursor: pointer;
+              	&:hover{
+              		color: $secondary-color;
+              	}
+              }
             }/* end .filter-content*/
           }/* end .filter-list */
           .multi-select {
