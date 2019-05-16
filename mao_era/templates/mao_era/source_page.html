@@ -16,13 +16,39 @@
     {% endif %}
     {% if resource.document %}
     <div class="align-left">
-      <iframe src="{{ resource.document.url }}" width="100%" height="auto"></iframe>
+      <div class="pdf">
+        <a href="{{ resource.document.url }}">View PDF</a>
+        <a href="{{ resource.document.url }}">Download PDF</a>   
+        <embed src="{{ resource.document.url }}" type="application/pdf"   height="500" width="100%">
+      </div>
     </div>
     {% endif %}
     {% if resource.source_url %}
-    <div class="align-left">
-      <iframe width="100%" height="315" src="{{ resource.source_url }}" frameborder="0" allowfullscreen allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
-    </div>
+      {% if resource.source.source_type == "video" %}
+      <div class="align-left">
+        <iframe width="100%" height="315" src="{{ resource.source_url }}" frameborder="0" allowfullscreen allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
+
+        <!--TO: Testing html video - not working
+        <video width="100%" controls>
+        <source src="{{ resource.source_url }}" type="video/mp4">
+        <source src="{{ resource.source_url }}" type="video/ogg">
+        Your browser does not support HTML5 video.
+        </video>
+         -->
+      </div>
+      {% else %}
+      <div class="align-left">
+        <iframe width="100%" height="315" src="{{ resource.source_url }}" frameborder="0" allowfullscreen allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        <!--TO: Testing audio video - not working 
+        <audio controls id="player">
+          <source src="{{ resource.source_url }}" type="audio/mpeg">
+          <source src="{{ resource.source_url }}" type="audio/ogg">
+          <track src="{{ resource.source_url }}https://s3-us-west-2.amazonaws.com/s.cdpn.io/15309/transcription.vtt" label="English Captions" kind="subtitles" srclang="en-us" default />
+          Your browser does not support HTML5 audio.
+        </audio>
+        -->
+      </div>
+       {% endif %}
     {% endif %}
     {% if resource.text %}
     <div class="align-left">

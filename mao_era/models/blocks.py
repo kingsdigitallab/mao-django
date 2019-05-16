@@ -2,7 +2,7 @@ from django import forms
 
 from wagtail.core.blocks import (
     CharBlock, FieldBlock, IntegerBlock, RichTextBlock, StreamBlock,
-    StructBlock, TextBlock
+    StructBlock
 )
 from wagtail.images.blocks import ImageChooserBlock
 
@@ -17,7 +17,7 @@ class AlignmentChoiceBlock(FieldBlock):
 class FootnoteBlock(StructBlock):
 
     number = IntegerBlock(min_value=1)
-    footnote = TextBlock()
+    footnote = RichTextBlock()
 
     class Meta:
         template = 'mao_era/blocks/footnote_block.html'
