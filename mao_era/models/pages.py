@@ -205,7 +205,7 @@ class ObjectBiographyPage(Page):
         InlinePanel('sources', label='sources'),
         InlinePanel('events', label='events'),
         InlinePanel('places', label='places'),
-        FieldPanel('featured_image'),
+        ImageChooserPanel('featured_image'),
         FieldPanel('related_objects', widget=forms.CheckboxSelectMultiple),
     ]
 
