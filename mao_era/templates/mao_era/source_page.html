@@ -7,6 +7,8 @@
 <div class="source-page">
   <h1>{% display_source_title page %}</h1>
 
+  {{ page.description|richtext }}
+
   {% for resource in page.resources %}
   <div class="source-section">
     {% if resource.image %}
