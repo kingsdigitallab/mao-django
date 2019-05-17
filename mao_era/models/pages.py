@@ -212,6 +212,11 @@ class ObjectBiographyPage(Page):
     search_fields = Page.search_fields + [
         index.SearchField('biography'),
         index.SearchField('summary'),
+        index.SearchField('footnotes'),
+        index.RelatedFields('sources', [
+            index.SearchField('title'),
+            index.SearchField('description'),
+        ]),
         index.FilterField('name'),
         index.FilterField('tags'),
     ]
