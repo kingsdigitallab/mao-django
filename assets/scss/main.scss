@@ -78,6 +78,10 @@ hr{
 	width: 100%;
 }
 
+sup{
+	font-size:0.7rem;
+}
+
 section{
 	-moz-transition:all 200ms ease-in;
 	-webkit-transition:all 200ms ease-in;
@@ -150,7 +154,7 @@ header {
 								padding: 1rem 2rem 1rem 1rem;
 							}
 							&:hover{
-							background: $lightgray;
+								background: $lightgray;
 								a{
 									color: $black;
 								}
@@ -170,17 +174,58 @@ header {
 			cursor: pointer;
 			&.menu-label {
 				position: absolute;
-				top:0.9rem;
-				right: 7rem;
-				font-size: 1.5rem;
+				top:0.8rem;
+				right: 0.6rem;
+				font-size: 1rem;
+				display: block;
+				height:1.5rem;
 				&:before{
 					content: 'MENU';
 					position: absolute;
+					right: 2.2rem;
+					top:0.3rem;
+				}
+				span{
+					position: relative;
+					margin: 9px 0 0 55px;
+					text-indent: -9999px;
+					transition: all .1s ease-in;
+					width: 30px;
+					height: 3px;
+					background-color: $black;
+					display: block;
+					&:before{
+					content: '';
+					position: absolute;
+					top: -9px;
+					transition: all .1s ease-in;
+					width: 30px;
+					height: 3px;
+					background-color: $black;
+					display: block;
+					}
+					&:after{
+					content: '';
+					position: absolute;
+					top: 9px;
+					transition: all .1s ease-in;
+					width: 30px;
+					height: 3px;
+					background-color: $black;
+					display: block;
+					}
 				}
 				&:hover {
 					color: $secondary-color;
+					span{
+						background-color:$secondary-color;
+						&:before,&:after{
+							background-color:$secondary-color;
+						}
+					}
 				}
 			}/* end .menu-label */
+
 		}/* end label */
 		input#menu[type="checkbox"] {
 			display: none;
@@ -190,18 +235,18 @@ header {
 		}/* end iinput#menu[type="checkbox"]:checked~.menu-list */
 		input#menu[type="checkbox"]:checked~label.menu-label {
 		/* cross icon */
+		&:before {
+			content: '✕';
+			right: -3.5rem;
+			color: $white;
+			font-size:2rem;
+			top:-0.3rem;
+		}
+		&:hover{
 			&:before {
-				content: '✕';
-				right: -3.5rem;
-				color: $white;
-				font-size:2rem;
-				top:-0.3rem;
+				color: $secondary-color;
 			}
-			&:hover{
-				&:before {
-					color: $secondary-color;
-				}
-			}
+		}
 		}/* end input#menu[type="checkbox"]:checked~label.menu-label */
 	}/* end nav */
 }/* end header */
@@ -209,13 +254,14 @@ header {
 /**** HOMEPAGE/SEARCH RESULTS ****/
 /* Shortcut links */
 .shortcutlinks{
-	margin-top:7%;
+	margin-top:5rem;
 	width:100%;
 	text-align:center;
+	display: block;
 	a{
 		border:1px solid $lightgray;
 		padding:0.7rem 1.2rem;
-		margin:0 1%;
+		margin:0 0.5rem;
 		background:$white;
 		&:hover{
 			color:$white;
@@ -229,7 +275,7 @@ header {
 /* Search */
 section#search {
 	.search-field {
-		margin: 3% 10% 0 10%;
+		margin: 2rem 10% 0 10%;
 		width: 80%;
 		text-align: center;
 		input {
@@ -255,7 +301,6 @@ section#search {
 				color: $black;
 				background:$lightgray;
 
-
 				&::-webkit-input-placeholder {
 					transition: opacity 0.45s ease;
 					opacity: 0;
@@ -269,7 +314,40 @@ section#search {
 					opacity: 0;
 				}
 			}
-		}
+			&:not(:valid) ~ .close-icon {
+				opacity: 0;
+			}
+		}/* end input */
+
+		button.close-icon {
+		position: relative;
+		border:1px solid transparent;
+		background-color: transparent;
+		display: inline-block;
+		vertical-align: middle;
+		outline: 0;
+		cursor: pointer;
+			&:after {
+				content: "✕";
+				display: block;
+				width: 27px;
+				height: 27px;
+				position: absolute;
+				background-color: $gray;
+				z-index:1;
+				right: 75px;
+				top: -4px;
+				bottom: 0;
+				margin: auto;
+				padding: 7px 0 0 0;
+				text-align: center;
+				color: white;
+				font-weight: normal;
+				cursor: pointer;
+				opacity: 1;
+				border-radius: 50%;
+				}
+		}/* end button.close-icon */
 		button.search-icon {
 			position: absolute;
 			width: 65px;
@@ -298,14 +376,13 @@ section#search {
 				transform: rotate(45deg);
 				border: 1px solid #333;
 			}
-		}
+		}/* end button.search-icon */
 		button {
 			&:hover {
 				opacity: 0.6;
 			}
 		}
-	}
-  /* end .search-field */
+	}/* end .search-field */
   .search-filters {
   	text-align: center;
   	width: 100%;
@@ -663,116 +740,153 @@ section#search {
 		.summary{
 			border-top: 1px dashed $lightgray;
 			padding:1rem 0;
+			h2{
+				padding: 1rem 0 0 1rem;
+			}
 			.summary-content{
-			font-family: 'Montserrat', sans-serif;
-			color:$black;
-			font-size:1rem;
-			font-weight:100;
-			background:lighten($lightgray,5%);
-			padding:1rem;
-			}/* end .content */
-	  }/* end .summary */
-	  h1{
-	  	margin:0 0 0.2rem 0;
-	  }
-	  h2{
-	  	margin:0 0 0.5rem 0;
-	  	font-size:1.4rem;
-	  	&.section{
-	  		margin: 1rem 0 0 0;
-	  		font-size:1.4rem;
-	  		&:before{
-	  			content:"";
-	  			border-left: 5px solid lighten($primary-color,20%);
-	  			padding: 0.4rem 0 0.2rem 0.5rem;
-	  		}
-	  	}
-	  }
-	  h3{
-	  	font-style:italic;
-	  	margin:0 0 1.5rem 0;
-	  	font-weight:normal;
-	  	font-size:1rem;
-	  	color:darken($primary-color,25%);
-	  }
-	  p{
-	  //font-family: 'Montserrat', sans-serif;
-	}
-	ol,ul{
-		li{
-			margin:0 0 1rem -20px;
-			text-align: left;
-		}
-	}
-	.keywords{
-		width:100%;
-		float:left;
-		border-top: 1px dashed $lightgray;
-		padding:1rem 0;
-		ul{
-			margin: 0 0 0 -40px;
-			text-align:left;
-			li{
-				background:darken($primary-color,25%);
-				display:inline-block;
-				padding:0.3rem 0.5rem 0.3rem 0.5rem;
-				list-style-type:none;
-				margin:0 0.1rem 0.5rem 0;
-				font-size:0.9rem;
 				font-family: 'Montserrat', sans-serif;
-				cursor: pointer;
-				a{
-					color:$white;
+				color:$black;
+				font-size:1rem;
+				font-weight:100;
+				background:lighten($lightgray,5%);
+				padding:1rem;
+			}/* end .content */
+		  }/* end .summary */
+		  h1{
+		  	margin:0 0 0.2rem 0;
+		  }/* end h1 */
+		  h2{
+		  	margin:0 0 0.5rem 0;
+		  	font-size:1.4rem;
+		  	float: left;
+    		width: 100%;
+		  	&.section{
+		  		margin: 1rem 0 1rem 0;
+		  		font-size:1.4rem;
+		  		&:before{
+		  			content:"";
+		  			border-left: 5px solid lighten($primary-color,20%);
+		  			padding: 0.4rem 0 0.2rem 0.5rem;
+		  		}
+		  	}
+		  }/* end h2 */
+		  h3{
+		  	font-style:italic;
+		  	margin:0 0 1.5rem 0;
+		  	font-weight:normal;
+		  	font-size:1rem;
+		  	color:darken($primary-color,25%);
+		  }/* end h3 */
+		  p{
+		  //font-family: 'Montserrat', sans-serif;
+		}
+		ol,ul{
+			li{
+				margin:0 0 1rem -20px;
+				text-align: left;
+			}
+		}
+		.block-image{
+			figure.align-left{
+				margin:0;
+				float:left;
+				width:40%;
+				margin-right:5%;
+				img{
+					width:100%;
+					height:auto;
 				}
-				&:hover{
-					background:darken($primary-color,35%);
+			}
+			figure.align-right{
+				margin:0;
+				float:right;
+				width:40%;
+				margin-left:5%;
+				img{
+					width:100%;
+					height:auto;
 				}
 			}
 		}
-	  }/* end .keywords */
-	  .biography{
-	  	width:100%;
-		float:left;
-		border-top: 1px dashed $lightgray;
-		padding:1rem 0;
-	  }
-	  .footnotes{
-		width:100%;
-		float:left;
-		border-top: 1px dashed $lightgray;
-		padding:1rem 0;
-	  	font-size:0.9rem;
+
+
+
+
+
+		.keywords{
+			width:100%;
+			float:left;
+			border-top: 1px dashed $lightgray;
+			padding:1rem 0;
+			ul{
+				margin: 0 0 0 -40px;
+				text-align:left;
+				li{
+					background:darken($primary-color,25%);
+					display:inline-block;
+					padding:0.3rem 0.5rem 0.3rem 0.5rem;
+					list-style-type:none;
+					margin:0 0.1rem 0.5rem 0;
+					font-size:0.9rem;
+					font-family: 'Montserrat', sans-serif;
+					cursor: pointer;
+					a{
+						color:$white;
+					}
+					&:hover{
+						background:darken($primary-color,35%);
+					}
+				}
+			}
+		}/* end .keywords */
+
+
+
+
+
+		.biography{
+			width:100%;
+			float:left;
+			border-top: 1px dashed $lightgray;
+			padding:1rem 0;
+		}
+		.footnotes{
+			width:100%;
+			float:left;
+			border-top: 1px dashed $lightgray;
+			padding:1rem 0;
+			font-size:0.9rem;
 	  }/* end .footnotes */  
 	  .sources{
-		width:100%;
-		float:left;
-		border-top: 1px dashed $lightgray;
-		padding:1rem 0;
-		  	.key{
-		  		width:100%;
-		  		float:left;
-		  		ul{
-		  			margin: 0 0 0 -40px;
-		  			text-align:left;
-		  			li{
-		  				background:darken($primary-color,25%);
-		  				display:inline-block;
-		  				color:$white;
-		  				padding:0.2rem 0.6rem 0.2rem 0.6rem;
-		  				list-style-type:none;
-		  				margin:0 0.1rem 0.5rem 0;
-		  				font-family: 'Montserrat', sans-serif;
-		  				cursor: pointer;
-		  				span{
-		  					font-size:0.7rem;
-		  					display: inline-block;
-		  					vertical-align: middle;
-		  				}
-		  				&:hover{
-		  					background:darken($primary-color,35%);
-		  				}
-		  			}
-		  		}
+	  	width:100%;
+	  	float:left;
+	  	border-top: 1px dashed $lightgray;
+	  	padding:1rem 0;
+	  	.key{
+	  		width:100%;
+	  		float:left;
+	  		ul{
+	  			margin: 0 0 0 -40px;
+	  			text-align:left;
+	  			li{
+	  				background:darken($primary-color,25%);
+	  				display:inline-block;
+	  				color:$white;
+	  				padding:0.2rem 0.6rem 0.2rem 0.6rem;
+	  				list-style-type:none;
+	  				margin:0 0.1rem 0.5rem 0;
+	  				font-family: 'Montserrat', sans-serif;
+	  				cursor: pointer;
+	  				span{
+	  					font-size:0.7rem;
+	  					display: inline-block;
+	  					vertical-align: middle;
+	  				}
+	  				&:hover{
+	  					background:darken($primary-color,35%);
+	  				}
+	  			}
+	  		}
 
 		  }/* end .key */
 		  ol{
@@ -782,9 +896,9 @@ section#search {
 	  }/* end .sources */
 	  .geography{
 	  	width:100%;
-		float:left;
-		border-top: 1px dashed $lightgray;
-		padding:1rem 0;
+	  	float:left;
+	  	border-top: 1px dashed $lightgray;
+	  	padding:1rem 0;
 		/* Map */
 		#map{
 			float:left;
@@ -814,21 +928,21 @@ section#search {
 			}
 
 			.leaflet-popup-tip {
-			    background:$black; 
-			    box-shadow: none;
-			    height:60px;
-			    transform: rotate(0);
-			    width:0;
+				background:$black; 
+				box-shadow: none;
+				height:60px;
+				transform: rotate(0);
+				width:0;
 			}
 
 			.point-icon{
-			  background-color: $secondary-color;
-			  border-radius: 50%;
-			  width:15px !important;
-			  height:15px !important;
-			  box-shadow: 0 0 7px $secondary-color;
-			  transition: all 1s;
-			  opacity:0.85;
+				background-color: $secondary-color;
+				border-radius: 50%;
+				width:15px !important;
+				height:15px !important;
+				box-shadow: 0 0 7px $secondary-color;
+				transition: all 1s;
+				opacity:0.85;
 			}
 
 		}/* end map */
@@ -911,20 +1025,20 @@ section#search {
 		}/* end .accordion-wrapper */ 
 	  }/* end .geography */
 	  .timeline{
-		width:100%;
-		float:left;
-		border-top: 1px dashed $lightgray;
-		padding:1rem 0;
+	  	width:100%;
+	  	float:left;
+	  	border-top: 1px dashed $lightgray;
+	  	padding:1rem 0;
 	  	img{
 	  		width:100%;
 	  	}
 	  }/* end .timeline */  
 
 	  .furtherreading{
-		width:100%;
-		float:left;
-		border-top: 1px dashed $lightgray;
-		padding:1rem 0;
+	  	width:100%;
+	  	float:left;
+	  	border-top: 1px dashed $lightgray;
+	  	padding:1rem 0;
 	  	font-size:0.9rem;
 	  }/* end .readinglist */  
 	} /* end article */
@@ -959,7 +1073,7 @@ section#search {
 			}/* end label */
 			>input{
 				&[type="checkbox"]{
-				display:none;
+					display:none;
 					&:checked{
 						~ label{ /* Slides label out but hidden */
 						  //right:460px;
@@ -1020,48 +1134,48 @@ section#search {
 			background: $black;
 			padding: 0 15px 15px 15px;
 			color: white;
-				.tabs-wrapper{
-					margin-top:3rem;
-					padding:1rem 0 0 0;
-					background:$darkgray;
-					height:100%;
-					width: 20rem;
-					position: fixed;
-					top: 0;
-					right: 0;
-					text-align: center;
-					overflow:scroll;
-					.tabs-object {
-						margin: 0 auto;
-						position: relative;
-						input, section {
-							clear: both;
-							padding-top: 10px;
-							display: none;
-						}
-						label {
-							font-size: 0.7rem;
-							display: block;
-							padding: 0.2rem;
-							margin:0.5rem 1rem 1rem 0;
-							cursor: pointer;
-							text-decoration: none;
-							text-align: center;
-							color: lighten($primary-color,15%);
-							display:inline-block;
-							text-transform:uppercase;
-							font-family: 'Montserrat', sans-serif;
-						}
-						#tab1:checked ~ #content1,
-						#tab2:checked ~ #content2,
-						#tab3:checked ~ #content3{
-							display: block;
-						}
-						[id^="tab"]:checked + label {
-							color:$white;
-							border-bottom:1px solid;
+			.tabs-wrapper{
+				margin-top:3rem;
+				padding:1rem 0 0 0;
+				background:$darkgray;
+				height:100%;
+				width: 20rem;
+				position: fixed;
+				top: 0;
+				right: 0;
+				text-align: center;
+				overflow:scroll;
+				.tabs-object {
+					margin: 0 auto;
+					position: relative;
+					input, section {
+						clear: both;
+						padding-top: 10px;
+						display: none;
+					}
+					label {
+						font-size: 0.7rem;
+						display: block;
+						padding: 0.2rem;
+						margin:0.5rem 1rem 1rem 0;
+						cursor: pointer;
+						text-decoration: none;
+						text-align: center;
+						color: lighten($primary-color,15%);
+						display:inline-block;
+						text-transform:uppercase;
+						font-family: 'Montserrat', sans-serif;
+					}
+					#tab1:checked ~ #content1,
+					#tab2:checked ~ #content2,
+					#tab3:checked ~ #content3{
+						display: block;
+					}
+					[id^="tab"]:checked + label {
+						color:$white;
+						border-bottom:1px solid;
 
-						}
+					}
 					}/* end .tabs-object */
 					.name-active{
 						h2{
@@ -1130,17 +1244,17 @@ section#search {
 								font-size:0.6rem;
 								font-weight:normal;         
 								font-family: 'Montserrat', sans-serif;
-							&:before {
-								border-radius: 50%;
-								background-color: $darkgray;
-								border: 1px solid lighten($primary-color,20%);
-								content: '';
-								height: 5px;
-								width: 5px;
-								margin-left:-13px;
-								display: block;
-								z-index:5;
-								margin-bottom: -0.55rem;
+								&:before {
+									border-radius: 50%;
+									background-color: $darkgray;
+									border: 1px solid lighten($primary-color,20%);
+									content: '';
+									height: 5px;
+									width: 5px;
+									margin-left:-13px;
+									display: block;
+									z-index:5;
+									margin-bottom: -0.55rem;
 								} 
 							}/* end h3 */
 							span {
@@ -1327,12 +1441,12 @@ section#search {
 
 
 /**** OBJECT PAGE ****/
-	.object-page{
-		article{
-			width:100%;
-		}
-		.geography{
-	  	width:100%;
+.object-page{
+	article{
+		width:100%;
+	}
+	.geography{
+		width:100%;
 		float:left;
 		border-top: 1px dashed $lightgray;
 		padding:1rem 0;
@@ -1389,7 +1503,7 @@ section#search {
 			}
 			>input{
 				&[type="checkbox"]{
-				display:none;
+					display:none;
 					&:checked{
 						~ label{ /* Slides label out but hidden */
 						  //right:460px;
@@ -1454,47 +1568,47 @@ section#search {
 			-webkit-transition:all 600ms ease-in;
 			-o-transition:all 600ms ease-in;
 			transition:all 600ms ease-in;
-				.tabs-wrapper{
-					margin-top:0;
-					padding:1rem 0 0 0;
-					background:$darkgray;
-					height:100%;
-					width: 100%;
-					min-width: 10rem;
+			.tabs-wrapper{
+				margin-top:0;
+				padding:1rem 0 0 0;
+				background:$darkgray;
+				height:100%;
+				width: 100%;
+				min-width: 10rem;
+				position: relative;
+				text-align: center;
+				overflow:scroll;
+				.tabs-object {
+					margin: 0 auto;
 					position: relative;
-					text-align: center;
-					overflow:scroll;
-					.tabs-object {
-						margin: 0 auto;
-						position: relative;
-						input, section {
-							clear: both;
-							padding-top: 10px;
-							display: none;
-						}
-						label {
-							font-size: 0.7rem;
-							display: block;
-							padding: 0.2rem;
-							margin:0.5rem 1rem 1rem 0;
-							cursor: pointer;
-							text-decoration: none;
-							text-align: center;
-							color: lighten($primary-color,15%);
-							display:inline-block;
-							text-transform:uppercase;
-							font-family: 'Montserrat', sans-serif;
-						}
-						#tab1:checked ~ #content1,
-						#tab2:checked ~ #content2,
-						#tab3:checked ~ #content3{
-							display: block;
-						}
-						[id^="tab"]:checked + label {
-							color:$white;
-							border-bottom:1px solid;
+					input, section {
+						clear: both;
+						padding-top: 10px;
+						display: none;
+					}
+					label {
+						font-size: 0.7rem;
+						display: block;
+						padding: 0.2rem;
+						margin:0.5rem 1rem 1rem 0;
+						cursor: pointer;
+						text-decoration: none;
+						text-align: center;
+						color: lighten($primary-color,15%);
+						display:inline-block;
+						text-transform:uppercase;
+						font-family: 'Montserrat', sans-serif;
+					}
+					#tab1:checked ~ #content1,
+					#tab2:checked ~ #content2,
+					#tab3:checked ~ #content3{
+						display: block;
+					}
+					[id^="tab"]:checked + label {
+						color:$white;
+						border-bottom:1px solid;
 
-						}
+					}
 					}/* end .tabs-object */
 					.name-active{
 						h2{
@@ -1564,17 +1678,17 @@ section#search {
 								font-size:0.6rem;
 								font-weight:normal;         
 								font-family: 'Montserrat', sans-serif;
-							&:before {
-								border-radius: 50%;
-								background-color: $darkgray;
-								border: 1px solid lighten($primary-color,20%);
-								content: '';
-								height: 5px;
-								width: 5px;
-								margin-left:-13px;
-								display: block;
-								z-index:5;
-								margin-bottom: -0.55rem;
+								&:before {
+									border-radius: 50%;
+									background-color: $darkgray;
+									border: 1px solid lighten($primary-color,20%);
+									content: '';
+									height: 5px;
+									width: 5px;
+									margin-left:-13px;
+									display: block;
+									z-index:5;
+									margin-bottom: -0.55rem;
 								} 
 							}/* end h3 */
 							span {
@@ -1657,7 +1771,7 @@ section#search {
 		}/* end .drawer */
 	 }/* end .sidebar-wrapper */
 
-}
+	}
 
 
 
@@ -1694,8 +1808,8 @@ section#search {
 				margin:0;
 	        }/* end .align-left */
 	        &.align-right{
-				width:100%;
-				margin:0;
+	        	width:100%;
+	        	margin:0;
 	        }/* end .align-right */
 	    }/* end figure */
 	}/* end .source-section */
