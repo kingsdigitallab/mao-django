@@ -357,5 +357,6 @@ class HomePage(Page):
             'facets': facets,
             'page': self,
             'q': querystring,
+            'tabs': request.GET.get('tabs', 'grid'),
         }
         return render(request, self.template, context)

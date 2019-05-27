@@ -4,23 +4,21 @@
 {% block meta_title %}{{ page.title }}{% endblock meta_title %}
 
 {% block main %}
-
-
 <div class="shortcutlinks">
   <a href="">Introduction</a><a href="">Teaching Resource</a>
 </div>
 
-<section id="search">
-  <form action="" method="get">
+<form action="" method="get">
+  <section id="search">
     <div class="search-field">
       <input name="q" value="{{ q }}" required placeholder="Search in Objects">
       <button class="close-icon" type="reset"></button>
-      <button class="search-icon"></button>
+      <button class="search-icon" type="submit"></button>
     </div>
     <div class="search-filters">
       <div class="filter">
         <input type="checkbox" id="filter-nav">
-        <label aria-label="Filter list" for="filter-nav" class="filter-label">Filters</label> 
+        <label aria-label="Filter list" for="filter-nav" class="filter-label">Filters</label>
         <div class="filter-drawer">
           <div class="filter-content">
             <h2>Filters</h2>
@@ -37,18 +35,16 @@
         </div>
       </div>
     </div>
-  </form>
-</section>
+  </section>
 
-<div class="tabs">
-  <input id="tab1" type="radio" name="tabs" checked="checked">
-  <label for="tab1"><span>Grid</span></label>
-  <input id="tab2" type="radio" name="tabs">
-  <label for="tab2"><span>List</span></label>
+  <div class="tabs">
+    <input id="tab1" type="radio" name="tabs" value="grid"{% if tabs == 'grid' %} checked="checked"{% endif %}>
+    <label for="tab1"><span>Grid</span></label>
+    <input id="tab2" type="radio" name="tabs" value="list"{% if tabs == 'list' %} checked="checked"{% endif %}>
+    <label for="tab2"><span>List</span></label>
 
-  <section id="content1" class="tab-content">
-    {% for biography in biographies %}
-    
+    <section id="content1" class="tab-content">
+      {% for biography in biographies %}
       <div class="photo">
         <a href="#{% pageurl biography %}">
           <div class="photo-image">
@@ -57,7 +53,7 @@
         </a>
         <div class="modal-overlay" id={% pageurl biography %}>
           <div class="modal-content">
-          <a href="#" class="modal-close">&#10005;</a>
+            <a href="#" class="modal-close">&#10005;</a>
             <h3>{{ biography.title }}</h3>
             <p>{{ biography.summary }}</p>
             <a class="readmore" href="{% pageurl biography %}">Read more ></a>
@@ -70,30 +66,30 @@
           </div><!--end .modal-content-->
         </div><!--end .modal-overlay-->
       </div><!--end .photo-->
-    </a>
-    {% endfor %}
-  </section>
+      {% endfor %}
+    </section>
 
-  <section id="content2" class="tab-content">
-    {% for biography in biographies %}
-    <a href="{% pageurl biography %}">
-      <div class="photo">
-        <div class="photo-image">
-          {% image biography.featured_image original %}
+    <section id="content2" class="tab-content">
+      {% for biography in biographies %}
+      <a href="{% pageurl biography %}">
+        <div class="photo">
+          <div class="photo-image">
+            {% image biography.featured_image original %}
+          </div>
+          <div class="photo-data">
+            <h2>{{ biography.title }}</h2>
+            <p class="summary">{{ biography.summary }}</p>
+            <ul class="keywords">
+              <h6>KEYWORDS</h6>
+              {% for tag in biography.tags.all %}
+              <li>{{ tag }}</li>
+              {% endfor %}
+            </ul>
+          </div>
         </div>
-        <div class="photo-data">
-          <h2>{{ biography.title }}</h2>
-          <p class="summary">{{ biography.summary }}</p>
-          <ul class="keywords">
-          <h6>KEYWORDS</h6>
-            {% for tag in biography.tags.all %}
-            <li>{{ tag }}</li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-    </a>
-    {% endfor %}
-  </section>
-</div>
+      </a>
+      {% endfor %}
+    </section>
+  </div>
+</form>
 {% endblock main %}
