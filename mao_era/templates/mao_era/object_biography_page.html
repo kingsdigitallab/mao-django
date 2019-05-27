@@ -27,7 +27,7 @@
       <h2>Keywords</h2>
       <ul>
         {% for tag in page.tags.all %}
-        <li><a href="{% pageurl home %}?tag={{ tag }}">{{ tag }}</li>
+        <li><a href="{% pageurl home %}?tag={{ tag }}">{{ tag }}</a></li>
         {% endfor %}
       </ul>
     </div>
