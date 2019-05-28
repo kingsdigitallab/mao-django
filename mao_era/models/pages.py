@@ -156,9 +156,12 @@ class PDFResource(Resource):
     source = ParentalKey(SourcePage, related_name='pdfs')
     document = models.ForeignKey(Document, on_delete=models.PROTECT,
                                  related_name='resources')
+    preview_image = models.ForeignKey(Image, on_delete=models.PROTECT,
+                                      related_name='pdfs')
 
     panels = Resource.panels + [
         DocumentChooserPanel('document'),
+        ImageChooserPanel('preview_image'),
     ]
 
 

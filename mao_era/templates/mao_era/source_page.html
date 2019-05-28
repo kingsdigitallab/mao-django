@@ -18,11 +18,7 @@
     {% endif %}
     {% if resource.document %}
     <div class="align-left">
-      <div class="pdf">
-        <a href="{{ resource.document.url }}">View PDF</a>
-        <a href="{{ resource.document.url }}">Download PDF</a>   
-        <embed src="{{ resource.document.url }}" type="application/pdf"   height="500" width="100%">
-      </div>
+      <a href="{{ resource.document.url }}">{% image resource.preview_image max-200x200 %}</a>
     </div>
     {% endif %}
     {% if resource.source_url %}
