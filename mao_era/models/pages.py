@@ -129,6 +129,7 @@ class Resource(Orderable):
 
     class Meta:
         abstract = True
+        ordering = ['sort_order']
 
     panels = [
         FieldPanel('title'),
