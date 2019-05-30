@@ -33,7 +33,7 @@ DATE_MESSAGE = 'Enter a valid date (YYYY, YYYY-MM, or YYYY-MM-DD)'
 @register_snippet
 class Event(models.Model):
 
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=150)
     date_start = models.CharField(
         max_length=11,
         validators=[RegexValidator(regex=DATE_REGEX, message=DATE_MESSAGE)])
