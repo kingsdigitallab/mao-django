@@ -5,7 +5,14 @@
 
 {% block main %}
 <div class="source-page">
-  <h1>{% display_source_title page %}</h1>
+    <div class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li><a href="/">Home</a></li>
+                <li><a href="">Source page</a></li>
+      </ul>
+      <h1>{% display_source_title page %}</h1>
+    </div>
+  
 
   {{ page.description|richtext }}
 
