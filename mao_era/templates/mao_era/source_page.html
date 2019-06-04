@@ -24,8 +24,17 @@
     </figure>
     {% endif %}
     {% if resource.document %}
+    
     <div class="align-left">
-      <a href="{{ resource.document.url }}">{% image resource.preview_image max-200x200 %}</a>
+        <div class="pdf">
+
+        <a href="{{ resource.document.url }}">&#11015; Download to view full PDF</a>  
+        <h6>
+          preview image of pdf
+        </h6>         
+        {% image resource.preview_image max-200x200 %}
+        <a href="{{ resource.document.url }}">&#11015; Download to view full PDF</a>  
+       </div>
     </div>
     {% endif %}
     {% if resource.source_url %}

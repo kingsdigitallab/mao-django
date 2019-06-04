@@ -1443,21 +1443,49 @@ section#search {
 			float: left;
 			margin:0 3% 0 0;
 			.pdf{
+				margin: 0 auto;
+    			width: 100%;
+    			text-align:center;
 				a{
-					padding:0.5rem 1rem;
-					float:right;
-					margin:0 0 1rem 0.5rem;
-					font-size:0.8rem;
-					border:1px solid $gray;
+					display: block;
+					padding: 0.5rem 1rem;
+					margin: 0 auto;
+					width: 13rem;
+					font-size: 0.8rem;
+					margin-bottom: 1rem;
+					background: darken($primary-color,25%);
+					border:1px solid darken($primary-color,25%);
+					color:$white;
 					&:hover{
 						background: $secondary-color;
 						border:1px solid $secondary-color;
 						color:$white;
 					}
 				}
-				embed{
+				/*embed{
 					height:60vh;
+				}*/
+				h6{
+				  float:left;
+				  width:100%;
+				  background-color:lighten($lightgray,13%);
+				  color: $gray;
+				  text-align: center;
+				  padding:0.5rem 0 0.2rem 0;
+				  border:1px solid $lightgray;	
+				  font-weight: normal;
+				  text-transform: uppercase;	
+				  margin:0;
+				  font-size: 0.6rem;
 				}
+				img{
+					width:100%;
+					height: auto;
+					border:1px solid $lightgray;
+					border-top:0;	
+					margin-bottom: 1rem;			
+				}
+
 			}
 			iframe{
 				height:60vh;
