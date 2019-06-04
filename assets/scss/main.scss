@@ -243,9 +243,10 @@ header {
 			content: '✕';
 			right: 0;
 			color: $white;
-			font-size:2rem;
+			font-size:1.5rem;
 			top:-0.3rem;
-			padding:0.2rem 0.5rem 0 0.5rem;
+			padding:0.4rem 0.6rem 0.2rem 0.6rem;
+			border-radius:50%;
 		}
 		&:hover{
 			&:before {
@@ -470,6 +471,72 @@ section#search {
   				margin: 0;
   				list-style: none;
   				overflow: scroll;
+  				input{
+  			  position: absolute; // take it out of document flow
+			  opacity: 0; // hide it
+			 & + label {
+			    position: relative;
+			    cursor: pointer;
+			    padding: 0;
+			  }
+
+			  // Box.
+			  & + label:before {
+			    content: '';
+			    margin-right: 10px;
+			    display: inline-block;
+			    vertical-align: text-top;
+			    width: 20px;
+			    height: 20px;
+			    background: white;
+			  }
+
+			  // Box hover
+			  &:hover + label:before {
+			    background: $secondary-color;
+			  }
+			  
+			  // Box focus
+			  &:focus + label:before {
+			    //box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.12);
+			  }
+
+			  // Box checked
+			  &:checked + label:before {
+			    background: $secondary-color;
+			  }
+			  
+			  // Disabled state label.
+			  &:disabled + label {
+			    color: $white;
+			    cursor: auto;
+			  }
+
+			  // Disabled box.
+			  &:disabled + label:before {
+			    box-shadow: none;
+			    background: $lightgray;
+			  }
+
+			  // Checkmark. Could be replaced with an image
+			  &:checked + label:after {
+			    content: '';
+			    position: absolute;
+			    left: 5px;
+			    top: 9px;
+			    background: white;
+			    width: 2px;
+			    height: 2px;
+			    box-shadow: 
+			      2px 0 0 $white,
+			      4px 0 0 $white,
+			      4px -2px 0 $white,
+			      4px -4px 0 $white,
+			      4px -6px 0 $white,
+			      4px -8px 0 $white;
+			    transform: rotate(45deg);
+			  }
+			  		}
   				label {
   					display: block;
   					-moz-transition: all 200ms ease-in;
@@ -623,16 +690,19 @@ section#search {
 				font-size: 0.7rem;
 				font-family: 'Montserrat', sans-serif;
 				cursor: pointer;
-				&:after{
+				border:1px solid lighten($primary-color,30%);
+				padding:0.3rem 0.5rem;
+				/*&:after{
 					content:",";
 				}
 				&:last-child{
 					&:after{
 						content:"";
 					} 
-				}
+				}*/
 				&:hover{
-					opacity:0.8;
+					color: lighten($secondary-color,15%);
+					border:1px solid lighten($secondary-color,15%);
 				}
 			}
     }/* end ul.keywords */
@@ -702,7 +772,7 @@ section#search {
       				margin-top:0;
       				font-size:1.2rem;
       			}
-      			ul{
+      			ul.keywords{
       				h6{
       					margin:0 0 0.5rem 0;
       				}
@@ -712,19 +782,24 @@ section#search {
       					display:inline-block;
       					list-style-type:none;
       					font-size:0.8rem;
-      					&:after{
+      					border:1px solid darken($primary-color,10%);
+      					padding:0.3rem 0.5rem;
+      					color: darken($primary-color,10%);
+      					/*&:after{
       						content:",";
       					}
       					&:last-child{
       						&:after{
       							content:"";
       						} 
-      					}
+      					}*/
       					&:hover{
-      						opacity:0.8;
+							border:1px solid $secondary-color;
+							color: $secondary-color;
       					}
-              }/*end li */
-          }
+	              }/*end li */
+
+	          }
           } /* end .photodata */
         } /* end .photo */
       } /* end #content2 List */
@@ -767,6 +842,27 @@ section#search {
         font-size: 1.6rem;
         border-top: 1px solid darken($lightgray,5%);
         font-weight: bold;
+        >span{
+        	background:darken($primary-color,25%);
+		    padding: 0.4rem 0.2rem 0.1rem 0.7rem;
+		    font-size: 1.2rem;
+		    color: #fff;
+		    text-transform: uppercase;
+		    vertical-align: top;
+		    line-height: 1.4;
+		    margin-right: 1rem;
+        	>span{
+			    font-size: 0.7rem;
+			    padding: 0.7rem 0.3rem 0 0.3rem;
+			    color: $white;
+			    font-family: 'Montserrat',sans-serif;
+			    display: inline-block;
+			    vertical-align: top;
+			    line-height: 0;
+			    font-weight: normal;
+			}
+        }
+       
     }
 }
 
@@ -860,11 +956,6 @@ section#search {
 				}
 			}
 		}
-
-
-
-
-
 		.keywords{
 			width:100%;
 			float:left;

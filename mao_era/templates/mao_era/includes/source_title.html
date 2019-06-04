@@ -1,6 +1,7 @@
-{% if source_type == 'audio' %}♪
-{% elif source_type == 'image' %}⧉
-{% elif source_type == 'text' %}文
-{% elif source_type == 'video' %}▸
+{% if source_type == 'audio' %}<span>♪<span>Audio</span> </span>
+{% elif source_type == 'image' %}<span>⧉<span>Image</span> </span>
+{% elif source_type == 'text' %}<span>文<span>Text</span> </span>
+{% elif source_type == 'video' %}<span>▸<span>Video</span> </span>
+{% elif source_type == 'pdf' %}<span>▤<span>Pdf</span> </span>
 {% endif %}
 {{ title }}

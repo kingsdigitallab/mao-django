@@ -11,7 +11,7 @@
 <form action="" method="get">
   <section id="search">
     <div class="search-field">
-      <input name="q" value="{{ q }}" required placeholder="Search in Objects">
+      <input name="q" value="{{ q }}" placeholder="Search in Objects">
       <button class="close-icon" type="reset"></button>
       <button class="search-icon" type="submit"></button>
     </div>
@@ -24,8 +24,8 @@
             <h2>Filters</h2>
 
             {% for facet in facets %}
-            <label>
-              <input type="checkbox" name="tag" value="{{ facet.0 }}">
+            <input type="checkbox" id="{{ facet.0 }}" name="tag" value="{{ facet.0 }}">
+            <label for="{{ facet.0 }}">
               {{ facet.0 }} <span>({{ facet.1 }})</span>
             </label>
             {% endfor %}
