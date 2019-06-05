@@ -3,17 +3,15 @@
 
 {% block meta_title %}{{ page.title }}{% endblock meta_title %}
 
-
 {% block main %}
-
-
-	<article>
-		<div class="breadcrumb" aria-label="breadcrumbs">
-			<ul>
-				<li><a href="/">Home</a></li>
-			</ul>
-			<h1>{{ page.title }}</h1>
-		</div>
-		{{ page.body|richtext }}
-	</article>
+<article>
+  <div class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+      {% get_site_root as site_root %}
+      <li><a href="{% pageurl site_root %}">Home</a></li>
+    </ul>
+    <h1>{{ page.title }}</h1>
+  </div>
+  {{ page.body|richtext }}
+</article>
 {% endblock main %}
