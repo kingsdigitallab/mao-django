@@ -146,9 +146,11 @@
             <a href="#section-{{ forloop.counter }}"><h2>{{ block.value.heading }}</h2></a>
           </li>
           {% endfor %}
+          {% if page.footnotes %}
           <li>
             <a href="#footnotes"><h2>Footnotes</h2></a>
           </li>
+          {% endif %}
           <li>
             <a href="#sources"><h2>Sources</h2></a>
           </li>
