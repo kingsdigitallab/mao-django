@@ -298,6 +298,19 @@ class ObjectBiographySource(models.Model):
         unique_together = ('biography', 'source')
 
 
+class ObjectBiographiesPage(Page):
+
+    body = RichTextField()
+
+    content_panels = Page.content_panels + [
+        FieldPanel('body', classname='full'),
+    ]
+
+    max_count = 1
+
+    subpage_types = [ObjectBiographyPage]
+
+
 class ProjectPage(Page):
 
     body = RichTextField()
@@ -307,6 +320,19 @@ class ProjectPage(Page):
     ]
 
     subpage_types = ['mao_era.ProjectPage']
+
+
+class SourcesPage(Page):
+
+    body = RichTextField()
+
+    content_panels = Page.content_panels + [
+        FieldPanel('body', classname='full'),
+    ]
+
+    max_count = 1
+
+    subpage_types = [SourcePage]
 
 
 class TimelinePage(Page):
@@ -322,8 +348,11 @@ class HomePage(Page):
         FieldPanel('body', classname='full'),
     ]
 
+    max_count = 1
+
     subpage_types = [
-        ObjectBiographyPage, ProjectPage, SourcePage, TimelinePage
+        ObjectBiographiesPage, ObjectBiographyPage, ProjectPage, SourcesPage,
+        SourcePage, TimelinePage
     ]
 
     def serve(self, request):
