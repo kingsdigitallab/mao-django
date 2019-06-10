@@ -1,0 +1,45 @@
+{% extends "mao_era/base.html" %}
+{% load wagtailcore_tags %}
+
+{% block meta_title %}{{ page.title }}{% endblock meta_title %}
+
+{% block main %}
+<article>
+  <div class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+      <li><a href="{% pageurl site_root %}">Home</a></li>
+    </ul>
+    <h1>{{ page.title }}</h1>
+  </div>
+
+  {{ page.body|richtext }}
+
+  <div>
+    <p>⧉ IMAGE 文 TEXT ▸ VIDEO ♪ AUDIO ▤ PDF</p>
+
+    <table>
+      <tr>
+        <th scope="col">Type</th>
+        <th scope="col">Title</th>
+      </tr>
+      {% for source_page in page.get_children %}
+      {% with source=source_page.specific %}
+      <tr>
+        {% with source_type=source.source_type %}
+        <td>
+          {% if source_type == 'audio' %}♪
+          {% elif source_type == 'image' %}⧉
+          {% elif source_type == 'text' %}文
+          {% elif source_type == 'video' %}▸
+          {% elif source_type == 'pdf' %}▤
+          {% endif %}
+        </td>
+        {% endwith %}
+        <td><a href="{% pageurl source %}">{{ source.title }}</a></td>
+      </tr>
+      {% endwith %}
+      {% endfor %}
+    </table>
+  </div>
+</article>
+{% endblock main %}

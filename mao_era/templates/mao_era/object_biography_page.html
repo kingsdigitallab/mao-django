@@ -15,8 +15,10 @@
   <article>
     <div class="breadcrumb" aria-label="breadcrumbs">
       <ul>
-        {% get_site_root as site_root %}
-        <li><a href="{% pageurl site_root %}">Object Biographies</a></li>
+        <li><a href="{% pageurl site_root %}">{{ site_root.title }}</a></li>
+        {% with parent=page.get_parent %}
+        <li><a href="{% pageurl parent %}">{{ parent.title }}</a></li>
+        {% endwith %}
       </ul>
       <h1>{{ page.title }}</h1>
     </div>

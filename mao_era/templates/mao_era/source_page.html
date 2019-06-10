@@ -7,9 +7,10 @@
 <div class="source-page">
   <div class="breadcrumb" aria-label="breadcrumbs">
     <ul>
-      {% get_site_root as site_root %}
-      <li><a href="{% pageurl site_root %}">Home</a></li>
-      <li><a href="">Sources</a></li>
+      <li><a href="{% pageurl site_root %}">{{ site_root.title }}</a></li>
+      {% with parent=page.get_parent %}
+      <li><a href="{% pageurl parent %}">{{ parent.title }}</a></li>
+      {% endwith %}
     </ul>
     <h1>{% display_source_title page %}</h1>
   </div>
@@ -24,16 +25,13 @@
     </figure>
     {% endif %}
     {% if resource.document %}
-    
     <div class="align-left">
         <div class="pdf">
 
-        <a href="{{ resource.document.url }}">&#11015; Download to view PDF</a>  
-        <h6>
-          preview image of pdf
-        </h6>         
+        <a href="{{ resource.document.url }}">&#11015; Download to view PDF</a>
+        <h6>preview image of pdf</h6>
         {% image resource.preview_image max-200x200 %}
-        <a href="{{ resource.document.url }}">&#11015; Download to view PDF</a>  
+        <a href="{{ resource.document.url }}">&#11015; Download to view PDF</a>
        </div>
     </div>
     {% endif %}
