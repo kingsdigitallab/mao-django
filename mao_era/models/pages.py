@@ -351,8 +351,7 @@ class HomePage(Page):
     max_count = 1
 
     subpage_types = [
-        ObjectBiographiesPage, ObjectBiographyPage, ProjectPage, SourcesPage,
-        SourcePage, TimelinePage
+        ObjectBiographiesPage, ProjectPage, SourcesPage, TimelinePage
     ]
 
     def serve(self, request):
