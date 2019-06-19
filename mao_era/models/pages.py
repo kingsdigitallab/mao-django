@@ -62,7 +62,7 @@ class Event(models.Model):
 @register_snippet
 class Place(models.Model):
 
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=150)
     latitude = models.FloatField()
     longitude = models.FloatField()
     address = models.CharField(max_length=100)
