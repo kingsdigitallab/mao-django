@@ -120,7 +120,7 @@ class SourcePage(Page):
 
 class Resource(Orderable):
 
-    title = models.CharField(max_length=255)
+    title = models.TextField()
     date = models.CharField(blank=True, max_length=20)
     creator = models.TextField(blank=True)
     publisher = models.TextField(blank=True)
