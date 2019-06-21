@@ -355,9 +355,27 @@ class HomePage(Page):
     ]
 
     def serve(self, request):
-        biographies = ObjectBiographyPage.objects.live()
+        query_dict = request.GET.copy()
         # Filter by tags.
-        tags = request.GET.getlist('tag')
+        tags = query_dict.getlist('tag')
+        biographies = self._filter_biographies_by_tags(tags)
+        # Search.
+        query = query_dict.get('q', '')
+        search_results = self._search_biographies(biographies, query)
+        # Facets.
+        facets = self._get_facets(search_results)
+        context = {
+            'biographies': search_results,
+            'facets': facets,
+            'page': self,
+            'q': query,
+            'tabs': query_dict.get('tabs', 'grid'),
+        }
+        return render(request, self.template, context)
+
+    def _filter_biographies_by_tags(self, tags):
+        """Returns a QuerySet of ObjectBiographyPages filtered by `tags`."""
+        biographies = ObjectBiographyPage.objects.live()
         if tags:
             query = None
             for tag in tags:
@@ -366,29 +384,25 @@ class HomePage(Page):
                 else:
                     query = query & models.Q(tags__name=tag)
             biographies = biographies.filter(query)
-        # Search.
-        querystring = request.GET.get('q', '')
-        query = querystring
-        if not query:
-            query = MatchAll()
-        results = biographies.search(query)
-        # Facets.
+        return biographies
+
+    def _get_facets(self, search_results):
+        """Returns a dictionary of facets applicable to `search_results`."""
         facets = {}
         # Trying to facet on empty search results generates an
         # exception. Helpful.
-        if results:
-            raw_facets = results.facet('tags')
+        if search_results:
+            raw_facets = search_results.facet('tags')
             facets = []
             for (tag_id, count) in raw_facets.items():
                 try:
                     facets.append((str(Tag.objects.get(id=tag_id)), count))
                 except Tag.DoesNotExist:
                     pass
-        context = {
-            'biographies': results,
-            'facets': facets,
-            'page': self,
-            'q': querystring,
-            'tabs': request.GET.get('tabs', 'grid'),
-        }
-        return render(request, self.template, context)
+        return facets
+
+    def _search_biographies(self, biographies, query):
+        """Returns those `biographies` matched by `query`."""
+        if not query:
+            query = MatchAll()
+        return biographies.search(query)
