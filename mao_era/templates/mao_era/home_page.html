@@ -15,6 +15,12 @@
       <button class="close-icon" type="reset"></button>
       <button class="search-icon" type="submit"></button>
     </div>
+    <div class="search-summary">
+      {% for facet in facets %}
+      {% if not facet.is_apply %}<span><a href="?{{ facet.link }}">X</a> {{ facet.name }} ({{ facet.count }})</span>{% endif %}
+      {% endfor %}
+      <span>
+    </div>
     <div class="search-filters">
       <div class="filter">
         <input type="checkbox" id="filter-nav">
@@ -23,14 +29,16 @@
           <div class="filter-content">
             <h2>Filters</h2>
 
-            {% for facet in facets %}
-            <input type="checkbox" id="{{ facet.0 }}" name="tag" value="{{ facet.0 }}">
-            <label for="{{ facet.0 }}">
-              {{ facet.0 }} <span>({{ facet.1 }})</span>
-            </label>
-            {% endfor %}
-            <button aria-label="apply filters" type="submit">Apply Filters</button>
-            <button aria-label="clear filters" type="reset">Clear all</button>
+            <ul>
+              {% for facet in facets %}
+              <li>
+                {% if facet.is_apply %}<a href="?{{ facet.link }}">{{ facet.name }}</a>
+                {% else %}<a href="?{{ facet.link }}">X</a> {{ facet.name }}
+                {% endif %} <span>({{ facet.count }})</span>
+              </li>
+              {% endfor %}
+            </ul>
+            <button aria-label="clear filters" type="submit">Clear all</button>
           </div>
         </div>
       </div>

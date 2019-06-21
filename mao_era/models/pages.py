@@ -363,7 +363,7 @@ class HomePage(Page):
         query = query_dict.get('q', '')
         search_results = self._search_biographies(biographies, query)
         # Facets.
-        facets = self._get_facets(search_results)
+        facets = self._get_facets(search_results, tags, query_dict)
         context = {
             'biographies': search_results,
             'facets': facets,
@@ -376,18 +376,23 @@ class HomePage(Page):
     def _filter_biographies_by_tags(self, tags):
         """Returns a QuerySet of ObjectBiographyPages filtered by `tags`."""
         biographies = ObjectBiographyPage.objects.live()
-        if tags:
-            query = None
-            for tag in tags:
-                if query is None:
-                    query = models.Q(tags__name=tag)
-                else:
-                    query = query & models.Q(tags__name=tag)
-            biographies = biographies.filter(query)
+        for tag in tags:
+            biographies = biographies.filter(tags__name=tag)
+        # You might think that the following two lines are pointless
+        # database churn, but in fact omitting them causes the
+        # selection of a tag to mean only that tag is ever retrieved
+        # when faceting.
+        ids = biographies.values('id')
+        biographies = ObjectBiographyPage.objects.filter(id__in=ids)
         return biographies
 
-    def _get_facets(self, search_results):
-        """Returns a dictionary of facets applicable to `search_results`."""
+    def _get_facets(self, search_results, tags, query_dict):
+        """Returns a dictionary of facets applicable to `search_results`.
+
+        Each facet includes its name, its count, and the querystring
+        to un/apply it.
+
+        """
         facets = {}
         # Trying to facet on empty search results generates an
         # exception. Helpful.
@@ -396,10 +401,33 @@ class HomePage(Page):
             facets = []
             for (tag_id, count) in raw_facets.items():
                 try:
-                    facets.append((str(Tag.objects.get(id=tag_id)), count))
+                    tag_name = str(Tag.objects.get(id=tag_id))
                 except Tag.DoesNotExist:
-                    pass
+                    continue
+                link, is_apply = self._get_tag_querystring(
+                    tags, tag_name, query_dict)
+                facets.append({'name': tag_name, 'count': count, 'link': link,
+                               'is_apply': is_apply})
         return facets
+
+    def _get_tag_querystring(self, tags, tag_name, query_dict):
+        """Returns the un/apply querystring for tag_name, and whether it is
+        for applying."""
+        qd = query_dict.copy()
+        print('Existing tags: {}'.format(tags))
+        print('Tag name: {}'.format(tag_name))
+        if tag_name in tags:
+            # Create a querystring for unapplying the facet.
+            new_tags = tags.copy()
+            new_tags.remove(tag_name)
+            is_apply = False
+        else:
+            # Create a querystring for applying the facet.
+            new_tags = tags + [tag_name]
+            is_apply = True
+        print('New tags: {}'.format(new_tags))
+        qd.setlist('tag', new_tags)
+        return qd.urlencode(), is_apply
 
     def _search_biographies(self, biographies, query):
         """Returns those `biographies` matched by `query`."""
