@@ -414,8 +414,6 @@ class HomePage(Page):
         """Returns the un/apply querystring for tag_name, and whether it is
         for applying."""
         qd = query_dict.copy()
-        print('Existing tags: {}'.format(tags))
-        print('Tag name: {}'.format(tag_name))
         if tag_name in tags:
             # Create a querystring for unapplying the facet.
             new_tags = tags.copy()
@@ -425,7 +423,6 @@ class HomePage(Page):
             # Create a querystring for applying the facet.
             new_tags = tags + [tag_name]
             is_apply = True
-        print('New tags: {}'.format(new_tags))
         qd.setlist('tag', new_tags)
         return qd.urlencode(), is_apply
 
