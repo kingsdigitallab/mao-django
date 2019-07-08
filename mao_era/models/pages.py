@@ -244,7 +244,7 @@ class ObjectBiographyPage(Page):
         has_events = self.events.count() > 0
         context = {
             'has_events': has_events,
-            'home': self.get_parent(),
+            'home': self.get_ancestors()[1],
             'map_markers': self.get_map_markers(places),
             'page': self,
             'places': places,
