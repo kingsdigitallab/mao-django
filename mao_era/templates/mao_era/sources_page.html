@@ -22,7 +22,7 @@
         <th scope="col">Type</th>
         <th scope="col">Title</th>
       </tr>
-      {% for source_page in page.get_children %}
+      {% for source_page in page.get_children.live %}
       {% with source=source_page.specific %}
       <tr>
         {% with source_type=source.source_type %}
