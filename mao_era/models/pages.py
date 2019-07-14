@@ -30,6 +30,19 @@ DATE_REGEX = r'^(-)?\d{4}(-[01][0-9](-[0-3][0-9])?)?$'
 DATE_MESSAGE = 'Enter a valid date (YYYY, YYYY-MM, or YYYY-MM-DD)'
 
 
+def get_map_markers(places):
+    markers = []
+    for idx, place in enumerate(places):
+        popup = '<h4>{}</h4><h5>{}</h5>'.format(
+            place.title, place.address, place.description)
+        markers.append({'latlng': [place.latitude, place.longitude],
+                        'popup': popup,
+                        'title': 'map-marker-{}'.format(idx + 1)})
+    if not markers:
+        return ''
+    return json.dumps(markers)
+
+
 @register_snippet
 class Event(models.Model):
 
@@ -57,6 +70,17 @@ class Event(models.Model):
         if len(date) > 7:
             data['day'] = int(date[8:10])
         return data
+
+    def get_event_data(self):
+        event_data = {}
+        event_data['start_date'] = self.convert_date(self.date_start)
+        if self.date_end:
+            event_data['end_date'] = self.convert_date(self.date_end)
+        event_data['text'] = {
+            'headline': self.title,
+            'text': self.description
+        }
+        return event_data
 
 
 @register_snippet
@@ -227,25 +251,13 @@ class ObjectBiographyPage(Page):
 
     subpage_types = []
 
-    def get_map_markers(self, places):
-        markers = []
-        for idx, place in enumerate(places):
-            popup = '<h4>{}</h4><h5>{}</h5>'.format(
-                place.title, place.address, place.description)
-            markers.append({'latlng': [place.latitude, place.longitude],
-                            'popup': popup,
-                            'title': 'map-marker-{}'.format(idx + 1)})
-        if not markers:
-            return ''
-        return json.dumps(markers)
-
     def serve(self, request):
         places = Place.objects.filter(biographies__biography=self)
         has_events = self.events.count() > 0
         context = {
             'has_events': has_events,
             'home': self.get_ancestors()[1],
-            'map_markers': self.get_map_markers(places),
+            'map_markers': get_map_markers(places),
             'page': self,
             'places': places,
             'timeline_url': reverse('biography-timeline', args=[self.id]),
@@ -335,9 +347,42 @@ class SourcesPage(Page):
     subpage_types = [SourcePage]
 
 
+class MapPage(Page):
+
+    body = RichTextField()
+
+    content_panels = Page.content_panels + [
+        FieldPanel('body', classname='full'),
+    ]
+
+    max_count = 1
+
+    def serve(self, request):
+        biography_ids = ObjectBiographyPage.objects.live().values_list(
+            'id', flat=True)
+        places = Place.objects.filter(biographies__biography__in=biography_ids)
+        context = {
+            'map_markers': get_map_markers(places),
+            'places': places,
+        }
+        return render(request, self.template, context)
+
+
 class TimelinePage(Page):
 
-    pass
+    body = RichTextField()
+
+    content_panels = Page.content_panels + [
+        FieldPanel('body', classname='full'),
+    ]
+
+    max_count = 1
+
+    def serve(self, request):
+        context = {
+            'timeline_url': reverse('full-timeline'),
+        }
+        return render(request, self.template, context)
 
 
 class HomePage(Page):
@@ -351,7 +396,7 @@ class HomePage(Page):
     max_count = 1
 
     subpage_types = [
-        ObjectBiographiesPage, ProjectPage, SourcesPage, TimelinePage
+        MapPage, ObjectBiographiesPage, ProjectPage, SourcesPage, TimelinePage
     ]
 
     def serve(self, request):

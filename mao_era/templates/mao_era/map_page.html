@@ -1,0 +1,42 @@
+{% extends "mao_era/base.html" %}
+{% load mao_era_tags static wagtailcore_tags wagtailimages_tags %}
+
+{% block meta_title %}{{ page.title }}{% endblock meta_title %}
+
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'vendor/leaflet/leaflet.css' %}">
+{% endblock extra_css %}
+
+
+{% block main %}
+<div class="object-page">
+  <article>
+    <div class="geography" id="geography">
+      <div id="map" style="height: 200px;"></div>
+
+      <div class="accordion-wrapper">
+        {% for place in places %}
+        <div class="accordion">
+          <input id="map-tab-{{ forloop.counter }}" type="checkbox" name="tabs">
+          <a class="map-item" href="#" id="map-marker-{{ forloop.counter }}">
+            <label for="map-tab-{{ forloop.counter }}">
+              <h5>{{ place.title }}</h5>
+              <h6>{{ place.address }}</h6>
+            </label>
+          </a>
+          <div class="content">{{ place.description|richtext }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </article>
+</div>
+{% endblock main %}
+
+
+{% block footer_scripts %}
+<script src="{% static 'vendor/leaflet/leaflet.js' %}"></script>
+<script>var map_marker_data = {{ map_markers|safe }};</script>
+<script src="{% static 'js/map.js' %}"></script>
+{% endblock footer_scripts %}

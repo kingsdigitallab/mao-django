@@ -4,5 +4,7 @@ from . import views
 
 
 urlpatterns = [
-    path('timeline/<int:bio_id>/', views.timeline, name='biography-timeline'),
+    path('timeline/', views.full_timeline, name='full-timeline'),
+    path('timeline/<int:bio_id>/', views.bio_timeline,
+         name='biography-timeline'),
 ]
