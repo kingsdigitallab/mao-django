@@ -360,7 +360,8 @@ class MapPage(Page):
     def serve(self, request):
         biography_ids = ObjectBiographyPage.objects.live().values_list(
             'id', flat=True)
-        places = Place.objects.filter(biographies__biography__in=biography_ids)
+        places = Place.objects.filter(
+            biographies__biography__in=biography_ids).distinct()
         context = {
             'map_markers': get_map_markers(places),
             'places': places,
