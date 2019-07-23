@@ -889,8 +889,10 @@ section#search {
 		padding: 0 3% 20vh 3%;
 		line-height: 1.3;
 		font-size: 1.2rem;
-		.width-100 {
-			width: 100%;
+		&.width-100 {
+			width: 100% !important;
+			max-width: 1600px;
+			padding-bottom: 0px;
 		}
 		.summary{
 			border-top: 1px dashed $lightgray;
@@ -998,17 +1000,15 @@ section#search {
 				}
 			}
 		}/* end .keywords */
-
-
-
-
-
 		.biography{
 			width:100%;
 			float:left;
 			border-top: 1px dashed $lightgray;
 			padding:1rem 0;
 			color: $black;
+			.rich-text > p:first-child{
+				margin-top: 0px;
+			}
 		}
 		.footnotes{
 			width:100%;
@@ -1062,7 +1062,8 @@ section#search {
 		/* Map */
 		#map{
 			float:left;
-			width:48%;
+			// width:48%;
+			width: 60%;
 			margin-right:2%;
 			overflow: auto;
 			// height:400px !important;
@@ -1192,9 +1193,40 @@ section#search {
 	  	float:left;
 	  	border-top: 1px dashed $lightgray;
 	  	padding:1rem 0;
-	  	img{
+	  	img {
 	  		width:100%;
-	  	}
+		}
+		//additional styling for the timeline
+		.tl-slider-background, .tl-menubar-button:hover {
+			background-color: #2a3e37 !important;
+		}
+		.tl-storyslider {
+			.tl-headline-date {
+				color: #a9c6bc;
+			}
+			.tl-headline {
+				color:#f1f1f1;
+			}
+			.tl-text-content p {
+				color: #d8d8d8;
+			}
+			.tl-slidenav-title {
+				line-height: 1.2em !important;
+				font-size: 12px !important;
+			}
+			.tl-slidenav-icon, .tl-slidenav-title, .tl-slidenav-description {
+				text-shadow: none;
+				color: white !important;
+			}
+			.tl-sidenav-next, .tl-sidenav-previous {
+				top: 95px;
+			}
+		}
+		.tl-timenav {
+		    .tl-headline, .tl-timeaxis-tick-text {
+				color: #2b3247 !important;
+			}
+		}
 	  }/* end .timeline */  
 
 	  .furtherreading{
