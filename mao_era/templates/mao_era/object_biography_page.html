@@ -135,7 +135,7 @@
       <input id="tab3" type="radio" name="tabs">
       <label for="tab3"><span>Related</span></label>
 
-      <section id="content1" class="tab-content">
+      <section id="content1" class="tab-content" aria-label="summary">
         <ul>
           <li>
             <a href="#summary" class="name-active"><h2>Summary</h2></a>
@@ -154,7 +154,7 @@
           </li>
           {% endif %}
           <li>
-            <a href="#sources"><h2>Sources</h2></a>
+            <a href="#sources" aria-label="object biography sources"><h2>Sources</h2></a>
           </li>
           {% if map_markers %}
           <li>
@@ -171,7 +171,7 @@
           </li>
         </ul>
       </section>
-      <section id="content2" class="tab-content">
+      <section id="content2" class="tab-content" aria-label="sources">
         <ul>
           {% for biography_source in page.sources.all %}
           <li>
@@ -185,7 +185,7 @@
         </ul>
       </section>
 
-      <section id="content3" class="tab-content relatedobjects">
+      <section id="content3" class="tab-content relatedobjects" aria-label="related">
         <ul>
           {% for object in page.related_objects.all %}
           <li>

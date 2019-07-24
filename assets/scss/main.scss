@@ -7,6 +7,8 @@
 - HEADER
 	- Navigation
 	- Search
+- MAIN
+- FOOTER
 - HOMEPAGE
 	- Shortcut links
 	- Search
@@ -69,7 +71,7 @@ body {
 
 a{
 	text-decoration:none;
-	color:darken($primary-color,10%);
+	color:darken($primary-color,11%);
 }
 
 hr{
@@ -89,6 +91,11 @@ section{
 	-webkit-transition:all 200ms ease-in;
 	-o-transition:all 200ms ease-in;
 	transition:all 200ms ease-in;
+}
+
+.skip {
+	font-size: 1px;
+	color:$gray;
 }
 
 /**** HEADER ****/
@@ -179,13 +186,12 @@ header {
 				font-size: 1.3rem;
 				display: block;
 				height:1.5rem;
-				&:before{
-					content: 'MENU';
+				.menu-text{
 					position: absolute;
 					right: 2.3rem;
 					top:0.18rem;
 				}
-				span{
+				.menu-icon{
 					position: relative;
 					margin: 9px 0 0 55px;
 					text-indent: -9999px;
@@ -217,7 +223,7 @@ header {
 				}
 				&:hover {
 					color: $secondary-color;
-					span{
+					.menu-icon{
 						background-color:$secondary-color;
 						&:before,&:after{
 							background-color:$secondary-color;
@@ -258,17 +264,45 @@ header {
 	}/* end nav */
 }/* end header */
 
+/**** MAIN ****/
+main {
+	overflow: auto;
+	padding-bottom: 60px;
+	min-height:82vh;
+}/* end MAIN */
+
+/**** FOOTER ****/
+footer {
+	background-color: #36534a;
+	padding: 20px;
+	text-align: center;
+	p {
+		color: white;
+		line-height: 1.2em;
+		a {
+			color: white;
+			opacity: 0.8;
+			text-decoration: underline;
+			&:hover {
+				opacity: 1;
+			}
+		}
+	}
+}/* end FOOTER */
+
 /**** HOMEPAGE/SEARCH RESULTS ****/
 /* Shortcut links */
 .shortcutlinks{
 	margin-top:5rem;
 	width:100%;
-	text-align:center;
-	display: block;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
 	a{
 		border:1px solid $lightgray;
 		padding:0.7rem 1.2rem;
-		margin:0 0.5rem;
+		margin:10px 0.5rem;
 		background:$white;
 		&:hover{
 			color:$white;
@@ -285,6 +319,7 @@ section#search {
 		margin: 2rem 10% 0 10%;
 		width: 80%;
 		text-align: center;
+		position: relative;
 		input {
 			width: 100%;
 			height: 55px;
@@ -327,43 +362,48 @@ section#search {
 		}/* end input */
 
 		button.close-icon {
-		position: relative;
-		border:1px solid transparent;
-		background-color: transparent;
-		display: inline-block;
-		vertical-align: middle;
-		outline: 0;
-		cursor: pointer;
-			&:after {
-				content: "✕";
-				display: block;
-				width: 27px;
-				height: 27px;
-				position: absolute;
-				background-color: $gray;
-				z-index:1;
-				right: 75px;
-				top: -4px;
-				bottom: 0;
-				margin: auto;
-				padding: 7px 0 0 0;
-				text-align: center;
-				color: white;
-				font-weight: normal;
-				cursor: pointer;
-				opacity: 1;
-				border-radius: 50%;
+			// position: relative;
+			border:1px solid transparent;
+			background-color: transparent;
+			display: inline-block;
+			vertical-align: middle;
+			outline: 0;
+			cursor: pointer;
+				&:after {
+					content: "✕";
+					display: block;
+					width: 27px;
+					height: 27px;
+					position: absolute;
+					background-color: $gray;
+					z-index:1;
+					right: 75px;
+					top: -4px;
+					bottom: 0;
+					margin: 17px 10px 0px 0px;
+					padding: 7px 0 0 0;
+					text-align: center;
+					color: white;
+					font-weight: normal;
+					cursor: pointer;
+					opacity: 1;
+					border-radius: 50%;
 				}
+			&:focus {
+				background-color: $gray;
+			}
 		}/* end button.close-icon */
 		button.search-icon {
 			position: absolute;
 			width: 65px;
-			margin: 0 auto;
+			// margin: 0 auto;
 			padding: 0;
-			margin-left: -60px;
+			// margin-left: -60px;
 			border: none;
 			background-color: white;
 			cursor: pointer;
+			top: 0;
+			right:0;
 			&:before {
 				content: '';
 				position: absolute;
@@ -406,7 +446,15 @@ section#search {
   			display: none;
   		}
   		input#filter-nav[type="checkbox"]:checked~.filter-drawer {
-  			margin: 0;
+			  margin: 0;
+			  .filter-content > button {
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				margin: 0px;
+				box-shadow: -3px -1px 1px #36534a;
+				transition: all 200ms ease-in;
+			  }
   		}
   		input#filter-nav:checked+label.filter-label{
   			&:after {
@@ -439,7 +487,8 @@ section#search {
   			transform: translate3d(260px, 0, 0);
   		}
   		label.filter-label {
-  			padding: 0.4rem 3vw;
+			// padding: 0.4rem 3vw;
+			padding: 10px 3vw;
   			cursor: pointer;
   			display: inline-block;
   			text-align: center;
@@ -470,12 +519,13 @@ section#search {
   				color: white;
   				margin: 0;
   				list-style: none;
-  				overflow: scroll;
+				overflow: scroll;
+				position: relative;
   				ul{
   					list-style-type: none;
   					margin-left:-40px;
   					li{
-
+						line-height: 1.4em;
   					}
   				}
   				a{
@@ -562,18 +612,24 @@ section#search {
               //}/* end label */
               button {
               	font-size: 0.8rem;
-              	width: 100%;
+				  // width: 100%;
+				width: 270px;
               	border: none;
               	background-color: $white;
               	cursor: pointer;
               	padding: 0.5rem;
-              	margin: 1rem 0;
+              	// margin: 1rem 0;
               	text-transform: uppercase;
-              	color: $primary-color;
+				color: darken($primary-color, 11%);
+				margin: 0 0 0 -270px;
               	&:hover {
               		background-color: darken($secondary-color,5%);
               		color: $white;
-              	}
+				  }
+				&:before {
+					content: "✕";
+					margin-right: 10px;
+				}
               }/* end button */
               p{
               	text-align: center;
@@ -592,6 +648,9 @@ section#search {
           }
       }/* end #filter */
   }/* end .search-filters */
+  .search-summary {
+	  padding: 20px 10% 0px 10%;
+  }
 }/* end section #search */
 
 /* tabs*/
@@ -615,7 +674,7 @@ section#search {
 		cursor: pointer;
 		text-decoration: none;
 		text-align: center;
-		color:lighten($gray,30%);
+		color: $gray;
 		display:inline-block;
 	}
 	#tab1:checked ~ #content1,
@@ -638,7 +697,8 @@ section#search {
 			.photo{
 				float:left;
 				position:relative;
-				width:16.66%; display:block;
+				width:16.66%; 
+				display:block;
 				&:hover{
 
 					.photo-data {
@@ -828,13 +888,13 @@ section#search {
         li{
             list-style-type: none;
             display: inline-block;
-            color: darken($primary-color,10%);
+            color: darken($primary-color,13%);
             font-size: 0.7rem;
             margin: 0;
             text-transform: uppercase;
             line-height: 2;
             a{
-                color: darken($primary-color,10%);
+                color: darken($primary-color,13%);
                 text-decoration: none;
                 &:hover{
                     color: $secondary-color;
@@ -883,7 +943,7 @@ section#search {
 //.object-page{
 	/* Article */
 	article {
-		margin: 7rem 0 0 0;
+		margin: 5rem 0 0 0;
 		width: calc(100% - 20rem);
 		float: left;
 		text-align: justify;
@@ -944,7 +1004,7 @@ section#search {
 		}
 		a{
 			text-decoration:none;
-			color:darken($primary-color,10%);
+			color:darken($primary-color,13%);
 			&:hover{
 				color:$secondary-color;
 				border-bottom: 1px dashed;
@@ -1068,7 +1128,10 @@ section#search {
 			margin-right:2%;
 			overflow: auto;
 			// height:400px !important;
-			height: 80vh !important;
+			height: 78vh !important;
+			&:focus {
+				background-color: $gray;
+			}
 			/* Leaflet */
 			.leaflet-popup-content-wrapper{
 				color:$white;
@@ -1115,7 +1178,7 @@ section#search {
 			// width:50%;
 			width: auto;
 			overflow: auto;
-			height: 80vh;
+			height: 78vh;
 			.accordion {
 				position: relative;
 				overflow: hidden;
@@ -1564,7 +1627,7 @@ section#search {
 
 /*** SOURCE PAGE ***/
 .source-page{
-	padding: 7rem 3% 20vh 3%;
+	padding: 5rem 3% 20vh 3%;
 	p{
 		line-height: 1.3;
     font-size: 1.2rem;
@@ -1871,6 +1934,10 @@ section#search {
 		}/* end .source-section */
 	}/* end .source-page */
 
+	.tabs section#content1 .photo {
+		width: 33.3%;
+	}
+	
 }/* end media screen and (max-width: 800px) */
 
 
@@ -1895,5 +1962,6 @@ section#search {
 			}/* end label */
 		}/* end nav */
 	}/* end header */
+
 }/* end media screen and (max-width: 400px) */
 
