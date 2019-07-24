@@ -1,4 +1,5 @@
 import json
+from random import shuffle
 
 from django import forms
 from django.core.validators import RegexValidator
@@ -360,7 +361,8 @@ class MapPage(Page):
     def serve(self, request):
         biography_ids = ObjectBiographyPage.objects.live().values_list(
             'id', flat=True)
-        places = Place.objects.filter(biographies__biography__in=biography_ids)
+        places = Place.objects.filter(
+            biographies__biography__in=biography_ids).distinct()
         context = {
             'map_markers': get_map_markers(places),
             'places': places,
@@ -409,8 +411,10 @@ class HomePage(Page):
         search_results = self._search_biographies(biographies, query)
         # Facets.
         facets = self._get_facets(search_results, tags, query_dict)
+        randomised_biographies = list(search_results)
+        shuffle(randomised_biographies)
         context = {
-            'biographies': search_results,
+            'biographies': randomised_biographies,
             'facets': facets,
             'page': self,
             'q': query,
