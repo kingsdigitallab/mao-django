@@ -631,6 +631,7 @@ section#search {
 		&#content1{
 			&:hover{
 				.photo:not(:hover){
+					transition: .2s ease-in;
 					opacity:0.6;
 				}
 			}
