@@ -11,7 +11,7 @@
 <form action="" method="get">
   <section id="search" aria-label="search">
     <div class="search-field">
-      <input name="q" value="{{ q }}" placeholder="Search in Objects" aria-label="search">
+      <input name="q" value="{{ q }}" placeholder="Search in Objects" aria-label="search bar">
       <button class="close-icon" type="reset"></button>
       <button class="search-icon" type="submit"></button>
     </div>
@@ -27,7 +27,7 @@
               {% for facet in facets %}
               <li>
                 {% if facet.is_apply %}<a href="?{{ facet.link }}">{{ facet.name }}</a>
-                {% else %}<a href="?{{ facet.link }}">X</a> {{ facet.name }}
+                {% else %}<a href="?{{ facet.link }}" class="selected-filter">X</a> {{ facet.name }}
                 {% endif %} <span>({{ facet.count }})</span>
               </li>
               {% endfor %}
@@ -39,7 +39,7 @@
     </div>
     <div class="search-summary">
         {% for facet in facets %}
-        {% if not facet.is_apply %}<span><a href="?{{ facet.link }}">X</a> {{ facet.name }} ({{ facet.count }})</span>{% endif %}
+        {% if not facet.is_apply %}<span><a href="?{{ facet.link }}" class="selected-filter">X</a> {{ facet.name }} ({{ facet.count }})</span>{% endif %}
         {% endfor %}
       </div>
   </section>
