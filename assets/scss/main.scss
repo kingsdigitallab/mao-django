@@ -503,8 +503,11 @@ section#search {
 					bottom: 0;
 					left: 0;
 					margin: 0px;
+					background: $secondary-color;
+					color: white;
 					box-shadow: -3px -1px 1px #36534a;
 					transition: all 200ms ease-in;
+					padding: 15px 0px 15px 0px;
 				}
 			}
 			input#filter-nav:checked+label.filter-label{
