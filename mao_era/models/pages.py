@@ -365,6 +365,7 @@ class MapPage(Page):
             biographies__biography__in=biography_ids).distinct()
         context = {
             'map_markers': get_map_markers(places),
+            'page': self,
             'places': places,
         }
         return render(request, self.template, context)
@@ -382,6 +383,7 @@ class TimelinePage(Page):
 
     def serve(self, request):
         context = {
+            'page': self,
             'timeline_url': reverse('full-timeline'),
         }
         return render(request, self.template, context)
