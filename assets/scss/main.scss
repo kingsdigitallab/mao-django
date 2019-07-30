@@ -75,6 +75,7 @@ button, a {
 
 a {
 	text-decoration:none;
+	color: darken($primary-color, 11%);
 }
 
 h2.section:before {
@@ -402,6 +403,9 @@ section#search {
 				outline: 0;
 				width: 40px;
 				height: 40px;
+				&:focus {
+					background-color: #fafafa;
+				}
 			}
 		}
 		/*
@@ -1368,11 +1372,13 @@ section#search {
 				.tl-headline {
 					font-size: 16px !important;
 					color: white !important;
+					line-height: 16px !important;
 				}
 			}
 		}
 		.tl-headline {
 			font-family: 'Josefin Sans', sans-serif;
+			text-align: left;
 		}
 		.tl-storyslider {
 			.tl-headline-date {
@@ -1394,11 +1400,18 @@ section#search {
 			}
 			.tl-slidenav-icon, .tl-slidenav-title, .tl-slidenav-description {
 				text-shadow: none;
-				color: $black !important;
+				color: #2a3e37 !important;
 				opacity: 1 !important;
 			}
 			.tl-slidenav-next, .tl-slidenav-previous {
 				opacity: 0.5 !important;
+				top: 30% !important;
+				&:hover {
+					opacity: 1 !important;
+				}
+				.tl-slidenav-content-container {
+					height: max-content;
+				}
 			}
 		}
 		.tl-timenav {
