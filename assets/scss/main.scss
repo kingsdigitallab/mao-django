@@ -69,7 +69,11 @@ body {
 	color:$black;
 }
 
-a{
+button {
+	cursor: pointer;
+}
+
+a {
 	text-decoration:none;
 	color:darken($primary-color,11%);
 }
@@ -360,7 +364,38 @@ section#search {
 				opacity: 0;
 			}
 		}/* end input */
-
+		.search-buttons {
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			position: absolute;
+			top: 15%;
+			right: 2%;
+			.close-icon {
+				background-color: $gray;
+				border: none;
+				border-radius: 50%;
+				width: 27px;
+				height: 27px;
+				margin-right: 10px;
+				color: white;
+				font-size: 16px;
+				padding-top: 0px;
+				padding-bottom: 3px;
+				outline: 0;
+				&:focus {
+					background-color: darken($gray, 11%);
+				}
+			}
+			.search-icon {
+				background:none;
+				border: none;
+				outline: 0;
+				width: 40px;
+				height: 40px;
+			}
+		}
+		/*
 		button.close-icon {
 			// position: relative;
 			border:1px solid transparent;
@@ -392,7 +427,7 @@ section#search {
 			&:focus {
 				background-color: $gray;
 			}
-		}/* end button.close-icon */
+		}
 		button.search-icon {
 			position: absolute;
 			width: 65px;
@@ -423,7 +458,8 @@ section#search {
 				transform: rotate(45deg);
 				border: 1px solid #333;
 			}
-		}/* end button.search-icon */
+		}
+		*/
 		button {
 			&:hover {
 				opacity: 0.6;
@@ -777,14 +813,16 @@ section#search {
 			}
 			li{
 				display: inline-block;
-				color: lighten($primary-color,30%);
 				list-style-type: none;
 				margin: 0 0 0.3rem 0;
-				font-size: 0.7rem;
-				font-family: 'Montserrat', sans-serif;
 				cursor: pointer;
 				border:1px solid lighten($primary-color,30%);
 				padding:0.3rem 0.5rem;
+				a {
+					color: lighten($primary-color,30%);
+					font-size: 0.7rem;
+					font-family: 'Montserrat', sans-serif;
+				}
 				/*&:after{
 					content:",";
 				}
@@ -936,7 +974,8 @@ section#search {
         padding:1rem 0 0.5rem 0;
         font-size: 1.6rem;
         border-top: 1px solid darken($lightgray,5%);
-        font-weight: bold;
+		font-weight: bold;
+		line-height: 1.2em;
         >span{
         	background:darken($primary-color,25%);
 		    padding: 0.4rem 0.2rem 0.1rem 0.7rem;
@@ -1115,22 +1154,22 @@ section#search {
 	  			margin: 0 0 0 -40px;
 	  			text-align:left;
 	  			li{
-	  				background:darken($primary-color,25%);
+	  				color:darken($primary-color,25%);
 	  				display:inline-block;
-	  				color:$white;
+	  				// color:$white;
 	  				padding:0.2rem 0.6rem 0.2rem 0.6rem;
 	  				list-style-type:none;
 	  				margin:0 0.1rem 0.5rem 0;
 	  				font-family: 'Montserrat', sans-serif;
-	  				cursor: pointer;
+	  				// cursor: pointer;
 	  				span{
 	  					font-size:0.7rem;
 	  					display: inline-block;
 	  					vertical-align: middle;
 	  				}
-	  				&:hover{
-	  					background:darken($primary-color,35%);
-	  				}
+	  				// &:hover{
+	  				// 	background:darken($primary-color,35%);
+	  				// }
 	  			}
 	  		}
 
@@ -1151,7 +1190,7 @@ section#search {
 			// width:48%;
 			width: 60%;
 			margin-right:2%;
-			overflow: auto;
+			// overflow: auto;
 			// height:400px !important;
 			height: 78vh !important;
 			&:focus {
@@ -1680,6 +1719,9 @@ section#search {
 			width:70%;
 			float: left;
 			margin:0 3% 0 0;
+			img {
+				width: 100%;
+			}
 			.pdf{
 				margin: 0 auto;
     			width: 100%;
@@ -1794,8 +1836,6 @@ section#search {
 
 
 @media screen and (max-width: 800px) {
-
-
 
 /**** OBJECT PAGE ****/
 .object-page{
@@ -1998,30 +2038,29 @@ section#search {
 	}/* end header */
 
 	.shortcutlinks {
-		margin-top: 3rem;
+		margin-top: 4rem;
 	}
-	section#search {
-		.search-field {
-			button {
-				&.search-icon {
-					&:before {
-						width: 25px;
-						height: 25px;
-						top: 12px;
-						left: 7px;
-					}
-					&:after {
-						top: 36px;
-					}
-				}
-				&.close-icon:after {
-					margin-right: 0px;
-					right: 65px;
-				}
-			}
-		}
-	}
-
+	// section#search {
+	// 	.search-field {
+	// 		button {
+	// 			&.search-icon {
+	// 				&:before {
+	// 					width: 25px;
+	// 					height: 25px;
+	// 					top: 12px;
+	// 					left: 7px;
+	// 				}
+	// 				&:after {
+	// 					top: 36px;
+	// 				}
+	// 			}
+	// 			&.close-icon:after {
+	// 				margin-right: 0px;
+	// 				right: 65px;
+	// 			}
+	// 		}
+	// 	}
+	// }
 	.tabs section#content1 .photo .modal-overlay {
 		.modal-content {
 			a.modal-close {
@@ -2032,12 +2071,25 @@ section#search {
 			padding: 20% 10%
 		}
 	}
-
 	ul.keywords {
 		li {
 			padding: .7em 1.5em !important;
 			margin-top: 5px !important;
 		}
+	}
+	article {
+		.geography #map {
+			height: 200px !important;
+		}
+		// .block-image figure.align-right {
+		// 	width: auto;
+		// 	margin: auto;
+		// 	text-align: center;
+		// 	float: none;
+		// 	img {
+		// 		max-width: 400px;
+		// 	}
+		// }
 	}
 
 }/* end media screen and (max-width: 600px) */

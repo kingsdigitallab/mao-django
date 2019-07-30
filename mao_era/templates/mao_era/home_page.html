@@ -12,8 +12,11 @@
   <section id="search" aria-label="search">
     <div class="search-field">
       <input name="q" value="{{ q }}" placeholder="Search in Objects" aria-label="search bar">
-      <button class="close-icon" type="reset"></button>
-      <button class="search-icon" type="submit"></button>
+      <div class="search-buttons">
+        <button class="close-icon" type="reset">x</button>
+        {% load static %}
+        <button class="search-icon" type="submit"><img src="{% static 'images/search.svg' %}" /></button>
+      </div>
     </div>
     <div class="search-filters">
       <div class="filter">
@@ -66,7 +69,7 @@
             <ul class="keywords">
               <h5>KEYWORDS</h5>
               {% for tag in biography.tags.all %}
-              <li>{{ tag }}</li>
+              <li><a href="?tag={{ tag }}">{{ tag }}</a></li>
               {% endfor %}
             </ul>
           </div><!--end .modal-content-->
@@ -88,7 +91,7 @@
             <ul class="keywords">
               <h6>KEYWORDS</h6>
               {% for tag in biography.tags.all %}
-              <li>{{ tag }}</li>
+              <li><a href="?tag={{ tag }}">{{ tag }}</a></li>
               {% endfor %}
             </ul>
           </div>
