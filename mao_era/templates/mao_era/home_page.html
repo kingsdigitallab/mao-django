@@ -80,23 +80,24 @@
 
     <section id="content2" class="tab-content" aria-label="list view content">
       {% for biography in biographies %}
-      <a href="{% pageurl biography %}">
         <div class="photo">
-          <div class="photo-image">
-            {% image biography.featured_image original %}
-          </div>
+          <a href="{% pageurl biography %}">
+            <div class="photo-image">
+              {% image biography.featured_image original %}
+            </div>
+          </a>
           <div class="photo-data">
             <h2>{{ biography.title }}</h2>
             <p class="summary">{{ biography.summary }}</p>
+            <a class="readmore" href="{% pageurl biography %}">Read more <span hidden>about {{ biography.title }}</span>></a>
             <ul class="keywords">
-              <h6>KEYWORDS</h6>
+              <h5>KEYWORDS</h5>
               {% for tag in biography.tags.all %}
               <li><a href="?tag={{ tag }}">{{ tag }}</a></li>
               {% endfor %}
             </ul>
           </div>
         </div>
-      </a>
       {% endfor %}
     </section>
   </div>

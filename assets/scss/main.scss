@@ -69,13 +69,22 @@ body {
 	color:$black;
 }
 
-button {
+button, a {
 	cursor: pointer;
 }
 
 a {
 	text-decoration:none;
-	color:darken($primary-color,11%);
+}
+
+h2.section:before {
+	content: "";
+	padding-top: 80px;
+	margin-top: -40px;
+}
+
+p {
+	line-height: 1.3em;
 }
 
 hr{
@@ -882,9 +891,9 @@ section#search {
       		text-align:left;
       		border-bottom:1px solid $lightgray;
       		padding:2rem 0;
-      		&:hover{
-      			background:lighten($primary-color,40%);
-      		}
+      		// &:hover{
+      		// 	background:lighten($primary-color,40%);
+      		// }
       		.photo-image{
       			width:15%;
       			margin:0 2% 0 0;
@@ -904,7 +913,10 @@ section#search {
       				margin-top:0;
 					font-size:1.2rem;
 					line-height: 1em;
-      			}
+				  }
+				.readmore {
+					color: darken($primary-color, 20%)
+				}
       			ul.keywords{
       				h6{
       					margin:0 0 0.5rem 0;
@@ -917,7 +929,8 @@ section#search {
       					font-size:0.8rem;
       					border:1px solid darken($primary-color,10%);
       					padding:0.3rem 0.5rem;
-      					color: darken($primary-color,10%);
+						color: darken($primary-color,10%);
+						margin-bottom: 5px;
       					/*&:after{
       						content:",";
       					}
@@ -1041,15 +1054,12 @@ section#search {
 				margin:0 0 0.5rem 0;
 				font-size:1.4rem;
 				display: inline-block;
-			width: 100%;
+				width: 100%;
 				&.section{
 					margin: 1rem 0 1rem 0;
 					font-size:1.4rem;
-					&:before{
-						content:"";
-						border-left: 5px solid lighten($primary-color,20%);
-						padding: 0.4rem 0 0.2rem 0.5rem;
-					}
+					border-left: 5px solid lighten($primary-color,20%);
+					padding: 0.4rem 0 0.2rem 0.5rem;
 				}
 			}/* end h2 */
 			h3{
@@ -1233,6 +1243,10 @@ section#search {
 				z-index: 3;
 			}
 
+			.leaflet-control a {
+				text-decoration: underline;
+			}
+
 			.point-icon{
 				background-color: $secondary-color;
 				border-radius: 50%;
@@ -1332,29 +1346,59 @@ section#search {
 	  		width:100%;
 		}
 		//additional styling for the timeline
-		.tl-slider-background, .tl-menubar-button:hover {
+		.tl-timeline {
+			font-family: Lato, sans-serif;
+		}
+		.tl-timeaxis-tick {
+			&:before {
+				border-color: $black !important;
+			}
+			.tl-timeaxis-tick-text {
+				font-family: 'Josefin Sans', sans-serif !important;
+				color: white !important;
+				font-size: 14px;
+			}
+		}
+		.tl-timemarker.tl-timemarker-active {
+			border-top-left-radius: 4px;
+			border-top-right-radius: 4px;
 			background-color: #2a3e37 !important;
+			.tl-timemarker-content-container {
+				background-color: #2a3e37 !important;
+				.tl-headline {
+					font-size: 16px !important;
+					color: white !important;
+				}
+			}
+		}
+		.tl-headline {
+			font-family: 'Josefin Sans', sans-serif;
 		}
 		.tl-storyslider {
 			.tl-headline-date {
-				color: #a9c6bc;
+				font-family: 'Josefin Sans', sans-serif;
+				margin-bottom: 15px;
+				font-size: 16px;
+				font-style: normal;
+				color: darken($primary-color, 20%);
 			}
 			.tl-headline {
-				color:#f1f1f1;
+				color:#2a3e37;
 			}
-			.tl-text-content p {
-				color: #d8d8d8;
+			.tl-text-content p{
+				color: $black;
 			}
 			.tl-slidenav-title {
 				line-height: 1.2em !important;
-				font-size: 12px !important;
+				font-size: 14px !important;
 			}
 			.tl-slidenav-icon, .tl-slidenav-title, .tl-slidenav-description {
 				text-shadow: none;
-				color: white !important;
+				color: $black !important;
+				opacity: 1 !important;
 			}
-			.tl-sidenav-next, .tl-sidenav-previous {
-				top: 95px;
+			.tl-slidenav-next, .tl-slidenav-previous {
+				opacity: 0.5 !important;
 			}
 		}
 		.tl-timenav {
@@ -1382,8 +1426,8 @@ section#search {
 		background:$black;
 		.sidebar-label{
 			position: fixed;
-			// top:calc(100vh - 3rem);
-			bottom: 0;
+			top:calc(100vh - 3rem);
+			// bottom: 0;
 			width:100%;
 			background: $black;
 			color:$white;
@@ -1526,9 +1570,8 @@ section#search {
 							} 
 							&:hover{
 								&:before {
-
-								background-color: lighten($secondary-color,15%);
-							} 
+									background-color: lighten($secondary-color,15%);
+								} 
 							}
 						}
 						h6{
