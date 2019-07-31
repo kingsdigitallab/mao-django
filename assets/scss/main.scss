@@ -922,7 +922,11 @@ section#search {
 					line-height: 1em;
 				  }
 				.readmore {
-					color: darken($primary-color, 20%)
+					color: $secondary-color;
+					&:hover {
+						color: darken($secondary-color, 10%);
+						text-decoration: underline;
+					}
 				}
       			ul.keywords{
       				h6{
