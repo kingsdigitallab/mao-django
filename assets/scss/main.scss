@@ -1932,11 +1932,12 @@ section#search {
 		background:$black;
 		.sidebar-label{
 			position: fixed;
-			top:calc(100vh - 3rem);
+			top:calc(100vh - 4rem);
 			width:100%;
 			background: $darkgray;
 			color:lighten($primary-color,15%);
 			display: block;
+			padding-bottom: 1.5rem;
 			>label{
 				float: left;
 				width: 100%;
