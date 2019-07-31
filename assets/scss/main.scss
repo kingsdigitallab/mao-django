@@ -1466,7 +1466,7 @@ section#search {
 			background: $black;
 			color:$white;
 			display: block;
-			z-index: 1;
+			z-index: 100;
 			>label{
 				float: left;
 				width: 100%;
