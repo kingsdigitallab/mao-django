@@ -23,5 +23,10 @@
 
 {% block footer_scripts %}
 <script src="{% static 'vendor/timeline/js/timeline.js' %}"></script>
-<script>timeline = new TL.Timeline('timeline-embed', '{{ timeline_url }}');</script>
+<script>
+   var options = {
+    optimal_tick_width: 600,
+  }
+  timeline = new TL.Timeline('timeline-embed', '{{ timeline_url }}', options);
+</script>
 {% endblock footer_scripts %}
