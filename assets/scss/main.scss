@@ -1370,6 +1370,9 @@ section#search {
 		//additional styling for the timeline
 		.tl-timeline {
 			font-family: Lato, sans-serif;
+			.tl-slider-background {
+				background-color: #2d303a !important;
+			}
 		}
 		.tl-timeaxis-tick {
 			&:before {
@@ -1384,9 +1387,9 @@ section#search {
 		.tl-timemarker.tl-timemarker-active {
 			border-top-left-radius: 4px;
 			border-top-right-radius: 4px;
-			background-color: #2a3e37 !important;
+			background-color: #2d303a !important;
 			.tl-timemarker-content-container {
-				background-color: #2a3e37 !important;
+				background-color: #2d303a !important;
 				.tl-headline {
 					font-size: 16px !important;
 					color: white !important;
@@ -1408,25 +1411,21 @@ section#search {
 				margin-bottom: 15px;
 				font-size: 18px;
 				font-style: normal;
-				color: darken($primary-color, 20%);
+				color: lighten($lightgray, 10%);
 			}
 			.tl-headline {
-				color:#031b27;
+				color:#abd3c5;
 			}
 			.tl-text {
-				border-left: 3px solid $primary-color;
+				border-left: 3px solid #abd3c5;
 			}
 			.tl-text-content p{
-				color: $black;
+				color: #e3e3e3;
 				margin-bottom: 0px;
-			}
-			.tl-slidenav-title {
-				line-height: 1.2em !important;
-				font-size: 14px !important;
 			}
 			.tl-slidenav-icon, .tl-slidenav-title, .tl-slidenav-description {
 				text-shadow: none;
-				color: #2a3e37 !important;
+				color: lighten($lightgray, 10%) !important;
 				opacity: 1 !important;
 			}
 			.tl-slidenav-next, .tl-slidenav-previous {
@@ -1437,6 +1436,13 @@ section#search {
 				}
 				.tl-slidenav-content-container {
 					height: max-content;
+					.tl-slidenav-title, .tl-slidenav-description {
+						line-height: 1.2em !important;
+						font-size: 13px !important;
+					}
+					.tl-slidenav-icon {
+						font-size: 24px !important;
+					}
 				}
 			}
 		}
