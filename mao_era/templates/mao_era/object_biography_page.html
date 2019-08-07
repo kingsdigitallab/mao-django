@@ -219,6 +219,13 @@
 {% endif %}
 {% if has_events %}
 <script src="{% static 'vendor/timeline/js/timeline.js' %}"></script>
-<script>timeline = new TL.Timeline('timeline-embed', '{{ timeline_url }}');</script>
+<script>
+   var options = {
+    scale_factor: 1,
+    marker_padding: 5,
+    marker_height_min: 30
+  }
+  timeline = new TL.Timeline('timeline-embed', '{{ timeline_url }}', options);
+</script>
 {% endif %}
 {% endblock footer_scripts %}

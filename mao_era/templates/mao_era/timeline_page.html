@@ -25,7 +25,9 @@
 <script src="{% static 'vendor/timeline/js/timeline.js' %}"></script>
 <script>
    var options = {
-    optimal_tick_width: 600
+    scale_factor: 3,
+    marker_padding: 10,
+    marker_height_min: 42
   }
   timeline = new TL.Timeline('timeline-embed', '{{ timeline_url }}', options);
 </script>
