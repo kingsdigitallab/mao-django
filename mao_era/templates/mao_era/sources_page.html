@@ -1,7 +1,19 @@
 {% extends "mao_era/base.html" %}
-{% load wagtailcore_tags %}
+{% load static wagtailcore_tags %}
 
 {% block meta_title %}{{ page.title }}{% endblock meta_title %}
+
+{% block extra_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'vendor/tablesorter/css/theme.default.css' %}">
+<link rel="stylesheet" href="{% static 'vendor/tablesorter/css/filter.formatter.css' %}">
+{% endblock extra_css %}
+
+{% block extra_js %}
+{{ block.super }}
+<script type="text/javascript" src="{% static 'vendor/tablesorter/js/jquery.tablesorter.js' %}"></script>
+<script type="text/javascript" src="{% static 'vendor/tablesorter/js/jquery.tablesorter.widgets.js' %}"></script>
+{% endblock extra_js %}
 
 {% block main %}
 <article class="width-100">
@@ -17,29 +29,46 @@
   <div>
     <p>⧉ IMAGE 文 TEXT ▸ VIDEO ♪ AUDIO ▤ PDF</p>
 
-    <table>
-      <tr>
-        <th scope="col">Type</th>
-        <th scope="col">Title</th>
-      </tr>
-      {% for source_page in page.get_children.live %}
-      {% with source=source_page.specific %}
-      <tr>
-        {% with source_type=source.source_type %}
-        <td>
-          {% if source_type == 'audio' %}♪
-          {% elif source_type == 'image' %}⧉
-          {% elif source_type == 'text' %}文
-          {% elif source_type == 'video' %}▸
-          {% elif source_type == 'pdf' %}▤
+    <table id="sources-table" class="tablesorter">
+      <thead>
+        <tr>
+          <th scope="col">Type</th>
+          <th scope="col">Title</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for source_page in page.get_children.live %}
+        {% with source=source_page.specific %}
+        <tr>
+          {% with source_type=source.source_type %}
+          {% if source_type == 'audio' %}<td data-text="audio">♪</td>
+          {% elif source_type == 'image' %}<td data-text="image">⧉</td>
+          {% elif source_type == 'text' %}<td data-text="text">文</td>
+          {% elif source_type == 'video' %}<td data-text="video">▸</td>
+          {% elif source_type == 'pdf' %}<td data-text="pdf">▤</td>
           {% endif %}
-        </td>
+          </td>
+          {% endwith %}
+          <td><a href="{% pageurl source %}">{{ source.title }}</a></td>
+        </tr>
         {% endwith %}
-        <td><a href="{% pageurl source %}">{{ source.title }}</a></td>
-      </tr>
-      {% endwith %}
-      {% endfor %}
+        {% endfor %}
+      </tbody>
     </table>
   </div>
 </article>
 {% endblock main %}
+
+{% block footer_scripts %}
+{{ block.super }}
+<script>
+$(function() {
+    $("#sources-table").tablesorter({
+        widgets: ["filter"],
+        widgetOptions: {
+            filter_columnFilters: true
+        }
+    });
+});
+</script>
+{% endblock footer_scripts %}
