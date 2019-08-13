@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Comfortaa|Inconsolata|Josefin+Sans|Karla|Major+Mono+Display|Montserrat|Nanum+Gothic+Coding|Nova+Mono|Prompt|Rajdhani|Roboto+Condensed|Teko');
+// @import url('https://fonts.googleapis.com/css?family=Comfortaa|Inconsolata|Josefin+Sans|Karla|Major+Mono+Display|Montserrat|Nanum+Gothic+Coding|Nova+Mono|Prompt|Rajdhani|Roboto+Condensed|Teko');
+@import url('https://fonts.googleapis.com/css?family=M+PLUS+1p:400,500,600,700|M+PLUS+Rounded+1c&display=swap');
 /*
 
 - GENERAL
@@ -27,6 +28,7 @@ $primary-color: #6b9e8d;
 $secondary-color:#812f2d;
 $black: #031b27;
 $white: #fff;
+$light-primary: #abd3c5;
 $lightgray:#ccc;
 $gray:#555;
 $darkgray:#2d303a;
@@ -56,26 +58,45 @@ html {
 
 body {
 	width: 100%;
+	height: 100%;
 	margin:0 auto;
-	font-family: 'Nova Mono', monospace;
-	font-family: 'Major Mono Display', monospace;
-	font-family: 'Nanum Gothic Coding', monospace;
+	font-family: 'M PLUS 1p', sans-serif;
+	// font-family: 'Nova Mono', monospace;
+	// font-family: 'Major Mono Display', monospace;
+	// font-family: 'Nanum Gothic Coding', monospace;
 	//font-family: 'Inconsolata', monospace;
 	//font-family: 'Comfortaa', cursive;
 	//font-family: 'Montserrat', sans-serif;
 	//font-family: 'Roboto Condensed', sans-serif;
-	font-family: 'Josefin Sans', sans-serif;
+	// font-family: 'Josefin Sans', sans-serif;
 	background:#f7f7f7;
 	color:$black;
+	font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 500;
 }
 
 button, a {
 	cursor: pointer;
 }
 
+button {
+	font-family: 'M PLUS 1p', sans-serif;
+	font-weight: 500;
+}
+
 a {
 	text-decoration:none;
 	color: darken($primary-color, 11%);
+	b {
+		font-weight: 500;
+	}
+}
+
+.readmore {
+	font-weight: 500;
 }
 
 h2.section:before {
@@ -85,7 +106,40 @@ h2.section:before {
 }
 
 p {
-	line-height: 1.3em;
+	line-height: 1.4em;
+}
+
+#sources-table {
+	font-size: 1.1rem;
+	td, th {
+		background-color: #f7f7f7;
+	}
+	th {
+		font-weight: 500;
+		&:focus {
+			outline: none;
+			background-color: lighten(#f7f7f7, 10%);
+		}
+	}
+	thead {
+		td {
+			margin: 0px;
+		}
+		input {
+			font-size: 1.1rem; 
+			margin: 10px 15px;
+		}
+	}
+	tbody td {
+		&:first-child {
+			width: 30%;
+		}
+		padding: 20px;
+		.icon {
+			width: 20px;
+			display: inline-block;
+		}
+	}
 }
 
 hr{
@@ -119,13 +173,15 @@ header {
 	top:0;
 	background:lighten($primary-color,20%);
 	height:3.5rem;
-	padding: 0.9rem 3% 0 3%;
-	font-family: 'Josefin Sans', sans-serif;
+	// padding: 0.9rem 3% 0 3%;
+	padding: 0.3rem 3% 0 3%;
+	// font-family: 'Josefin Sans', sans-serif;
 	z-index:1000;
 	a {
 		font-size: 2.1rem;
 		text-transform:uppercase;
 		color: $black;
+		font-weight: 500;
 	}
 	/**** NAVIGATION ****/
 	nav {
@@ -133,7 +189,7 @@ header {
 			position: fixed;
 			top: 0;
 			right: 0;
-			width:350px;
+			width: 350px;
 			height: 100%;
 			margin: 0 -350px 0 0;
 			-moz-transition: all 200ms ease-in;
@@ -142,7 +198,7 @@ header {
 			transition: all 200ms ease-in; 
 			overflow:scroll;
 			>ul {
-				width:350px;
+				width:100%;
 				height: 100%;
 				padding-top: 3.5rem;
 				list-style: none;
@@ -155,7 +211,6 @@ header {
 						color: white;
 						text-decoration: none;
 						font-size: 1.3em;
-						font-weight: bold;
 						padding: 1rem 2rem 1rem 3rem;
 						display:block;
 					}/* end a */
@@ -203,7 +258,7 @@ header {
 				.menu-text{
 					position: absolute;
 					right: 2.3rem;
-					top:0.18rem;
+					top: -4px;
 				}
 				.menu-icon{
 					position: relative;
@@ -266,12 +321,11 @@ header {
 			font-size:1.5rem;
 			top:-0.3rem;
 			// padding:0.4rem 0.6rem 0.2rem 0.6rem;
-			padding: 10px 10px 5px 10px;
+			padding: 3px 10px;
 			border-radius:50%;
 		}
 		&:hover{
 			&:before {
-				
 				background: darken($secondary-color,10%);
 			}
 		}
@@ -283,7 +337,7 @@ header {
 main {
 	overflow: auto;
 	padding-bottom: 60px;
-	min-height:82vh;
+	min-height: 90vh;
 }/* end MAIN */
 
 /**** FOOTER ****/
@@ -291,6 +345,7 @@ footer {
 	background-color: #36534a;
 	padding: 20px;
 	text-align: center;
+	
 	p {
 		color: white;
 		line-height: 1.2em;
@@ -319,6 +374,7 @@ footer {
 		padding:0.7rem 1.2rem;
 		margin:10px 0.5rem;
 		background:$white;
+		font-weight: 500;
 		&:hover{
 			color:$white;
 			background:$secondary-color;
@@ -343,13 +399,12 @@ section#search {
 			font-size: 1rem;
 			outline: none;
 			border: 1px solid $lightgray;
-			font-family: 'Josefin Sans', sans-serif;
-			font-size:1.5rem;
+			font-family: 'M PLUS 1p', sans-serif;
+			// font-family: 'Josefin Sans', sans-serif;
 			&::placeholder{
 				color: darken($lightgray,20%);
-				font-weight:normal;
-				font-family: 'Montserrat', sans-serif;
-				font-size:1rem;
+				// font-family: 'Montserrat', sans-serif;
+				font-size: 1rem;
 				font-style:italic;
 			}
 			&:focus {
@@ -581,12 +636,16 @@ section#search {
 					list-style: none;
 					overflow: scroll;
 					position: relative;
+					h1 {
+						font-weight: 500;
+					}
 					ul{
 						list-style-type: none;
 						margin-left:-40px;
 						padding-bottom: 80px;
 						li{
-							line-height: 1.4em;
+							font-size: 14px;
+							line-height: 2em;
 						}
 					}
 					a{
@@ -699,7 +758,7 @@ section#search {
 					text-align: center;
 					margin-top:0;
 					text-transform: uppercase;
-					font-size: 0.6rem;
+					font-size: 0.8rem;
 					cursor: pointer;
 					&:hover{
 						color: $secondary-color;
@@ -741,8 +800,8 @@ section#search {
 		display: none;
 	}
 	label {
-		font-weight: 700;
-		font-size: 1rem;
+		font-weight: 500;
+		font-size: 1.1rem;
 		display: block;
 		padding: 0.2rem;
 		margin:0.5rem;
@@ -842,8 +901,8 @@ section#search {
 				padding:0.3rem 0.5rem;
 				a {
 					color: lighten($primary-color,30%);
-					font-size: 0.7rem;
-					font-family: 'Montserrat', sans-serif;
+					font-size: 0.9rem;
+					// font-family: 'Montserrat', sans-serif;
 				}
 				/*&:after{
 					content:",";
@@ -863,7 +922,7 @@ section#search {
     	position: absolute;
     	right: 22%;
     	border-radius:50%;
-    	padding:0.4rem 0.55rem 0.25rem 0.5rem;
+    	padding:0.2rem 0.5rem;
     	background: lighten($primary-color,20%);
     	color: $black;
     	&:hover {
@@ -935,15 +994,15 @@ section#search {
 					}
 				}
       			ul.keywords{
-      				h6{
-      					margin:0 0 0.5rem 0;
+      				h5{
+      					margin:1.5rem 0 0.8rem 0;
       				}
       				margin:0 0 0 -40px;
       				text-align:left;
       				li{
       					display:inline-block;
       					list-style-type:none;
-      					font-size:0.8rem;
+      					font-size:1rem;
       					border:1px solid darken($primary-color,10%);
       					padding:0.3rem 0.5rem;
 						color: darken($primary-color,10%);
@@ -980,13 +1039,13 @@ section#search {
         li{
             list-style-type: none;
             display: inline-block;
-            color: darken($primary-color,13%);
+            color: darken($primary-color,20%);
             font-size: 0.7rem;
             margin: 0;
             text-transform: uppercase;
             line-height: 2;
             a{
-                color: darken($primary-color,13%);
+                color: darken($primary-color,20%);
                 text-decoration: none;
                 &:hover{
                     color: $secondary-color;
@@ -1001,29 +1060,27 @@ section#search {
     }
     h1{
         margin: 0;
-        padding:1rem 0 0.5rem 0;
+        padding:0.7rem 0 0.7rem 0;
         font-size: 1.6rem;
         border-top: 1px solid darken($lightgray,5%);
-		font-weight: bold;
 		line-height: 1.2em;
         >span{
         	background:darken($primary-color,25%);
-		    padding: 0.4rem 0.2rem 0.1rem 0.7rem;
+		    padding: 0.2rem 0.2rem 0.2rem 0.7rem;
 		    font-size: 1.2rem;
 		    color: #fff;
 		    text-transform: uppercase;
-		    vertical-align: top;
-		    line-height: 1.4;
+		    vertical-align: middle;
+		    line-height: 1;
 		    margin-right: 1rem;
         	>span{
-			    font-size: 0.7rem;
-			    padding: 0.7rem 0.3rem 0 0.3rem;
+			    font-size: 0.8rem;
+			    padding: 0.6rem 0.3rem 0 0.3rem;
 			    color: $white;
-			    font-family: 'Montserrat',sans-serif;
+			    // font-family: 'Montserrat',sans-serif;
 			    display: inline-block;
 			    vertical-align: top;
-			    line-height: 0;
-			    font-weight: normal;
+			    // font-weight: normal;
 			}
         }
        
@@ -1042,31 +1099,32 @@ section#search {
 		text-align: justify;
 		// padding: 0 3% 20vh 3%;
 		padding: 0 3% 0 3%;
-		line-height: 1.3;
-		font-size: 1.2rem;
+		line-height: 1.4em;
+		font-size: 1.1rem;
 		&.width-100 {
 			width: 100% !important;
-			max-width: 1600px;
+			// max-width: 1600px;
 			padding-bottom: 0px;
 		}
 		.summary{
 			border-top: 1px dashed $lightgray;
 			padding:1rem 0;
 			h2{
-				padding: 1rem 0 0 1rem;
+				padding: 1.5rem 0 0 1.5rem;
 				float: left;
 			}
 			.summary-content{
-				font-family: 'Montserrat', sans-serif;
+				// font-family: 'Montserrat', sans-serif;
 				color:$black;
 				font-size:1rem;
-				font-weight:100;
+				line-height: 1.4em;
+				// font-weight:100;
 				background:lighten($lightgray,13%);
-				padding:1rem;
+				padding:1.5rem;
 			}/* end .content */
 			}/* end .summary */
 			h1{
-				margin:0 0 0.2rem 0;
+				margin:0 0 1rem 0;
 			}/* end h1 */
 			h2{
 				margin:0 0 0.5rem 0;
@@ -1083,7 +1141,7 @@ section#search {
 			h3{
 				font-style:italic;
 				margin:0 0 1.5rem 0;
-				font-weight:normal;
+				// font-weight:normal;
 				font-size:1rem;
 				color:darken($primary-color,25%);
 			}/* end h3 */
@@ -1135,11 +1193,11 @@ section#search {
 				li{
 					background:darken($primary-color,25%);
 					display:inline-block;
-					padding:0.3rem 0.5rem 0.3rem 0.5rem;
+					padding:0.3rem 0.7rem;
 					list-style-type:none;
-					margin:0 0.1rem 0.5rem 0;
-					font-size:0.9rem;
-					font-family: 'Montserrat', sans-serif;
+					margin:0 0.2rem 0.5rem 0;
+					font-size:1rem;
+					// font-family: 'Montserrat', sans-serif;
 					cursor: pointer;
 					a{
 						color:$white;
@@ -1175,38 +1233,38 @@ section#search {
 	  	float:left;
 	  	border-top: 1px dashed $lightgray;
 	  	padding:1rem 0;
-	  	.key{
-	  		width:100%;
-	  		float:left;
-	  		ul{
-	  			margin: 0 0 0 -40px;
-	  			text-align:left;
-	  			li{
-	  				color:darken($primary-color,25%);
-	  				display:inline-block;
-	  				// color:$white;
-	  				padding:0.2rem 0.6rem 0.2rem 0.6rem;
-	  				list-style-type:none;
-	  				margin:0 0.1rem 0.5rem 0;
-	  				font-family: 'Montserrat', sans-serif;
-	  				// cursor: pointer;
-	  				span{
-	  					font-size:0.7rem;
-	  					display: inline-block;
-	  					vertical-align: middle;
-	  				}
-	  				// &:hover{
-	  				// 	background:darken($primary-color,35%);
-	  				// }
-	  			}
-	  		}
-
-		  }/* end .key */
 		  ol{
 		  	float:left;
 		  	width:100%;
 		  }
 	  }/* end .sources */
+	  .key{
+		width:100%;
+		float:left;
+		ul{
+			margin: 0 0 0 -40px;
+			text-align:left;
+			li{
+				color:darken($primary-color,25%);
+				display:inline-block;
+				// color:$white;
+				padding:0.2rem 0.6rem 0.2rem 0.6rem;
+				list-style-type:none;
+				margin:0 0.1rem 0.5rem 0;
+				// font-family: 'Montserrat', sans-serif;
+				// cursor: pointer;
+				span{
+					font-size:1.1rem;
+					display: inline-block;
+					vertical-align: middle;
+				}
+				// &:hover{
+				// 	background:darken($primary-color,35%);
+				// }
+			}
+		}
+
+	}/* end .key */
 	  .geography{
 	  	width:100%;
 	  	float:left;
@@ -1230,17 +1288,17 @@ section#search {
 				background:$black; 
 				border-radius:0;
 				text-align:center;
-				font-family: 'Josefin Sans', sans-serif;
+				// font-family: 'Josefin Sans', sans-serif;
 				h4{
 					font-size: 1.2rem;
-					font-weight: normal; 
+					// font-weight: normal; 
 					margin:1.3rem 0 0 0;
 					line-height: 1.2;
 				}
 				h5{
 					font-size: 0.9rem;
 					color: lighten($primary-color,20%);
-					font-weight: normal;
+					// font-weight: normal;
 					margin:0.2rem 0 0.5rem 0;
 				}
 			}
@@ -1309,19 +1367,29 @@ section#search {
 		      }
 		    }/* input */
 		    a label {
+				&:first-child {
+					margin-top:0px;
+					padding-top: 0px;
+				}
 		    	position: relative;
 		    	display: block;
-		    	font-weight: bold;
-		    	line-height: 1.5;
+		    	// font-weight: bold;
 		    	cursor: pointer;
-		    	padding:0.5rem 1rem;
+		    	padding:1rem 1rem;
 		    	text-align: left;
 		    	h5, h6{
 		    		margin:0;
 		    		line-height: 1.2;
 				}/* end h5, h6 */
+				h5 {
+					font-size: 1rem;
+					line-height: 1.4em;
+					margin-top: 10px;
+				}
 				h6{
-					font-weight: normal;
+					color: $darkgray;
+					font-size: 0.8rem;
+					// font-weight: normal;
 				}
 				&:hover{
 					background: $lightgray;
@@ -1348,9 +1416,9 @@ section#search {
 		    	-o-transition: max-height .35s;
 		    	transition: max-height .35s;
 		    	font-size: 1rem;
-		    	.rich-text{
-		    		padding:0.5rem 0;
-		    	}
+		    	.rich-text p {
+					margin: 0 0 1.5rem 0;
+				}
 		    }/* end .content */
 		  }/* end .accordion */
 		}/* end .accordion-wrapper */ 
@@ -1369,7 +1437,7 @@ section#search {
 		}
 		//additional styling for the timeline
 		.tl-timeline {
-			font-family: Lato, sans-serif;
+			// font-family: Lato, sans-serif;
 			.tl-slider-background {
 				background-color: #2d303a !important;
 			}
@@ -1379,7 +1447,7 @@ section#search {
 				border-color: $black !important;
 			}
 			.tl-timeaxis-tick-text {
-				font-family: 'Josefin Sans', sans-serif !important;
+				// font-family: 'Josefin Sans', sans-serif !important;
 				color: white !important;
 				font-size: 14px;
 			}
@@ -1398,7 +1466,7 @@ section#search {
 			}
 		}
 		.tl-headline {
-			font-family: 'Josefin Sans', sans-serif;
+			// font-family: 'Josefin Sans', sans-serif;
 			text-align: left;
 		}
 		.tl-skinny .tl-text h2.tl-headline {
@@ -1407,17 +1475,17 @@ section#search {
 		}
 		.tl-storyslider {
 			.tl-headline-date {
-				font-family: 'Josefin Sans', sans-serif;
+				// font-family: 'Josefin Sans', sans-serif;
 				margin-bottom: 15px;
 				font-size: 18px;
 				font-style: normal;
 				color: lighten($lightgray, 10%);
 			}
 			.tl-headline {
-				color:#abd3c5;
+				color: $light-primary;
 			}
 			.tl-text {
-				border-left: 3px solid #abd3c5;
+				border-left: 3px solid $light-primary;
 			}
 			.tl-text-content p{
 				color: #e3e3e3;
@@ -1513,7 +1581,7 @@ section#search {
 						color: white;
 						background: $black;
 						z-index: 3;
-						padding:3px 0 0 0;
+						padding: 3px 0 0 0;
 						font-size: 1.7rem;
 						line-height: 1.8;
 						visibility: visible;
@@ -1547,27 +1615,27 @@ section#search {
 
 		} /* end .pagecontent-label */
 		.drawer{
-			position:fixed;
+			position: fixed;
 			top:190%;
-			right:0;
-			width:100%;
-			height:100%;
-			margin:0 0 -100% 0;
-			z-index:2;
+			right: 0;
+			width: 100%;
+			height: 100%;
+			margin: 0 0 -100% 0;
+			z-index: 2;
 			background: $black;
 			padding: 0 15px 15px 15px;
 			color: white;
 			.tabs-wrapper{
-				margin-top:3rem;
-				padding:1rem 0 0 0;
-				background:$darkgray;
-				height:100%;
+				margin-top: 3rem;
+				padding: 1rem 0 0 0;
+				background: $darkgray;
+				height: 100%;
 				width: 20rem;
 				position: fixed;
 				top: 0;
 				right: 0;
 				text-align: center;
-				overflow:scroll;
+				overflow: scroll;
 				.tabs-object {
 					margin: 0 auto;
 					position: relative;
@@ -1577,20 +1645,20 @@ section#search {
 						display: none;
 					}
 					label {
-						font-size: 0.7rem;
+						font-size: 0.9rem;
 						display: block;
 						padding: 0.2rem;
-						margin:0.5rem 1rem 1rem 0;
+						margin: 0.5rem 1rem 1rem 0;
 						cursor: pointer;
 						text-decoration: none;
 						text-align: center;
-						color: lighten($primary-color,15%);
-						display:inline-block;
-						text-transform:uppercase;
-						font-family: 'Montserrat', sans-serif;
+						color: $light-primary;
+						display: inline-block;
+						text-transform: uppercase;
+						// font-family: 'Montserrat', sans-serif;
 						&:hover{
 							span{
-								color:lighten($secondary-color,15%);
+								color: lighten($secondary-color,25%);
 							}
 				
 						}
@@ -1615,6 +1683,7 @@ section#search {
 							&:before {
 								border: 2px solid $white;
 								background-color: $white;
+								
 							} 
 							&:hover{
 								&:before {
@@ -1656,11 +1725,12 @@ section#search {
 								text-decoration: none;
 							}/* end a */
 							h2{
-								color:lighten($primary-color,20%);
+								color: $light-primary;
 								margin:0 0 0 1rem;
 								//text-transform:uppercase;
 								font-size:1.1rem;
-								font-weight:normal;         
+								font-weight:400;
+								padding-right: 10%;         
 								&:before {
 									border-radius: 50%;
 									background-color: $darkgray;
@@ -1671,7 +1741,7 @@ section#search {
 									margin-left:-14px;
 									display: block;
 									z-index:5;
-									margin-bottom: -0.75rem;
+									margin-bottom: -1.1rem;
 									border-radius:50%;
 								} /* end before */
 								&:hover{
@@ -1682,12 +1752,12 @@ section#search {
 								}
 							}/* end h2 */
 							h3{
-								color:lighten($primary-color,20%);
+								color:lighten($primary-color,40%);
 								margin:0 0 0 1rem;
 								text-transform:uppercase;
-								font-size:0.6rem;
-								font-weight:normal;         
-								font-family: 'Montserrat', sans-serif;
+								font-size:1rem;
+								font-weight:400;         
+								// font-family: 'Montserrat', sans-serif;
 								&:before {
 									border-radius: 50%;
 									background-color: $darkgray;
@@ -1698,18 +1768,24 @@ section#search {
 									margin-left:-13px;
 									display: block;
 									z-index:5;
-									margin-bottom: -0.55rem;
+									margin-bottom: -0.9rem;
 								} 
 							}/* end h3 */
-							span {
-								position: relative;
-								margin:0.2rem 0 0.5rem 0;
-								text-transform:none;
-								font-size:0.9rem;
+							.source {
+								margin:0 0 0 1rem;
 								color:lighten($primary-color,20%);
-								display:block;
-								font-family: 'Montserrat', sans-serif;
-							}/* end span */
+								& > span {
+									margin:0.2rem 0 0.5rem 0;
+									text-transform:none;
+									font-size:0.9rem;
+									color:white;
+									display: block;
+									span {
+										margin-left: 10px;
+									}
+									// font-family: 'Montserrat', sans-serif;
+								}/* end span */
+							}
 							&:after{
 								content: '';
 								border: none;
@@ -1740,7 +1816,7 @@ section#search {
 										border: 1px solid lighten($primary-color,10%);
 									}
 								}
-								span{
+								.source {
 									color:lighten($primary-color,5%);
 								}
 							}/* end hover */
@@ -1768,6 +1844,7 @@ section#search {
 								h1{
 									font-size:1.1rem;
 									margin:0 0 1rem 0;
+									color: darken(white,10%);
 								}
 								img{
 									width:70%;
@@ -1792,11 +1869,11 @@ section#search {
 /*** SOURCE PAGE ***/
 .source-page{
 	padding: 5rem 3% 20vh 3%;
-	p{
-		line-height: 1.3;
-		font-size: 1.2rem;
-		margin-top: 0px;
-	}
+	// p{
+	// 	line-height: 1.3;
+	// 	font-size: 1.2rem;
+	// 	margin-top: 0px;
+	// }
 	.source-section{
 		display: block;
 		float: left;
@@ -1822,8 +1899,8 @@ section#search {
 					display: block;
 					padding: 0.5rem 1rem;
 					margin: 0 auto;
-					width: 13rem;
-					font-size: 0.8rem;
+					width: 15rem;
+					font-size: 1rem;
 					margin-bottom: 1rem;
 					background: darken($primary-color,25%);
 					border:1px solid darken($primary-color,25%);
@@ -1845,7 +1922,7 @@ section#search {
 				  text-align: center;
 				  padding:0.5rem 0 0.2rem 0;
 				  border:1px solid $lightgray;	
-				  font-weight: normal;
+				//   font-weight: normal;
 				  text-transform: uppercase;	
 				  margin:0;
 				  font-size: 0.6rem;
@@ -1883,7 +1960,9 @@ section#search {
 				// width: 28%;
 				padding: 0 2% 10px 0;
 				// font-size: 0.6rem;
-				font-size: 12px;
+				font-size: 14px;
+				color: darken($primary-color, 20%);
+				font-weight: 500;
 				text-transform: uppercase;
 				// display: inline-block;
 			}
@@ -1892,10 +1971,10 @@ section#search {
 				margin-right:-1px;
 				padding: 0 0 1.5rem 0;
 				// font-size: 0.9rem;
-				font-size: 16px;
-				&.rich-text p{
-					font-size: 0.9rem;
-					line-height: 1;
+				font-size: 1rem;
+				.rich-text p{
+					font-size: 1rem;
+					line-height: 1.6em;
 					margin: 0;
 				}
 			}
@@ -1945,6 +2024,7 @@ section#search {
 		#map{
 			width:100%;
 			margin-right:2%;
+			margin-bottom: 10px;
 		}/* end map */
 		/* Accordion styles */
 		.accordion-wrapper{ 
@@ -1986,7 +2066,7 @@ section#search {
 					padding: 0.2rem 0.4rem;
 					margin: 0.5rem 1rem 1rem 0;
 					text-transform: uppercase;
-					font-family: 'Montserrat',sans-serif;
+					// font-family: 'Montserrat',sans-serif;
 					font-size: 0.7rem;
 					cursor: pointer;
 				}
@@ -2116,14 +2196,22 @@ section#search {
 
 	/**** HEADER ****/
 	header {
-		padding: 0.9rem 3% 0 3%;
-		a {
+		// padding: 0.9rem 3% 0 3%;
+		& > a {
 			font-size: 1rem;
 			max-width: 8rem;
 			display: block;
 		}
 		/**** NAVIGATION ****/
 		nav {
+			.menu-list {
+				width: 90%;
+				height: 100%;
+				margin: 0 -90% 0 0;
+				ul {
+					width: 100%;
+				}
+			}
 			label {
 				&.menu-label {
 					right: 1.5rem;

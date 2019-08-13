@@ -27,7 +27,15 @@
   {{ page.body|richtext }}
 
   <div>
-    <p>⧉ IMAGE 文 TEXT ▸ VIDEO ♪ AUDIO ▤ PDF</p>
+    <!-- <div class="key">
+        <ul>
+          <li>⧉ <span>IMAGE</span></li>
+          <li><small>文 </small><span>TEXT</span></li>
+          <li>▸ <span>VIDEO</span></li>
+          <li>♪ <span>AUDIO</span></li>
+          <li>▤ <span>PDF</span></li>
+        </ul>
+      </div> -->
 
     <table id="sources-table" class="tablesorter">
       <thead>
@@ -41,13 +49,12 @@
         {% with source=source_page.specific %}
         <tr>
           {% with source_type=source.source_type %}
-          {% if source_type == 'audio' %}<td data-text="audio">♪</td>
-          {% elif source_type == 'image' %}<td data-text="image">⧉</td>
-          {% elif source_type == 'text' %}<td data-text="text">文</td>
-          {% elif source_type == 'video' %}<td data-text="video">▸</td>
-          {% elif source_type == 'pdf' %}<td data-text="pdf">▤</td>
+          {% if source_type == 'audio' %}<td data-text="audio"><span class="icon">♪</span> Audio</td>
+          {% elif source_type == 'image' %}<td data-text="image"><span class="icon">⧉</span> Image</td>
+          {% elif source_type == 'text' %}<td data-text="text"><span class="icon">文</span> Text</td>
+          {% elif source_type == 'video' %}<td data-text="video"><span class="icon">▸</span> Video</td>
+          {% elif source_type == 'pdf' %}<td data-text="pdf"><span class="icon">▤</span> PDF</td>
           {% endif %}
-          </td>
           {% endwith %}
           <td><a href="{% pageurl source %}">{{ source.title }}</a></td>
         </tr>

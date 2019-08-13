@@ -177,7 +177,8 @@
           <li>
             {% with source=biography_source.source %}
             <a href="{% pageurl source %}">
-              <h3>Source {{ forloop.counter }} <span>{% display_source_title source %}</span></h3>
+              <h3>Source {{ forloop.counter }}</h3>
+              <p class="source">{% display_source_title source %}</p>
             </a>
             {% endwith %}
           </li>
