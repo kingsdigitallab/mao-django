@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{% block meta_title %}{% endblock %} | Mao Era in Objects</title>
-    <meta name="author" content="King's Digital Lab">
-    <meta name="description" content="">
+    <meta name="author" content="King's Digital Lab">{% if page.search_description %}
+    <meta name="description" content="{{ page.search_description }}">{% endif %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.png' %}">
     {% compress css %}
