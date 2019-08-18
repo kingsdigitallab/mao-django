@@ -15,7 +15,7 @@
       <div class="search-buttons">
         <button class="close-icon" type="reset">x</button>
         {% load static %}
-        <button class="search-icon" type="submit"><img src="{% static 'images/search.svg' %}" alt="search icon"/></button>
+        <button class="search-icon" type="submit"><i class="fas fa-search"></i></button>
       </div>
     </div>
     <div class="search-filters">
@@ -48,10 +48,12 @@
   </section>
 
   <div class="tabs">
-    <input id="tab1" type="radio" aria-label='grid view' name="tabs" value="grid"{% if tabs == 'grid' %} checked="checked"{% endif %}>
-    <label for="tab1"><span>&#8862; Grid</span></label>
-    <input id="tab2" type="radio" name="tabs" aria-label='list view' value="list"{% if tabs == 'list' %} checked="checked"{% endif %}>
-    <label for="tab2"><span>&#8803; List</span></label>
+    <!-- <div role="group" aria-label="tabs"> -->
+      <input id="tab1" type="radio" aria-label='grid view' name="tabs" value="grid"{% if tabs == 'grid' %} checked="checked"{% endif %}>
+      <label for="tab1"><span>&#8862; Grid</span></label>
+      <input id="tab2" type="radio" name="tabs" aria-label='list view' value="list"{% if tabs == 'list' %} checked="checked"{% endif %}>
+      <label for="tab2"><span>&#8803; List</span></label>
+    <!-- </div> -->
     <section id="content1" class="tab-content" aria-label="grid view content">
       {% for biography in biographies %}
       <div class="photo">

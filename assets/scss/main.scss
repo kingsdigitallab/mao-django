@@ -459,6 +459,9 @@ section#search {
 				outline: 0;
 				width: 40px;
 				height: 40px;
+				i {
+					font-size: 2em;
+				}
 				&:focus {
 					background-color: #fafafa;
 				}
@@ -1003,7 +1006,8 @@ section#search {
       					display:inline-block;
       					list-style-type:none;
       					font-size:1rem;
-      					border:1px solid darken($primary-color,10%);
+						border:1px solid darken($primary-color,10%);
+						background-color: white;
       					padding:0.3rem 0.5rem;
 						color: darken($primary-color,10%);
 						margin-bottom: 5px;
