@@ -363,7 +363,7 @@ footer {
 /**** HOMEPAGE/SEARCH RESULTS ****/
 /* Shortcut links */
 .shortcutlinks{
-	margin-top:5rem;
+	margin-top:2.5rem;
 	width:100%;
 	display: flex;
 	flex-wrap: wrap;
@@ -375,6 +375,8 @@ footer {
 		margin:10px 0.5rem;
 		background:$white;
 		font-weight: 500;
+		width: 190px;
+		text-align: center;
 		&:hover{
 			color:$white;
 			background:$secondary-color;
@@ -541,7 +543,7 @@ section#search {
   	.search-filters {
 		text-align: center;
 		width: 100%;
-		margin-top: 2em;
+		margin-top: 0.5em;
 		.filter {
 			display: inline-block;
 			text-align: center;
@@ -793,7 +795,7 @@ section#search {
 /* tabs*/
 .tabs {
 	margin: 0 auto;
-	padding-top: 5vh;
+	padding-top: 1vh;
 	position: relative;
 	width:80vw;
 	text-align:right;
