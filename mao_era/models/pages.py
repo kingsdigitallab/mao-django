@@ -212,7 +212,6 @@ class URLResource(Resource):
 
 
 class ObjectBiographyPage(Page):
-
     byline = models.CharField(max_length=100)
     summary = models.TextField()
     biography = StreamField(BiographyStreamBlock())
@@ -246,7 +245,7 @@ class ObjectBiographyPage(Page):
             index.SearchField('title'),
             index.SearchField('description'),
         ]),
-        index.FilterField('name'),
+        # index.FilterField('name'),
         index.FilterField('tags'),
     ]
 
