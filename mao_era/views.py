@@ -15,10 +15,28 @@ def bio_timeline(request, bio_id):
     return timeline(events)
 
 
+def biography_pdf(request, bio_id):
+    try:
+        bio = ObjectBiographyPage.objects.live().get(pk=bio_id)
+    except ObjectBiographyPage.DoesNotExist:
+        return HttpResponseNotFound()
+    html = weasyprint.HTML(url=bio.full_url)
+    return _generate_pdf(html, bio.slug)
+
+
 def full_timeline(request):
     biographies = ObjectBiographyPage.objects.live()
     events = Event.objects.filter(biographies__biography__id__in=biographies)
     return timeline(events)
+
+
+def _generate_pdf(html, filename):
+    css = weasyprint.CSS(filename=finders.find('scss/pdf.css'))
+    doc = html.render(stylesheets=[css])
+    response = HttpResponse(doc.write_pdf(), content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="{}.pdf"'.format(
+        filename)
+    return response
 
 
 def source_pdf(request, source_id):
@@ -27,12 +45,7 @@ def source_pdf(request, source_id):
     except SourcePage.DoesNotExist:
         return HttpResponseNotFound()
     html = weasyprint.HTML(url=source.full_url)
-    css = weasyprint.CSS(filename=finders.find('scss/pdf.css'))
-    doc = html.render(stylesheets=[css])
-    response = HttpResponse(doc.write_pdf(), content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="{}.pdf"'.format(
-        source.slug)
-    return response
+    return _generate_pdf(html, source.slug)
 
 
 def timeline(events):

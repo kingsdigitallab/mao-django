@@ -26,10 +26,9 @@
     <div class="details">
       <h3>{{ page.byline }}</h3>
       <div class="pdf">
-        <a href=""><i class="fas fa-download"></i> Download to view PDF</a>
+        <a href="{% url 'biography-pdf' bio_id=page.pk %}"><i class="fas fa-download"></i> Download to view PDF</a>
       </div>
     </div>
-   
 
     <div class="summary" id="summary">
       <h2>Summary</h2>
