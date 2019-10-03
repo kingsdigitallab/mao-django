@@ -322,6 +322,15 @@ class ObjectBiographiesPage(Page):
 
     subpage_types = [ObjectBiographyPage]
 
+    def serve(self, request):
+        related_objects = list(self.related_objects.all())
+        shuffle(related_objects)
+        context = {
+            'page': self,
+            'related_objects': related_objects,
+        }
+        return render(request, self.template, context)
+
 
 class ProjectPage(Page):
 

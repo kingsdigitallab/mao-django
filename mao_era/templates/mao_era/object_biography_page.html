@@ -188,7 +188,7 @@
 
       <section id="content3" class="tab-content relatedobjects" aria-label="related">
         <ul>
-          {% for object in page.related_objects.all %}
+          {% for object in related_objects %}
           <li>
             <a href="{% pageurl object %}">
               <h1>{{ object.title }}</h1>
