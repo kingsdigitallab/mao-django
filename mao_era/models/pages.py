@@ -212,6 +212,7 @@ class URLResource(Resource):
 
 
 class ObjectBiographyPage(Page):
+
     byline = models.CharField(max_length=100)
     summary = models.TextField()
     biography = StreamField(BiographyStreamBlock())
@@ -322,15 +323,6 @@ class ObjectBiographiesPage(Page):
 
     subpage_types = [ObjectBiographyPage]
 
-    def serve(self, request):
-        related_objects = list(self.related_objects.all())
-        shuffle(related_objects)
-        context = {
-            'page': self,
-            'related_objects': related_objects,
-        }
-        return render(request, self.template, context)
-
 
 class ProjectPage(Page):
 
@@ -408,7 +400,7 @@ class HomePage(Page):
     max_count = 1
 
     subpage_types = [
-        MapPage, ObjectBiographiesPage, ProjectPage, SourcesPage, TimelinePage
+        MapPage, ObjectBiographiesPage, ProjectPage, SourcesPage, TimelinePage, ObjectBiographyPage
     ]
 
     def serve(self, request):

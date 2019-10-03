@@ -21,19 +21,23 @@
   <div class="source-section">
     {% if resource.image %}
     <figure class="align-left">
+        {% if resource.source.source_type == "image" %}
+        <div class="pdf">
+          <a href="{% url 'source-pdf' source_id=page.pk %}"><i class="fas fa-download"></i> Download to view PDF</a>
+        </div>
+        {% endif %}
       {% image resource.image max-800x3000 %}
     </figure>
     {% endif %}
     {% if resource.document %}
-    <div class="align-left">
-        <div class="pdf">
-
-        <a href="{{ resource.document.url }}"><i class="fas fa-download"></i> Download to view PDF</a>
-        <h6>preview image of pdf</h6>
-        {% image resource.preview_image max-200x200 %}
-        <a href="{{ resource.document.url }}"><i class="fas fa-download"></i> Download to view PDF</a>
-       </div>
-    </div>
+      <div class="align-left">
+          <div class="pdf">
+            <a href="{{ resource.document.url }}"><i class="fas fa-download"></i> Download to view PDF</a>
+            <h6>preview image of pdf</h6>
+            {% image resource.preview_image max-200x200 %}
+            <a href="{{ resource.document.url }}"><i class="fas fa-download"></i> Download to view PDF</a>
+        </div>
+      </div>
     {% endif %}
     {% if resource.source_url %}
       {% if resource.source.source_type == "video" %}

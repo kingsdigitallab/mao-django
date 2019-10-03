@@ -1,4 +1,4 @@
-var map = L.map('map').setView([39.904202, 115.83023], 4);
+// var map = L.map('map').setView([39.904202, 115.83023], 4);
 var map_markers = [];
 var pointIcon = L.divIcon({
     iconSize: [10, 10],
@@ -33,7 +33,7 @@ function mapMarkerFunction(id) {
         var markerID = map_markers[i].options.title;
         var position = map_markers[i].getLatLng();
         if (markerID == id) {
-            map.setView(position, 4);
+            map.setView(position);
             map_markers[i].openPopup();
         }
     }
