@@ -1,8 +1,11 @@
 import json
 
-from django.http import HttpResponse
+from django.contrib.staticfiles import finders
+from django.http import HttpResponse, HttpResponseNotFound
 
-from .models import Event, ObjectBiographyPage
+import weasyprint
+
+from .models import Event, ObjectBiographyPage, SourcePage
 
 
 def bio_timeline(request, bio_id):
@@ -16,6 +19,20 @@ def full_timeline(request):
     biographies = ObjectBiographyPage.objects.live()
     events = Event.objects.filter(biographies__biography__id__in=biographies)
     return timeline(events)
+
+
+def source_pdf(request, source_id):
+    try:
+        source = SourcePage.objects.live().get(pk=source_id)
+    except SourcePage.DoesNotExist:
+        return HttpResponseNotFound()
+    html = weasyprint.HTML(url=source.full_url)
+    css = weasyprint.CSS(filename=finders.find('scss/pdf.css'))
+    doc = html.render(stylesheets=[css])
+    response = HttpResponse(doc.write_pdf(), content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="{}.pdf"'.format(
+        source.slug)
+    return response
 
 
 def timeline(events):
