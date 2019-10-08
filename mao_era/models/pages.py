@@ -255,12 +255,15 @@ class ObjectBiographyPage(Page):
     def serve(self, request):
         places = Place.objects.filter(biographies__biography=self)
         has_events = self.events.count() > 0
+        related_objects = list(self.related_objects.all())
+        shuffle(related_objects)
         context = {
             'has_events': has_events,
             'home': self.get_ancestors()[1],
             'map_markers': get_map_markers(places),
             'page': self,
             'places': places,
+            'related_objects': related_objects,
             'timeline_url': reverse('biography-timeline', args=[self.id]),
         }
         return render(request, self.template, context)
@@ -400,7 +403,8 @@ class HomePage(Page):
     max_count = 1
 
     subpage_types = [
-        MapPage, ObjectBiographiesPage, ProjectPage, SourcesPage, TimelinePage, ObjectBiographyPage
+        MapPage, ObjectBiographiesPage, ProjectPage, SourcesPage, TimelinePage,
+        ObjectBiographyPage
     ]
 
     def serve(self, request):
@@ -426,10 +430,12 @@ class HomePage(Page):
 
     def _filter_biographies_by_tags(self, tags):
         """Returns a QuerySet of ObjectBiographyPages filtered by `tags`."""
-        # Since there could be a page with the object biography page template in the menu, 
-        # I specified that we need to retrieve biographies that are children of ObjectBiographiesPage
+        # Since there could be a page with the object biography page
+        # template in the menu, I specified that we need to retrieve
+        # biographies that are children of ObjectBiographiesPage
         biography_list_page = ObjectBiographiesPage.objects.first()
-        biographies = ObjectBiographyPage.objects.live().descendant_of(biography_list_page)
+        biographies = ObjectBiographyPage.objects.live().descendant_of(
+            biography_list_page)
         for tag in tags:
             biographies = biographies.filter(tags__name=tag)
         # You might think that the following two lines are pointless
