@@ -426,7 +426,10 @@ class HomePage(Page):
 
     def _filter_biographies_by_tags(self, tags):
         """Returns a QuerySet of ObjectBiographyPages filtered by `tags`."""
-        biographies = ObjectBiographyPage.objects.live()
+        # Since there could be a page with the object biography page template in the menu, 
+        # I specified that we need to retrieve biographies that are children of ObjectBiographiesPage
+        biography_list_page = ObjectBiographiesPage.objects.first()
+        biographies = ObjectBiographyPage.objects.live().descendant_of(biography_list_page)
         for tag in tags:
             biographies = biographies.filter(tags__name=tag)
         # You might think that the following two lines are pointless

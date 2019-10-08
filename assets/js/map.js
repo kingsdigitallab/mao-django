@@ -1,4 +1,4 @@
-// var map = L.map('map').setView([39.904202, 115.83023], 4);
+var map = L.map('map').setView([39.904202, 115.83023], 4);
 var map_markers = [];
 var pointIcon = L.divIcon({
     iconSize: [10, 10],
@@ -25,7 +25,8 @@ $('a.map-item').click(function() {
 });
 
 function mapClickZoom(e) {
-    map.setView(e.target.getLatLng(), 9);
+    // removed zoom parameter 9
+    map.setView(e.target.getLatLng());
 }
 
 function mapMarkerFunction(id) {
