@@ -11,7 +11,7 @@ from django.conf import settings
 import wagtail.admin.rich_text.editors.draftail.features as draftail_features
 from wagtail.core import hooks
 
-from .rich_text import AnchorEntityElementHandler, anchor_entity_decorator
+from .rich_text import AnchorEntityElementHandler, anchor_entity_decorator, AnchorIDEntityElementHandler, anchorid_entity_decorator
 
 
 @hooks.register('register_rich_text_features')
@@ -42,6 +42,28 @@ def register_rich_text_features(features):
         'to_database_format': {
             'entity_decorators': {type_: anchor_entity_decorator}
         },
+    })
+
+@hooks.register('register_rich_text_features')
+def register_anchorid_features(features):
+    features.default_features.append('anchorid')
+    feature_name = 'anchorid'
+    type_ = 'ANCHORID'
+
+    control = {
+        'type': type_,
+        'label': '<id>',
+        'description': 'Anchor ID',
+    }
+
+    features.register_editor_plugin(
+        'draftail', feature_name, draftail_features.EntityFeature(control)
+    )
+
+    features.register_converter_rule('contentstate', feature_name, {
+        # Note here that the conversion is more complicated than for blocks and inline styles.
+        'from_database_format': {'span[id]': AnchorIDEntityElementHandler(type_)},
+        'to_database_format': {'entity_decorators': {type_: anchorid_entity_decorator}},
     })
 
 

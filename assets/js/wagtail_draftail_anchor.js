@@ -66,3 +66,58 @@ window.draftail.registerPlugin({
     source: AnchorSource,
     decorator: Anchor,
 });
+
+
+class AnchorIDSource extends React.Component {
+    componentDidMount() {
+        const { editorState, entityType, onComplete } = this.props;
+
+        const anchor_id = window.prompt('Anchor identifier (e.g., "footnote"):');
+
+        const content = editorState.getCurrentContent();
+        // Uses the Draft.js API to create a new entity with the right data.
+        const contentWithEntity = content.createEntity(
+            entityType.type,
+            'IMMUTABLE',
+            {
+                anchorid: anchor_id,
+            },
+        );
+        const entityKey = contentWithEntity.getLastCreatedEntityKey();
+        const selection = editorState.getSelection();
+        const nextState = RichUtils.toggleLink(
+            editorState,
+            selection,
+            entityKey,
+        );
+
+        onComplete(nextState);
+    }
+
+    render() {
+        return null;
+    }
+}
+
+const AnchorID = props => {
+    const { entityKey, contentState } = props;
+    const data = contentState.getEntity(entityKey).getData();
+
+    return React.createElement(
+        'a',
+        {
+            role: 'button',
+            title: data.anchorid,
+            onMouseUp: () => {
+                window.alert(data.anchorid);
+            },
+        },
+        props.children,
+    );
+};
+
+window.draftail.registerPlugin({
+    type: 'ANCHORID',
+    source: AnchorIDSource,
+    decorator: AnchorID,
+});
