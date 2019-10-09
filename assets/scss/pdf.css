@@ -1,11 +1,10 @@
 footer { display: none; }
 header { display: none; }
 .align-left { float: none !important; }
-* { float: none !important; font-family: 'Times New Roman', Times, serif !important}
+* { float: none !important;}
 
 body {
     background-color: white !important;
-    font-family: Firefly Sung, DejaVu Sans, sans-serif;
 }
 .skip, .breadcrumb h1 span, .breadcrumb ul, .pdf, .geography, .timeline, .sidebar-wrapper { display: none !important }
 h1 {
