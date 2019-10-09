@@ -1863,14 +1863,13 @@ section#search {
 						width:100%;
 						float:left;
 						font-size:0.9rem;
-
 						ul{
 							margin:0 0 0 -35px;
 							list-style-type:none;
 							li a{
 								width:100%;
 								float:left;
-								margin-bottom:1rem;
+								// margin-bottom:1rem;
 								margin-left:0;
 								color:$white;
 								padding:1rem 2rem;
@@ -1894,7 +1893,11 @@ section#search {
 								&:hover{
 									background: darken($secondary-color,10%);
 								}
+								
 							}/* end li a */
+							li:after {
+								border-left: 0px;
+							}
 						}/* end ul */
 					}/* end .relatedobjects */ 
 				}/* end .tabs-wrapper */
@@ -2072,7 +2075,7 @@ section#search {
 		/* Accordion styles */
 		.accordion-wrapper{ 
 			width:100%;
-			height:auto;
+			height:78vh;
 		}/* end .accordion-wrapper */ 
 	  }/* end .geography */
 
