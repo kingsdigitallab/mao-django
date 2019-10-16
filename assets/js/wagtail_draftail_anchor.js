@@ -72,26 +72,30 @@ class AnchorIDSource extends React.Component {
     componentDidMount() {
         const { editorState, entityType, onComplete } = this.props;
 
-        const anchor_id = window.prompt('Anchor identifier (e.g., "footnote"):');
+        const anchor_id = window.prompt('Anchor identifier (e.g., "footnote").\nPlease ensure that two different sections don\'t have the same identifier:');
 
-        const content = editorState.getCurrentContent();
-        // Uses the Draft.js API to create a new entity with the right data.
-        const contentWithEntity = content.createEntity(
-            entityType.type,
-            'IMMUTABLE',
-            {
-                anchorid: anchor_id,
-            },
-        );
-        const entityKey = contentWithEntity.getLastCreatedEntityKey();
-        const selection = editorState.getSelection();
-        const nextState = RichUtils.toggleLink(
-            editorState,
-            selection,
-            entityKey,
-        );
+        if (anchor_id) {
+            const content = editorState.getCurrentContent();
+            // Uses the Draft.js API to create a new entity with the right data.
+            const contentWithEntity = content.createEntity(
+                entityType.type,
+                'MUTABLE',
+                {
+                    anchorid: anchor_id,
+                },
+            );
+            const entityKey = contentWithEntity.getLastCreatedEntityKey();
+            const selection = editorState.getSelection();
+            const nextState = RichUtils.toggleLink(
+                editorState,
+                selection,
+                entityKey,
+            );
 
-        onComplete(nextState);
+            onComplete(nextState);
+        } else {
+            onComplete(editorState);
+        }
     }
 
     render() {

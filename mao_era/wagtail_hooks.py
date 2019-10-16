@@ -61,8 +61,7 @@ def register_anchorid_features(features):
     )
 
     features.register_converter_rule('contentstate', feature_name, {
-        # Note here that the conversion is more complicated than for blocks and inline styles.
-        'from_database_format': {'span[id]': AnchorIDEntityElementHandler(type_)},
+        'from_database_format': {'a[id]': AnchorIDEntityElementHandler(type_)},
         'to_database_format': {'entity_decorators': {type_: anchorid_entity_decorator}},
     })
 
