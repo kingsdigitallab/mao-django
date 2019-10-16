@@ -25,9 +25,7 @@ def anchorid_entity_decorator(props):
     Draft.js ContentState to database HTML.
     Converts the ANCHORID entities into <span> tags.
     """
-    return DOM.create_element('a', {
-        'data-anchorid': True,
-        'href': '#',
+    return DOM.create_element('span', {
         'id': props['anchorid'],
     }, props['children'])
 
@@ -53,13 +51,13 @@ class AnchorEntityElementHandler(InlineEntityElementHandler):
 class AnchorIDEntityElementHandler(InlineEntityElementHandler):
     """
     Database HTML to Draft.js ContentState.
-    Converts the a tag into a ANCHORID entity, with the right data.
+    Converts the a tag into an ANCHORID entity, with the right data.
     """
     mutability = 'MUTABLE'
 
     def get_attribute_data(self, attrs):
         """
-        Take the ``anchor_id`` value from the ``id`` HTML attribute.
+        Take the ``anchorid`` value from the ``id`` HTML attribute.
         """
         return {
             'anchorid': attrs['id'],

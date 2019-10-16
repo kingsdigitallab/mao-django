@@ -5,6 +5,7 @@
  */
 const React = window.React;
 const RichUtils = window.DraftJS.RichUtils;
+const DraftailEditor = window.DraftJS.DraftailEditor;
 
 /**
  * A React component that renders nothing.
@@ -17,7 +18,6 @@ class AnchorSource extends React.Component {
 
         const content = editorState.getCurrentContent();
 
-        // This is very basic – we do not even support editing existing anchors.
         const fragment = window.prompt('Fragment identifier\n("#footnote-" followed by number, eg "#footnote-1"):');
 
         // Uses the Draft.js API to create a new entity with the right data.
@@ -71,7 +71,7 @@ window.draftail.registerPlugin({
 class AnchorIDSource extends React.Component {
     componentDidMount() {
         const { editorState, entityType, onComplete } = this.props;
-
+        
         const anchor_id = window.prompt('Anchor identifier (e.g., "footnote").\nPlease ensure that two different sections don\'t have the same identifier:');
 
         if (anchor_id) {
@@ -104,20 +104,81 @@ class AnchorIDSource extends React.Component {
 }
 
 const AnchorID = props => {
-    const { entityKey, contentState } = props;
+    const { entityKey, contentState, onEdit, onRemove } = props;
     const data = contentState.getEntity(entityKey).getData();
 
+
+    remove = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onRemove(entityKey);
+    }
+    edit = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onEdit(entityKey);
+    }
     return React.createElement(
         'a',
         {
-            role: 'button',
+            role: "button",
             title: data.anchorid,
-            onMouseUp: () => {
-                window.alert(data.anchorid);
+            "data-draftail-trigger": "true",
+            style: {
+                "cursor": "pointer",
+                "color": "green"
             },
-        },
+            onClick: (t) => {
+                var e = t.target.closest("[data-draftail-trigger]");
+                if (e) {
+                    var n = e.closest("[data-draftail-editor-wrapper]"),
+                    r = n.getBoundingClientRect(),
+                    o = e.getBoundingClientRect();
+                    var x = document.getElementById("data-editor-"+data.anchorid);
+                    if (x.style.display === "none") {
+                        x.style.display = "block";
+                        x.style.left = o.left - r.left + 30 - (document.documentElement.scrollLeft || document.body.scrollLeft) + "px";
+                    } else {
+                        x.style.display = "none";
+                    }
+                }
+            }
+        }, 
         props.children,
+        React.createElement(
+            'div',
+            {
+                id: "data-editor-"+data.anchorid,
+                className: "Tooltip Tooltip--top",
+                role: "tooltip",
+                style: {
+                    "display": "none",
+                    "font-size": "14px",
+                }
+            },
+            data.anchorid,
+            React.createElement(
+                'button',
+                {
+                    className: "button Tooltip__button",
+                    style: {
+                        "margin-left": "20px"
+                    },
+                    onClick: this.edit
+                },
+                "edit"
+            ),
+            React.createElement(
+                'button',
+                {
+                    className: "button button-secondary no Tooltip__button",
+                    onClick: this.remove
+                },
+                "remove"
+            )
+        )
     );
+
 };
 
 window.draftail.registerPlugin({

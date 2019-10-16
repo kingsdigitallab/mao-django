@@ -53,7 +53,7 @@ def register_anchorid_features(features):
     control = {
         'type': type_,
         'label': '<id>',
-        'description': 'Anchor ID',
+        'description': 'ID attribute'
     }
 
     features.register_editor_plugin(
@@ -61,7 +61,7 @@ def register_anchorid_features(features):
     )
 
     features.register_converter_rule('contentstate', feature_name, {
-        'from_database_format': {'a[id]': AnchorIDEntityElementHandler(type_)},
+        'from_database_format': {'span': AnchorIDEntityElementHandler(type_)},
         'to_database_format': {'entity_decorators': {type_: anchorid_entity_decorator}},
     })
 
