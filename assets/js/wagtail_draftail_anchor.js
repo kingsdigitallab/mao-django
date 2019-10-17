@@ -129,13 +129,13 @@ const AnchorID = props => {
             onClick: (t) => {
                 var e = t.target.closest("[data-draftail-trigger]");
                 if (e) {
-                    var n = e.closest("[data-draftail-editor-wrapper]"),
-                    r = n.getBoundingClientRect(),
+                    var n = e.closest("[data-draftail-editor-wrapper]");
+                    r = n.getBoundingClientRect();
                     o = e.getBoundingClientRect();
                     var x = document.getElementById("data-editor-"+data.anchorid);
                     if (x.style.display === "none") {
                         x.style.display = "block";
-                        x.style.left = o.left - r.left + 30 - (document.documentElement.scrollLeft || document.body.scrollLeft) + "px";
+                        x.style.left = o.left - (document.documentElement.scrollLeft || document.body.scrollLeft) + "px";
                     } else {
                         x.style.display = "none";
                     }
