@@ -12,6 +12,6 @@ $(function() {
     $(".leaflet-marker-icon").on('click', (el) => {
         $("input[type='checkbox']").prop('checked', false);
         $("#"+el.target.title).prev("input[type='checkbox']").prop('checked', true);
-        $(".accordion-wrapper").animate({scrollTop:$("#"+el.target.title).parent(".accordion").position().top-160+'px'});
+        $(".accordion-wrapper").animate({scrollTop:$("#"+el.target.title).parent(".accordion").position().top-$("#map-tab-1").parent(".accordion").position().top-46+'px'});
     })
 });
