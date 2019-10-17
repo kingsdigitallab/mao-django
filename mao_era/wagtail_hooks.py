@@ -1,10 +1,3 @@
-"""Extensions to Wagtail.
-
-The anchor extension to the rich text editor was written by Thibaud
-Colas, available at
-https://github.com/thibaudcolas/wagtail_draftail_experiments.
-
-"""
 from django.utils.html import format_html_join
 from django.conf import settings
 
@@ -13,7 +6,11 @@ from wagtail.core import hooks
 
 from .rich_text import AnchorEntityElementHandler, anchor_entity_decorator, AnchorIDEntityElementHandler, anchorid_entity_decorator
 
-
+"""
+The anchor extension to the rich text editor was written by Thibaud
+Colas, available at
+https://github.com/thibaudcolas/wagtail_draftail_experiments.
+"""
 @hooks.register('register_rich_text_features')
 def register_rich_text_features(features):
     """Registering the `anchor` feature, which uses the `ANCHOR` Draft.js
@@ -46,8 +43,7 @@ def register_rich_text_features(features):
 
 
 """
-    An extension of extension developed by King's Digital Lab
-    to connect anchors with html blocks through id's
+An extension of extension developed by King's Digital Lab to connect anchors with html blocks through id's
 """
 @hooks.register('register_rich_text_features')
 def register_anchorid_features(features):

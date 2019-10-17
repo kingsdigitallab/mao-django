@@ -1,14 +1,12 @@
-"""Anchor extension to the rich text editor was written by Thibaud
-Colas, available at
-https://github.com/thibaudcolas/wagtail_draftail_experiments
-
-"""
-
 from draftjs_exporter.dom import DOM
 from wagtail.admin.rich_text.converters.html_to_contentstate import \
     InlineEntityElementHandler
 
 
+"""Anchor extension to the rich text editor was written by Thibaud
+Colas, available at
+https://github.com/thibaudcolas/wagtail_draftail_experiments
+"""
 def anchor_entity_decorator(props):
     """
     Draft.js ContentState to database HTML.

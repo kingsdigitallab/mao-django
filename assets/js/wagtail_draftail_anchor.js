@@ -1,12 +1,11 @@
+const React = window.React;
+const RichUtils = window.DraftJS.RichUtils;
+
 /**
  * An anchor extension to the Wagtail editor, written by Thibaud
  * Colas, available at
  * https://github.com/thibaudcolas/wagtail_draftail_experiments
  */
-const React = window.React;
-const RichUtils = window.DraftJS.RichUtils;
-const DraftailEditor = window.DraftJS.DraftailEditor;
-
 // Warning: This code uses ES2015+ syntax, it will not work in IE11.
 class AnchorSource extends React.Component {
     componentDidMount() {
