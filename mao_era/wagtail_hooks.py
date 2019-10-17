@@ -44,6 +44,11 @@ def register_rich_text_features(features):
         },
     })
 
+
+"""
+    An extension of extension developed by King's Digital Lab
+    to connect anchors with html blocks through id's
+"""
 @hooks.register('register_rich_text_features')
 def register_anchorid_features(features):
     features.default_features.append('anchorid')
