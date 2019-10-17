@@ -7,10 +7,6 @@ const React = window.React;
 const RichUtils = window.DraftJS.RichUtils;
 const DraftailEditor = window.DraftJS.DraftailEditor;
 
-/**
- * A React component that renders nothing.
- * We actually create the entities directly in the componentDidMount lifecycle hook.
- */
 // Warning: This code uses ES2015+ syntax, it will not work in IE11.
 class AnchorSource extends React.Component {
     componentDidMount() {
@@ -20,7 +16,6 @@ class AnchorSource extends React.Component {
 
         const fragment = window.prompt('Fragment identifier\n("#footnote-" followed by number, eg "#footnote-1"):');
 
-        // Uses the Draft.js API to create a new entity with the right data.
         const contentWithEntity = content.createEntity(
             entityType.type,
             'MUTABLE',
@@ -68,6 +63,10 @@ window.draftail.registerPlugin({
 });
 
 
+
+/* An extension of extension developed by King's Digital Lab
+   to connect anchors with html blocks through id's
+*/
 class AnchorIDSource extends React.Component {
     componentDidMount() {
         const { editorState, entityType, onComplete } = this.props;
