@@ -351,40 +351,6 @@ class SourcesPage(Page):
     subpage_types = [SourcePage]
 
 
-# class EssayPage(Page):
-
-#     byline = models.CharField(max_length=100, blank=True)
-#     biography = StreamField(BiographyStreamBlock())
-#     footnotes = StreamField(FootnotesStreamBlock(required=False), blank=True)
-#     related_objects = ParentalManyToManyField('self', blank=True)
-
-#     content_panels = Page.content_panels + [
-#         FieldPanel('byline'),
-#         StreamFieldPanel('biography'),
-#         StreamFieldPanel('footnotes'),
-#         FieldPanel('related_objects', widget=forms.CheckboxSelectMultiple),
-#     ]
-
-#     search_fields = Page.search_fields + [
-#         index.SearchField('biography'),
-#         index.SearchField('footnotes'),
-#     ]
-
-#     subpage_types = []
-
-#     def serve(self, request):
-#         places = Place.objects.filter(biographies__biography=self)
-#         related_objects = list(self.related_objects.all())
-#         shuffle(related_objects)
-#         context = {
-#             'home': self.get_ancestors()[1],
-#             'page': self,
-#             'places': places,
-#             'related_objects': related_objects,
-#         }
-#         return render(request, self.template, context)
-
-
 class MapPage(Page):
 
     body = RichTextField()
