@@ -30,12 +30,16 @@
       </div>
     </div>
 
+    {% if page.summary %}
     <div class="summary" id="summary">
       <h2>Summary</h2>
       <div class="summary-content">
         {{ page.summary }}
       </div>
     </div>
+    {% endif%}
+
+    {% if page.keywords %}
     <div class="keywords" id="keywords">
       <h2>Keywords</h2>
       <ul>
@@ -44,6 +48,7 @@
         {% endfor %}
       </ul>
     </div>
+    {% endif%}
 
     <div class="biography">
       {{ page.biography }}
@@ -59,6 +64,7 @@
     </div>
     {% endif %}
 
+    {% if page.sources.all %}
     <div class="sources" id="sources">
       <h2>Sources</h2>
       <div class="key">
@@ -80,6 +86,7 @@
         {% endfor %}
       </ol>
     </div>
+    {% endif %}
 
     {% if map_markers %}
     <div class="geography" id="geography">
@@ -112,11 +119,13 @@
     </div>
     {% endif %}
 
+    {% if page.further_reading %}
     <div class="furtherreading" id="furtherreading">
       <h2>Further Reading</h2>
 
       {{ page.further_reading|richtext }}
     </div>
+    {% endif %}
   </article>
 
 
@@ -134,20 +143,26 @@
       <input id="tab1" type="radio" name="tabs" checked="checked">
       <label for="tab1"><span>Structure</span></label>
 
+      {% if page.sources.all %}
       <input id="tab2" type="radio" name="tabs">
       <label for="tab2"><span>Source</span></label>
+      {% endif%}
 
       <input id="tab3" type="radio" name="tabs">
       <label for="tab3"><span>Related</span></label>
 
       <section id="content1" class="tab-content" aria-label="summary">
         <ul>
+          {% if page.summary %}
           <li>
             <a href="#summary" class="name-active"><h2>Summary</h2></a>
           </li>
+          {% endif %}
+          {% if page.keywords %}
           <li>
             <a href="#keywords"><h2>Keywords</h2></a>
           </li>
+          {% endif %}
           {% for block in page.biography %}
           <li>
             <a href="#section-{{ forloop.counter }}"><h2>{{ block.value.heading }}</h2></a>
@@ -158,9 +173,11 @@
             <a href="#footnotes"><h2>Footnotes</h2></a>
           </li>
           {% endif %}
+          {% if page.sources.all %}
           <li>
             <a href="#sources" aria-label="object biography sources"><h2>Sources</h2></a>
           </li>
+          {% endif %}
           {% if map_markers %}
           <li>
             <a href="#geography"><h2>Geography</h2></a>
@@ -171,11 +188,15 @@
             <a href="#timeline"><h2>Timeline</h2></a>
           </li>
           {% endif %}
+          {% if page.further_reading %}
           <li>
             <a href="#furtherreading"><h2>Further Reading</h2></a>
           </li>
+          {% endif %}
         </ul>
       </section>
+
+      {% if page.sources.all %}
       <section id="content2" class="tab-content" aria-label="sources">
         <ul>
           {% for biography_source in page.sources.all %}
@@ -190,6 +211,7 @@
           {% endfor %}
         </ul>
       </section>
+      {% endif%}
 
       <section id="content3" class="tab-content relatedobjects" aria-label="related">
         <ul>
