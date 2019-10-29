@@ -1,0 +1,36 @@
+{% extends "mao_era/base.html" %}
+{% load mao_era_tags wagtailcore_tags %}
+
+{% block meta_title %}{{ page.title }}{% endblock meta_title %}
+
+{% block main %}
+<article class="width-100">
+  <div class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+      {% get_site_root as site_root %}
+      <li><a href="{% pageurl site_root %}">Home</a></li>
+    </ul>
+    <h1>{{ page.title }}</h1>
+  </div>
+  {{ page.body }}
+
+  {% if page.footnotes %}
+    <div class="footnotes" id="footnotes" style="clear: both;">
+        <h2>Footnotes</h2>
+    
+        <ol>
+            {{ page.footnotes }}
+        </ol>
+    </div>
+  {% endif %}
+
+  {% if page.further_reading %}
+    <div class="furtherreading" id="furtherreading">
+        <h2>Further Reading</h2>
+
+        {{ page.further_reading|richtext }}
+    </div>
+    {% endif %}
+
+</article>
+{% endblock main %}

@@ -337,6 +337,23 @@ class ProjectPage(Page):
 
     subpage_types = ['mao_era.ProjectPage']
 
+class EssayPage(Page):
+    body = StreamField(BiographyStreamBlock())
+    footnotes = StreamField(FootnotesStreamBlock(required=False), blank=True)
+    further_reading = RichTextField(blank=True)
+
+    content_panels = Page.content_panels + [
+        StreamFieldPanel('body'),
+        StreamFieldPanel('footnotes'),
+        FieldPanel('further_reading'),
+    ]
+
+    search_fields = Page.search_fields + [
+        index.SearchField('footnotes'),
+    ]
+
+    subpage_types = []
+
 
 class SourcesPage(Page):
 
@@ -404,7 +421,7 @@ class HomePage(Page):
 
     subpage_types = [
         MapPage, ObjectBiographiesPage, ProjectPage, SourcesPage, TimelinePage,
-        ObjectBiographyPage
+        ObjectBiographyPage, EssayPage
     ]
 
     def serve(self, request):
