@@ -1540,13 +1540,21 @@ section#search {
 				}
 				.tl-slidenav-content-container {
 					height: max-content;
+					width: 150px;
 					.tl-slidenav-title, .tl-slidenav-description {
 						line-height: 1.2em !important;
 						font-size: 13px !important;
+						width: auto !important;
 					}
 					.tl-slidenav-icon {
 						font-size: 24px !important;
 					}
+				}
+			}
+			.tl-slidenav-next {
+				right: 150px !important;
+				.tl-slidenav-icon {
+					margin-left: 130px !important;
 				}
 			}
 		}
