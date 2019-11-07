@@ -329,7 +329,9 @@ class ObjectBiographiesPage(Page):
 
 class ProjectPage(Page):
 
-    body = RichTextField()
+    body = RichTextField(features=['bold', 'italic', 'superscript', 'h2', 'h3', 'h4', 'ol', 'ul',
+                                   'hr', 'link', 'document-link', 'image', 'embed',
+                                   'anchor', 'anchorid', 'blockquote'])
 
     content_panels = Page.content_panels + [
         FieldPanel('body', classname='full'),

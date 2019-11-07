@@ -36,7 +36,7 @@ class SectionContentBlock(StreamBlock):
 
     text = RichTextBlock(features=['bold', 'italic', 'superscript', 'ol', 'ul',
                                    'link', 'document-link', 'image', 'embed',
-                                   'anchor', 'blockquote'])
+                                   'anchor', 'anchorid', 'blockquote'])
     image = ImageBlock()
 
 
