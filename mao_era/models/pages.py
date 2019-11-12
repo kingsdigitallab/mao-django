@@ -329,9 +329,10 @@ class ObjectBiographiesPage(Page):
 
 class ProjectPage(Page):
 
-    body = RichTextField(features=['bold', 'italic', 'superscript', 'h2', 'h3', 'h4', 'ol', 'ul',
-                                   'hr', 'link', 'document-link', 'image', 'embed',
-                                   'anchor', 'anchorid', 'blockquote'])
+    body = RichTextField(features=[
+        'bold', 'italic', 'superscript', 'h2', 'h3', 'h4', 'ol', 'ul', 'hr',
+        'link', 'document-link', 'image', 'embed', 'anchor', 'anchorid',
+        'blockquote'])
 
     content_panels = Page.content_panels + [
         FieldPanel('body', classname='full'),
@@ -424,6 +425,7 @@ class HomePage(Page):
         context = {
             'biographies': randomised_biographies,
             'facets': facets,
+            'filter_nav': query_dict.get('filter-nav', False),
             'page': self,
             'q': query,
             'tabs': query_dict.get('tabs', 'grid'),
@@ -481,6 +483,8 @@ class HomePage(Page):
             new_tags = tags.copy()
             new_tags.remove(tag_name)
             is_apply = False
+            if 'filter-nav' in qd:
+                del qd['filter-nav']
         else:
             # Create a querystring for applying the facet.
             new_tags = tags + [tag_name]
