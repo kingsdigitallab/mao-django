@@ -30,8 +30,8 @@
             <ul>
               {% for facet in facets %}
               <li>
-                {% if facet.is_apply %}<a href="?{{ facet.link }}{% if not filter_nav %}&amp;filter-nav=true{% endif %}">{{ facet.name }}</a>
-                {% else %}<a href="?{{ facet.link }}{% if not filter_nav %}&amp;filter-nav=true{% endif %}" class="selected-filter">X</a> {{ facet.name }}
+                {% if facet.is_apply %}<a href="?{{ facet.link }}">{{ facet.name }}</a>
+                {% else %}<a href="?{{ facet.link }}&amp;filter-nav=true" class="selected-filter">X</a> {{ facet.name }}
                 {% endif %} <span>({{ facet.count }})</span>
               </li>
               {% endfor %}

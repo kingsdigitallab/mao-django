@@ -488,6 +488,7 @@ class HomePage(Page):
         else:
             # Create a querystring for applying the facet.
             new_tags = tags + [tag_name]
+            qd['filter-nav'] = 'true'
             is_apply = True
         qd.setlist('tag', new_tags)
         return qd.urlencode(), is_apply
