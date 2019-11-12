@@ -114,7 +114,8 @@ a {
 
 h2.section:before {
 	content: "";
-	padding-top: 80px;
+	//80px
+	padding-top: 71px;
 	margin-top: -40px;
 }
 
@@ -222,8 +223,9 @@ header {
 					a {
 						color: white;
 						text-decoration: none;
-						font-size: 1.3em;
-						padding: 1rem 2rem 1rem 3rem;
+						//1.3em
+						font-size: 1.2em;
+						padding: .7rem 2rem .7rem 3rem;
 						display:block;
 					}/* end a */
 					&:last-child {
@@ -1126,10 +1128,10 @@ section#search {
 		.summary{
 			border-top: 1px dashed $lightgray;
 			padding:1rem 0;
-			h2{
-				padding: 1.5rem 0 0 1.5rem;
-				float: left;
-			}
+			// h2{
+			// 	padding: 1.5rem 0 0 1.5rem;
+			// 	float: left;
+			// }
 			.summary-content{
 				color:$black;
 				font-size:1rem;
@@ -1145,8 +1147,8 @@ section#search {
 		h2{
 			margin:0 0 0.5rem 0;
 			font-size:1.4rem;
-			display: inline-block;
-			width: 100%;
+			display: flex;
+			// width: 100%;
 			&.section{
 				margin: 1rem 0 1rem 0;
 				font-size:1.4rem;
