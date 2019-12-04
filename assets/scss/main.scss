@@ -360,8 +360,6 @@ footer {
 	background-color: #36534a;
 	padding: 20px;
 	text-align: center;
-	z-index: 100;
-	position: relative;
 	p {
 		color: white;
 		line-height: 1.2em;
@@ -1181,6 +1179,7 @@ section#search {
 			margin-bottom: 1.5rem;
 			h3 {
 				margin-bottom: 0;
+				margin-right: 10px;
 			}
 			.pdf {
 				text-align:center;
@@ -1798,6 +1797,7 @@ section#search {
 									width: 7px;
 									margin-left:-14px;
 									display: block;
+									position: relative;
 									z-index:5;
 									margin-bottom: -1.1rem;
 									border-radius:50%;
@@ -1842,6 +1842,17 @@ section#search {
 									}
 								}/* end span */
 							}
+							&:first-child:before{
+								content: '';
+								border: none;
+								//border-left: 1px solid lighten($primary-color,10%);
+								border-left: 1px solid $gray;
+								margin-left: 5px;
+								padding-right:2px;
+								padding-bottom:20rem;
+								padding-top: 0rem;
+								z-index:-1;
+							}	
 							&:after{
 								content: '';
 								border: none;
@@ -1888,8 +1899,8 @@ section#search {
 							li a{
 								width:100%;
 								float:left;
-								// margin-bottom:1rem;
-								margin-left:0;
+								margin-bottom:2rem;
+								margin-left:-8px;
 								color:$white;
 								padding:1rem 2rem;
 								border-bottom:1px solid $gray;
@@ -1934,8 +1945,11 @@ section#search {
 	// 	margin-top: 0px;
 	// }
 	.source-section{
-		display: block;
-		float: left;
+		// display: block;
+		// float: left;
+		display: grid;
+		grid-template-columns: 1fr 0.7fr;
+		grid-column-gap: 2rem;
 		width: 100%;
 		border-top: 1px dashed $lightgray;
 		padding: 2rem 0;
@@ -1944,7 +1958,7 @@ section#search {
 			margin: 0 0 0.5rem 0;
 		}
 		.align-left{
-			width:70%;
+			width:100%;
 			float: left;
 			margin:0 3% 0 0;
 			img {
@@ -2075,6 +2089,12 @@ section#search {
 }
 
 @media screen and (max-width: 800px) {
+
+/*** SOURCE PAGE ****/
+.source-page .source-section {
+	display: block;
+}
+
 /**** OBJECT PAGE ****/
 .object-page{
 	article{
