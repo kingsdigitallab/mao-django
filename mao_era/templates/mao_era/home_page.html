@@ -21,7 +21,7 @@
     </div>
     <div class="search-filters">
       <div class="filter">
-        <input type="checkbox" id="filter-nav">
+        <input name="filter-nav" type="checkbox" value="true" id="filter-nav"{% if filter_nav %} checked="checked"{% endif %}>
         <label aria-label="Filter list" for="filter-nav" class="filter-label">Filter by keywords</label>
         <div class="filter-drawer">
           <div class="filter-content">
@@ -31,7 +31,7 @@
               {% for facet in facets %}
               <li>
                 {% if facet.is_apply %}<a href="?{{ facet.link }}">{{ facet.name }}</a>
-                {% else %}<a href="?{{ facet.link }}" class="selected-filter">X</a> {{ facet.name }}
+                {% else %}<a href="?{{ facet.link }}&amp;filter-nav=true" class="selected-filter">X</a> {{ facet.name }}
                 {% endif %} <span>({{ facet.count }})</span>
               </li>
               {% endfor %}
