@@ -15,7 +15,7 @@
   {{ page.body|richtext }}
 
   <ul>
-    {% for biography in page.get_children %}
+    {% for biography in page.get_children|dictsort:"title" %}
     <li><a href="{% pageurl biography %}">{{ biography.title }}</a></li>
     {% endfor %}
   </ul>

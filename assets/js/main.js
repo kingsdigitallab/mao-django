@@ -1,4 +1,4 @@
-$(function() {
+$(document).ready(function () {
     // highlight the clicked sidebar link on the object biography page 
     $('#content1 a').click(function(event) {
         $('.name-active').removeClass('name-active'); 
