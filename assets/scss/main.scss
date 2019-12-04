@@ -360,7 +360,8 @@ footer {
 	background-color: #36534a;
 	padding: 20px;
 	text-align: center;
-	
+	z-index: 100;
+	position: relative;
 	p {
 		color: white;
 		line-height: 1.2em;
@@ -411,13 +412,16 @@ section#search {
 		input {
 			width: 100%;
 			height: 55px;
-			padding: 0 20px;
+			// padding: 0 20px;
+			padding: 0px 80px 0px 20px;
 			margin:0 -2%;
 			font-size: 1rem;
 			outline: none;
 			border: 1px solid $lightgray;
 			font-family: 'M PLUS 1p', sans-serif;
-			// remove the default reset button
+			//change type=search in Safari
+			-webkit-appearance: textfield;
+			// remove the default reset button in Edge
 			::-ms-clear {
 				display: none;
 			}
@@ -1602,7 +1606,7 @@ section#search {
 			background: $black;
 			color:$white;
 			display: block;
-			z-index: 100;
+			z-index: 99;
 			>label{
 				float: left;
 				width: 100%;
@@ -2090,7 +2094,8 @@ section#search {
 		/* Accordion styles */
 		.accordion-wrapper{ 
 			width:100%;
-			height:78vh;
+			// height:78vh;
+			height: auto;
 		}/* end .accordion-wrapper */ 
 	  }/* end .geography */
 
@@ -2268,6 +2273,7 @@ section#search {
 			font-size: 1rem;
 			max-width: 8rem;
 			display: block;
+			line-height: 1.4em;
 		}
 		/**** NAVIGATION ****/
 		nav {

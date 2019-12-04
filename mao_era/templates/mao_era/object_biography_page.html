@@ -17,7 +17,9 @@
       <ul>
         <li><a href="{% pageurl site_root %}">{{ site_root.title }}</a></li>
         {% with parent=page.get_parent %}
-        <li><a href="{% pageurl parent %}">{{ parent.title }}</a></li>
+          {% ifnotequal parent.title "Home" %}
+          <li><a href="{% pageurl parent %}">{{ parent.title }}</a></li>
+          {% endifnotequal %}
         {% endwith %}
       </ul>
       <h1>{{ page.title }}</h1>
@@ -135,7 +137,15 @@
   <div class="sidebar-label">
    <input type="checkbox" id="page-content" />
    <label aria-label="page content" class="page-content" for="page-content">
-   <span>Structure</span><span>Source</span><span>Related</span>
+   <span>Structure</span>
+
+   {% if page.sources.all %}
+   <span>Source</span>
+   {% endif%}
+
+   {% if related_objects %}
+   <span>Related</span>
+   {% endif%}
   </label>
   <div class="drawer">
       <div class="tabs-wrapper">
@@ -148,8 +158,10 @@
       <label for="tab2"><span>Source</span></label>
       {% endif%}
 
+      {% if related_objects %}
       <input id="tab3" type="radio" name="tabs">
       <label for="tab3"><span>Related</span></label>
+      {% endif%}
 
       <section id="content1" class="tab-content" aria-label="summary">
         <ul>
@@ -213,6 +225,7 @@
       </section>
       {% endif%}
 
+      {% if related_objects %}
       <section id="content3" class="tab-content relatedobjects" aria-label="related">
         <ul>
           {% for object in related_objects %}
@@ -226,6 +239,7 @@
           {% endfor %}
         </ul>
       </section>
+      {% endif%}
     </div>
   </div><!-- end side-bar -->
   </div>
