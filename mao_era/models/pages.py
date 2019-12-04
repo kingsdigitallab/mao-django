@@ -470,7 +470,8 @@ class HomePage(Page):
                     tags, tag_name, query_dict)
                 facets.append({'name': tag_name, 'count': count, 'link': link,
                                'is_apply': is_apply})
-        return facets
+        sorted_facets = sorted(facets, key = lambda x: x['name'])
+        return sorted_facets
 
     def _get_tag_querystring(self, tags, tag_name, query_dict):
         """Returns the un/apply querystring for tag_name, and whether it is

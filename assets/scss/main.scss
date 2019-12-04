@@ -562,7 +562,7 @@ section#search {
 			text-align: center;
 			background: darken($primary-color,25%);
 			color: $white;
-			max-width: 150px;
+			max-width: 250px;
 			width: 80%;
 			&:hover {
 				background: $secondary-color;
@@ -797,7 +797,7 @@ section#search {
 		white-space: nowrap;
 		padding: 7px 10px;
 		border: 1px solid darken($primary-color, 13%);
-		margin: 5px 5px 0px 0px;
+		margin: 5px 5px 0px 14px;
 	}
 	.selected-filter {
 		color: $secondary-color;
@@ -2243,6 +2243,9 @@ section#search {
 			align-items: flex-start;
 		}
 		width: 33.3%;
+	}
+	section#search .search-summary span {
+		margin: 5px 5px 0px 0px;
 	}
 	
 }/* end media screen and (max-width: 800px) */
