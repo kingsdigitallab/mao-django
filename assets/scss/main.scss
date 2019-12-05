@@ -2336,12 +2336,6 @@ section#search {
 	
 }/* end media screen and (max-width: 800px) */
 
-@media screen and (max-width: 400px) {
-	.events .event-input, .events .event-results {
-		display: block !important;
-	}
-}
-
 @media screen and (max-width: 600px) {
 
 	/**** HEADER ****/
@@ -2438,3 +2432,9 @@ section#search {
 
 }/* end media screen and (max-width: 600px) */
 
+
+@media screen and (max-width: 500px) {
+	article .events .event-input, article .events .event-results {
+		display: block !important;
+	}
+}/* end media screen and (max-width: 600px) */

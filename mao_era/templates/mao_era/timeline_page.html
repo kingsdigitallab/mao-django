@@ -31,7 +31,7 @@
               <h4>{{ events.count }} event{{events|pluralize:'s'}} found for '{{ query }}'</h4>
               {% for event in events%}
               <div class="event-results">
-                  <p class="event-date">{{ event.date_start|formatDate }}{% if event.date_end %} - {{event.date_end}}{% endif%}</p>
+                  <p class="event-date">{{ event.date_start|formatDate }}{% if event.date_end %} - {{ event.date_end|formatDate }}{% endif%}</p>
                   <div>
                     <h2>{{event.title | safe}}</h2>
                     <p>{{event.description | safe}}</p>
