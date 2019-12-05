@@ -1,5 +1,6 @@
 from django import template
-
+import datetime
+from django.utils.dateformat import format
 
 register = template.Library()
 
@@ -20,3 +21,20 @@ def get_site_root(context):
 @register.simple_tag
 def get_menu_pages(parent):
     return parent.get_children().live().in_menu()
+
+@register.filter
+def formatDate(value):
+    try:
+        date = datetime.datetime.strptime(value, "%Y-%m-%d").date()
+        date = format(date, "M d, Y")
+    except:
+        try:
+            date = datetime.datetime.strptime(value, "%Y-%m").date()
+            date = format(date, "M, Y")
+        except:
+            try:
+                date = datetime.datetime.strptime(value, "%Y").date()
+                date = format(date, "Y")
+            except:
+                date = value
+    return date

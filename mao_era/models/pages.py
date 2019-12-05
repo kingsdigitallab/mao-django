@@ -24,6 +24,9 @@ from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
+from django.db.models import Q
+from django.db.models.functions import Substr
+
 from .blocks import BiographyStreamBlock, FootnotesStreamBlock
 
 
@@ -388,9 +391,22 @@ class TimelinePage(Page):
     max_count = 1
 
     def serve(self, request):
+        # context = {
+        #     'page': self,
+        #     'timeline_url': reverse('full-timeline'),
+        # }
+        # return render(request, self.template, context)
+        events = []
+        query_dict = request.GET.copy()
+        query = query_dict.get('y')
+        if query:
+            #.annotate extracts the first four digits from dates (i.e., years), .filter looks for exact matches and whether the queried date falls into a certain period, .order_by sorts extracted events by the start date
+            events = Event.objects.annotate(end_date=Substr('date_end', 1, 4), start_date=Substr('date_start', 1, 4)).filter(Q(end_date = query) | Q(start_date = query) | Q(start_date__lte = query) & Q(end_date__gte = query)).order_by('date_start')
         context = {
             'page': self,
             'timeline_url': reverse('full-timeline'),
+            'query': query,
+            'events': events
         }
         return render(request, self.template, context)
 

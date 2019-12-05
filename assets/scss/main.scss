@@ -398,8 +398,6 @@ footer {
 } /* end a */
 }/* end .shortcutlinks */
 
-
-
 /* Search */
 section#search {
 	.search-field {
@@ -433,7 +431,6 @@ section#search {
 				transition: 0.35s ease;
 				color: $black;
 				background:$lightgray;
-
 				&::-webkit-input-placeholder {
 					transition: opacity 0.45s ease;
 					opacity: 0;
@@ -1180,6 +1177,7 @@ section#search {
 			h3 {
 				margin-bottom: 0;
 				margin-right: 10px;
+				text-align: left;
 			}
 			.pdf {
 				text-align:center;
@@ -1282,47 +1280,46 @@ section#search {
 			border-top: 1px dashed $lightgray;
 			padding:1rem 0;
 			font-size:0.9rem;
-	  }/* end .footnotes */  
-	  .sources{
-	  	width:100%;
-	  	float:left;
-	  	border-top: 1px dashed $lightgray;
-	  	padding:1rem 0;
-		  ol{
-		  	float:left;
-		  	width:100%;
-		  }
-	  }/* end .sources */
-	  .key{
+		}/* end .footnotes */  
+		.sources{
 		width:100%;
 		float:left;
-		ul{
-			margin: 0 0 0 -40px;
-			text-align:left;
-			li{
-				color:darken($primary-color,25%);
-				display:inline-block;
-				// color:$white;
-				padding:0.2rem 0.6rem 0.2rem 0.6rem;
-				list-style-type:none;
-				margin:0 0.1rem 0.5rem 0;
-				span{
-					font-size:1.1rem;
-					display: inline-block;
-					vertical-align: middle;
-				}
-				// &:hover{
-				// 	background:darken($primary-color,35%);
-				// }
+		border-top: 1px dashed $lightgray;
+		padding:1rem 0;
+			ol{
+			float:left;
+			width:100%;
 			}
-		}
-
-	}/* end .key */
-	  .geography{
-	  	width:100%;
-	  	float:left;
-	  	border-top: 1px dashed $lightgray;
-	  	padding:1rem 0;
+		}/* end .sources */
+		.key{
+			width:100%;
+			float:left;
+			ul{
+				margin: 0 0 0 -40px;
+				text-align:left;
+				li{
+					color:darken($primary-color,25%);
+					display:inline-block;
+					// color:$white;
+					padding:0.2rem 0.6rem 0.2rem 0.6rem;
+					list-style-type:none;
+					margin:0 0.1rem 0.5rem 0;
+					span{
+						font-size:1.1rem;
+						display: inline-block;
+						vertical-align: middle;
+					}
+					// &:hover{
+					// 	background:darken($primary-color,35%);
+					// }
+				}
+			}
+		}/* end .key */
+		.geography{
+		width:100%;
+		float:left;
+		border-top: 1px dashed $lightgray;
+		padding:1rem 0;
 		/* Map */
 		#map{
 			float:left;
@@ -1407,73 +1404,130 @@ section#search {
 					&:checked ~ .content { /* :checked */
 						max-height: 100vh;
 					}
-		      &[type=checkbox] + a label::after {
-		      	content: "+";
-		      	color:gray;
-		      }
-		      &[type=radio] + a label::after {
-		      	content: "\25BC";
-		      }
-		      &[type=checkbox]:checked + a label::after {
-		      	content: "-";
-		      }
-		      &[type=radio]:checked + a label::after {
-		      	content: "+";
-		      }
-		    }/* input */
-		    a label {
-				padding: 15px 20px;
-		    	position: relative;
-		    	display: block;
-		    	// font-weight: bold;
-		    	cursor: pointer;
-		    	padding:1rem 1rem;
-		    	text-align: left;
-		    	h5, h6{
-		    		margin:0;
-		    		line-height: 1.2;
-				}/* end h5, h6 */
-				h5 {
-					font-size: 1rem;
-					line-height: 1.4em;
+					&[type=checkbox] + a label::after {
+					content: "+";
+					color:gray;
+					}
+					&[type=radio] + a label::after {
+					content: "\25BC";
+					}
+					&[type=checkbox]:checked + a label::after {
+					content: "-";
+					}
+					&[type=radio]:checked + a label::after {
+					content: "+";
 				}
-				h6{
-					color: $darkgray;
-					font-size: 0.8rem;
-					// font-weight: normal;
+				}/* input */
+				a label {
+					padding: 15px 20px;
+					position: relative;
+					display: block;
+					// font-weight: bold;
+					cursor: pointer;
+					padding:1rem 1rem;
+					text-align: left;
+					h5, h6{
+						margin:0;
+						line-height: 1.2;
+					}/* end h5, h6 */
+					h5 {
+						font-size: 1rem;
+						line-height: 1.4em;
+					}
+					h6{
+						color: $darkgray;
+						font-size: 0.8rem;
+						// font-weight: normal;
+					}
+					&:hover{
+						background: $lightgray;
+					}
+					&::after { /* Icon */
+						position: absolute;
+						right: 0;
+						top: 0;
+						display: block;
+						width: 3em;
+						height: 3em;
+						line-height: 3;
+						text-align: center;
+						-webkit-transition: all .35s;
+						-o-transition: all .35s;
+						transition: all .35s;
+					}
+				}/* end label */
+				.content {
+						padding:0 1rem;
+						max-height: 0;
+						overflow: hidden;
+						-webkit-transition: max-height .35s;
+						-o-transition: max-height .35s;
+						transition: max-height .35s;
+						font-size: 1rem;
+						.rich-text p {
+							margin: 0 0 1.5rem 0;
+						}
+					}/* end .content */	
+				}/* end .accordion */
+			}/* end .accordion-wrapper */ 
+		}/* end .geography */
+		.events {
+			margin-bottom: 20px;
+			.event-input {
+				display: flex;
+				align-items: center;
+				margin-bottom: 20px;
+				> span {
+					margin-right: 20px;
 				}
-				&:hover{
-					background: $lightgray;
+				.year-search-field {
+					position: relative;
+					max-width: 140px;
+					input {
+						height: 55px;
+						font-size: 1rem;
+						padding: 0px 40px 0px 20px;
+						outline: none;
+						width: 100%;
+					}
+					.search-icon {
+						display: flex;
+						justify-content: space-around;
+						align-items: center;
+						position: absolute;
+						top: 15%;
+						right: 2%;
+						background:none;
+						border: none;
+						outline: 0;
+						width: 40px;
+						height: 40px;
+						i {
+							font-size: 2em;
+							color: #555;
+						}
+						&:focus {
+							background-color: #fafafa;
+						}
+					}
 				}
-			      &::after { /* Icon */
-			      	position: absolute;
-			      	right: 0;
-			      	top: 0;
-			      	display: block;
-			      	width: 3em;
-			      	height: 3em;
-			      	line-height: 3;
-			      	text-align: center;
-			      	-webkit-transition: all .35s;
-			      	-o-transition: all .35s;
-			      	transition: all .35s;
-			      }
-		    }/* end label */
-		    .content {
-		    	padding:0 1rem;
-		    	max-height: 0;
-		    	overflow: hidden;
-		    	-webkit-transition: max-height .35s;
-		    	-o-transition: max-height .35s;
-		    	transition: max-height .35s;
-		    	font-size: 1rem;
-		    	.rich-text p {
-					margin: 0 0 1.5rem 0;
+			}
+			.event-results {
+				display: grid;
+				grid-template-columns: 0.15fr 1fr;
+				margin-bottom: 1rem;
+				grid-gap: 20px;
+				.event-date {
+					font-weight: 500;
+					font-size: 1.2rem;
+					margin-top: 0px;
+					text-align: left;
 				}
-		    }/* end .content */
-		  }/* end .accordion */
-		}/* end .accordion-wrapper */ 
-	  }/* end .geography */
+				h2 {
+					color: darken($primary-color, 20%);
+				}
+			}
+		}/* end .events */
 	  .timeline{
 	  	width:100%;
 	  	float:left;
@@ -2282,7 +2336,11 @@ section#search {
 	
 }/* end media screen and (max-width: 800px) */
 
-
+@media screen and (max-width: 400px) {
+	.events .event-input, .events .event-results {
+		display: block !important;
+	}
+}
 
 @media screen and (max-width: 600px) {
 

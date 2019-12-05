@@ -13,8 +13,37 @@
 <div class="object-page">
   <article class="width-100">
       <h1>{{ page.title }}</h1>
-    <div class="timeline" id="timeline">
-      <div id="timeline-embed"></div>
+      <div class="timeline" id="timeline">
+        <div class="events">
+          <div class="event-input">
+            <span>Search events by year (e.g., 1950): </span>
+            <form action="" method="GET" class="year-search-field">
+                <label>
+                  <span hidden>Enter year</span>
+                  <input type="number" name="y" value="{{ query }}" placeholder="yyyy" aria-label="year search bar" min="1700" max="2050">
+                </label>
+                {% load static %}
+                <button class="search-icon" type="submit"><i class="fas fa-search"></i></button>
+            </form>
+          </div>
+          {% if query %}
+            {% if events %}
+              <h4>{{ events.count }} event{{events|pluralize:'s'}} found for '{{ query }}'</h4>
+              {% for event in events%}
+              <div class="event-results">
+                  <p class="event-date">{{ event.date_start|formatDate }}{% if event.date_end %} - {{event.date_end}}{% endif%}</p>
+                  <div>
+                    <h2>{{event.title | safe}}</h2>
+                    <p>{{event.description | safe}}</p>
+                  </div>
+              </div>
+              {% endfor %}
+            {% else %}
+              <h4>No events found for '{{ query }}'</h4>
+            {% endif %}
+          {% endif %}
+        </div>
+        <div id="timeline-embed"></div>
     </div>
   </article>
 </div>
