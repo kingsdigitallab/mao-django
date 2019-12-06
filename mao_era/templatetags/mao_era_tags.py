@@ -1,6 +1,6 @@
 from django import template
 import datetime
-from django.utils.dateformat import format
+
 
 register = template.Library()
 
@@ -22,19 +22,24 @@ def get_site_root(context):
 def get_menu_pages(parent):
     return parent.get_children().live().in_menu()
 
+
 @register.filter
-def formatDate(value):
-    try:
-        date = datetime.datetime.strptime(value, "%Y-%m-%d").date()
-        date = format(date, "M d, Y")
-    except:
+def format_date(value):
+    """Returns a suitably formatted date string from the input string.
+
+    The input string should be of the form [-]YYYY[-MM[-DD]].
+
+    """
+    date_formats = (
+        ('%Y-%m-%d', '%b %d, %Y'),
+        ('%Y-%m', '%b, %Y'),
+        ('%Y', '%Y'),
+    )
+    str_date = value
+    for input_format, output_format in date_formats:
         try:
-            date = datetime.datetime.strptime(value, "%Y-%m").date()
-            date = format(date, "M, Y")
-        except:
-            try:
-                date = datetime.datetime.strptime(value, "%Y").date()
-                date = format(date, "Y")
-            except:
-                date = value
-    return date
+            date = datetime.datetime.strptime(value, input_format).date()
+            str_date = date.strftime(output_format)
+        except ValueError:
+            continue
+    return str_date

@@ -391,17 +391,21 @@ class TimelinePage(Page):
     max_count = 1
 
     def serve(self, request):
-        # context = {
-        #     'page': self,
-        #     'timeline_url': reverse('full-timeline'),
-        # }
-        # return render(request, self.template, context)
         events = []
         query_dict = request.GET.copy()
         query = query_dict.get('y')
         if query:
-            #.annotate extracts the first four digits from dates (i.e., years), .filter looks for exact matches and whether the queried date falls into a certain period, .order_by sorts extracted events by the start date
-            events = Event.objects.annotate(end_date=Substr('date_end', 1, 4), start_date=Substr('date_start', 1, 4)).filter(Q(end_date = query) | Q(start_date = query) | Q(start_date__lte = query) & Q(end_date__gte = query)).order_by('date_start')
+            # .annotate extracts the first four digits from dates
+            # (i.e., years), .filter looks for exact matches and
+            # whether the queried date falls into a certain period,
+            # .order_by sorts extracted events by the start date
+            events = Event.objects.annotate(
+                end_date=Substr('date_end', 1, 4),
+                start_date=Substr('date_start', 1, 4)).filter(
+                    Q(end_date=query) | Q(start_date=query) | Q(
+                        start_date__lte=query) & Q(
+                            end_date__gte=query)
+            ).order_by('date_start')
         context = {
             'page': self,
             'timeline_url': reverse('full-timeline'),
@@ -488,7 +492,7 @@ class HomePage(Page):
                     tags, tag_name, query_dict)
                 facets.append({'name': tag_name, 'count': count, 'link': link,
                                'is_apply': is_apply})
-        sorted_facets = sorted(facets, key = lambda x: x['name'])
+        sorted_facets = sorted(facets, key=lambda x: x['name'])
         return sorted_facets
 
     def _get_tag_querystring(self, tags, tag_name, query_dict):
