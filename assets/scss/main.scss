@@ -1,22 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=M+PLUS+1p:400,500|ZCOOL+XiaoWei');
 
-// @font-face {
-//     font-family: 'ZCOOLXiaoWei';
-//     src: url("../fonts/ZCOOLXiaoWei-Regular.ttf") format('ttf');
-// }
-// @font-face {
-//     font-family: 'M PLUS 1p';
-//     src: url("../fonts/MPlus1p-Regular.woff") format('woff'),
-//             url("../fonts/MPlus1p-Regular.woff") format('truetype');
-//     font-weight: 400;
-// }
-// @font-face {
-//     font-family: 'M PLUS 1p';
-//     src: url("../fonts/MPlus1p-Medium.woff") format('woff'),
-//             url("../fonts/MPlus1p-Medium.woff") format('truetype');
-//     font-weight: 500;
-// }
-
 /*
 
 - GENERAL
@@ -114,7 +97,6 @@ a {
 
 h2.section:before {
 	content: "";
-	//80px
 	padding-top: 71px;
 	margin-top: -40px;
 }
@@ -187,7 +169,6 @@ header {
 	top:0;
 	background:lighten($primary-color,20%);
 	height:3.5rem;
-	// padding: 0.9rem 3% 0 3%;
 	padding: 0.3rem 3% 0 3%;
 	z-index:1000;
 	a {
@@ -334,7 +315,6 @@ header {
 			color: $white;
 			font-size:1.5rem;
 			top:-0.3rem;
-			// padding:0.4rem 0.6rem 0.2rem 0.6rem;
 			padding: 3px 10px;
 			border-radius:50%;
 		}
@@ -408,7 +388,6 @@ section#search {
 		input {
 			width: 100%;
 			height: 55px;
-			// padding: 0 20px;
 			padding: 0px 80px 0px 20px;
 			margin:0 -2%;
 			font-size: 1rem;
@@ -486,71 +465,6 @@ section#search {
 				}
 			}
 		}
-		/*
-		button.close-icon {
-			// position: relative;
-			border:1px solid transparent;
-			background-color: transparent;
-			display: inline-block;
-			vertical-align: middle;
-			outline: 0;
-			cursor: pointer;
-				&:after {
-					content: "✕";
-					display: block;
-					width: 27px;
-					height: 27px;
-					position: absolute;
-					background-color: $gray;
-					z-index:1;
-					right: 75px;
-					top: -4px;
-					bottom: 0;
-					margin: 17px 10px 0px 0px;
-					padding: 7px 0 0 0;
-					text-align: center;
-					color: white;
-					font-weight: normal;
-					cursor: pointer;
-					opacity: 1;
-					border-radius: 50%;
-				}
-			&:focus {
-				background-color: $gray;
-			}
-		}
-		button.search-icon {
-			position: absolute;
-			width: 65px;
-			// margin: 0 auto;
-			padding: 0;
-			// margin-left: -60px;
-			border: none;
-			background-color: white;
-			cursor: pointer;
-			top: 0;
-			right:0;
-			&:before {
-				content: '';
-				position: absolute;
-				width: 35px;
-				height: 35px;
-				border: 2px solid #333;
-				border-radius: 100%;
-				top: 8px;
-				left: 0;
-			}
-			&:after {
-				content: '';
-				position: absolute;
-				right: 27px;
-				top: 41px;
-				width: 12px;
-				transform: rotate(45deg);
-				border: 1px solid #333;
-			}
-		}
-		*/
 		button {
 			&:hover {
 				opacity: 0.6;
@@ -603,11 +517,6 @@ section#search {
 					z-index: 4;    
 					transition-delay: 2s;
 				}
-				// &:hover{
-				// 	&:after {
-				// 		color: $secondary-color;
-				// 	}
-				// }
 			}
 			input#filter-nav[type="checkbox"]:checked~label.filter-label {
 				background: $secondary-color;
@@ -623,7 +532,6 @@ section#search {
 				transform: translate3d(260px, 0, 0);
 			}
 			label.filter-label {
-				// padding: 0.4rem 3vw;
 				padding: 10px 0;
 				cursor: pointer;
 				width: 100%;
@@ -676,94 +584,13 @@ section#search {
 					.selected-filter {
 						color: $secondary-color;
 					}
-					/*input{
-					position: absolute; // take it out of document flow
-					opacity: 0; // hide it
-				/*& + label {
-					position: relative;
-					cursor: pointer;
-					padding: 0;
-				}*/
-
-				// Box.
-				/* & + label:before {
-					content: '';
-					margin-right: 10px;
-					display: inline-block;
-					vertical-align: text-top;
-					width: 20px;
-					height: 20px;
-					background: white;
-				}
-
-				// Box hover
-				&:hover + label:before {
-					background: $secondary-color;
-				}
-				
-				// Box focus
-				&:focus + label:before {
-					//box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.12);
-				}
-
-				// Box checked
-				&:checked + label:before {
-					background: $secondary-color;
-				}
-				
-				// Disabled state label.
-				&:disabled + label {
-					color: $white;
-					cursor: auto;
-				}
-
-				// Disabled box.
-				&:disabled + label:before {
-					box-shadow: none;
-					background: $lightgray;
-				}
-
-				// Checkmark. Could be replaced with an image
-				&:checked + label:after {
-					content: '';
-					position: absolute;
-					left: 5px;
-					top: 9px;
-					background: white;
-					width: 2px;
-					height: 2px;
-					box-shadow: 
-					2px 0 0 $white,
-					4px 0 0 $white,
-					4px -2px 0 $white,
-					4px -4px 0 $white,
-					4px -6px 0 $white,
-					4px -8px 0 $white;
-					transform: rotate(45deg);
-				}
-						}
-					label {
-						display: block;
-						-moz-transition: all 200ms ease-in;
-						-webkit-transition: all 200ms ease-in;
-						-o-transition: all 200ms ease-in;
-						transition: all 200ms ease-in;
-						z-index: 500;
-						&.filter-label {
-							width: 100px;
-							font-size: 1em;
-							text-align: center;
-					}/* end filter-label */
-				//}/* end label */
 				button {
 					font-size: 0.8rem;
-					// width: 100%;
 					width: 270px;
 					border: none;
 					background-color: $white;
 					cursor: pointer;
 					padding: 0.5rem;
-					// margin: 1rem 0;
 					text-transform: uppercase;
 					color: darken($primary-color, 11%);
 					margin: 0 0 0 -270px;
@@ -855,17 +682,6 @@ section#search {
 				position:relative;
 				width:16.66%; 
 				display:block;
-				/*
-				&:hover{
-
-					.photo-data {
-
-					}
-					.photo-image{
-
-					}
-				}
-				*/
 				.photo-image{
 					width: 100%;
 					padding-bottom: 100%;
@@ -920,14 +736,6 @@ section#search {
 								color: lighten($primary-color,30%);
 								font-size: 0.9rem;
 							}
-							/*&:after{
-								content:",";
-							}
-							&:last-child{
-								&:after{
-									content:"";
-								} 
-							}*/
 							&:hover{
 								color: lighten($secondary-color,15%);
 								border:1px solid lighten($secondary-color,15%);
@@ -989,9 +797,6 @@ section#search {
       		text-align:left;
       		border-bottom:1px solid $lightgray;
       		padding:2rem 0;
-      		// &:hover{
-      		// 	background:lighten($primary-color,40%);
-      		// }
       		.photo-image{
       			width:15%;
       			margin:0 2% 0 0;
@@ -1034,14 +839,6 @@ section#search {
       					padding:0.3rem 0.5rem;
 						color: darken($primary-color,10%);
 						margin-bottom: 5px;
-      					/*&:after{
-      						content:",";
-      					}
-      					&:last-child{
-      						&:after{
-      							content:"";
-      						} 
-      					}*/
       					&:hover{
 							border:1px solid $secondary-color;
 							color: $secondary-color;
@@ -1106,7 +903,6 @@ section#search {
 			    color: $white;
 			    display: inline-block;
 			    vertical-align: top;
-			    // font-weight: normal;
 			}
         }
        
@@ -1122,27 +918,20 @@ section#search {
 		width: calc(100% - 20rem);
 		float: left;
 		text-align: justify;
-		// padding: 0 3% 20vh 3%;
 		padding: 0 3% 0 3%;
 		line-height: 1.4em;
 		font-size: 1.1rem;
 		&.width-100 {
 			width: 100% !important;
-			// max-width: 1600px;
 			padding-bottom: 0px;
 		}
 		.summary{
 			border-top: 1px dashed $lightgray;
 			padding:1rem 0;
-			// h2{
-			// 	padding: 1.5rem 0 0 1.5rem;
-			// 	float: left;
-			// }
 			.summary-content{
 				color:$black;
 				font-size:1rem;
 				line-height: 1.4em;
-				// font-weight:100;
 				background:lighten($lightgray,13%);
 				padding:1.5rem;
 			}/* end .content */
@@ -1154,7 +943,6 @@ section#search {
 			margin:0 0 0.5rem 0;
 			font-size:1.4rem;
 			display: flex;
-			// width: 100%;
 			&.section{
 				margin: 1rem 0 1rem 0;
 				font-size:1.4rem;
@@ -1165,7 +953,6 @@ section#search {
 		h3{
 			font-style:italic;
 			margin:0 0 1.5rem 0;
-			// font-weight:normal;
 			font-size:1rem;
 			color:darken($primary-color,25%);
 		}/* end h3 */
@@ -1300,7 +1087,6 @@ section#search {
 				li{
 					color:darken($primary-color,25%);
 					display:inline-block;
-					// color:$white;
 					padding:0.2rem 0.6rem 0.2rem 0.6rem;
 					list-style-type:none;
 					margin:0 0.1rem 0.5rem 0;
@@ -1323,11 +1109,8 @@ section#search {
 		/* Map */
 		#map{
 			float:left;
-			// width:48%;
 			width: 60%;
 			margin-right:2%;
-			// overflow: auto;
-			// height:400px !important;
 			height: 78vh !important;
 			&:focus {
 				background-color: $gray;
@@ -1340,14 +1123,12 @@ section#search {
 				text-align:center;
 				h4{
 					font-size: 1.2rem;
-					// font-weight: normal; 
 					margin:1.3rem 0 0 0;
 					line-height: 1.2;
 				}
 				h5{
 					font-size: 0.9rem;
 					color: lighten($primary-color,20%);
-					// font-weight: normal;
 					margin:0.2rem 0 0.5rem 0;
 				}
 			}
@@ -1385,8 +1166,6 @@ section#search {
 		}/* end map */
 		/* Accordion styles */
 		.accordion-wrapper{ 
-			// float:left;
-			// width:50%;
 			width: auto;
 			overflow: auto;
 			height: 78vh;
@@ -1401,7 +1180,7 @@ section#search {
 					&:checked + a label {
 						background-color: lighten($lightgray, 10%);
 					}
-					&:checked ~ .content { /* :checked */
+					&:checked ~ .content {
 						max-height: 100vh;
 					}
 					&[type=checkbox] + a label::after {
@@ -1422,7 +1201,6 @@ section#search {
 					padding: 15px 20px;
 					position: relative;
 					display: block;
-					// font-weight: bold;
 					cursor: pointer;
 					padding:1rem 1rem;
 					text-align: left;
@@ -1437,7 +1215,6 @@ section#search {
 					h6{
 						color: $darkgray;
 						font-size: 0.8rem;
-						// font-weight: normal;
 					}
 					&:hover{
 						background: $lightgray;
@@ -1652,7 +1429,6 @@ section#search {
 		background:$black;
 		.sidebar-label{
 			position: fixed;
-			// top:calc(100vh - 3rem);
 			right: 0;
 			bottom: 0;
 			width:100%;
@@ -1838,7 +1614,6 @@ section#search {
 							h2{
 								color: $light-primary;
 								margin:0 0 0 1rem;
-								//text-transform:uppercase;
 								font-size:1.1rem;
 								font-weight:400;
 								padding-right: 10%;         
@@ -1899,7 +1674,6 @@ section#search {
 							&:first-child:before{
 								content: '';
 								border: none;
-								//border-left: 1px solid lighten($primary-color,10%);
 								border-left: 1px solid $gray;
 								margin-left: 5px;
 								padding-right:2px;
@@ -1910,7 +1684,6 @@ section#search {
 							&:after{
 								content: '';
 								border: none;
-								//border-left: 1px solid lighten($primary-color,10%);
 								border-left: 1px solid $gray;
 								margin-left: 5px;
 								padding-right:2px;
@@ -1993,14 +1766,7 @@ section#search {
 /*** SOURCE PAGE ***/
 .source-page{
 	padding: 5rem 3% 20vh 3%;
-	// p{
-	// 	line-height: 1.3;
-	// 	font-size: 1.2rem;
-	// 	margin-top: 0px;
-	// }
 	.source-section{
-		// display: block;
-		// float: left;
 		display: grid;
 		grid-template-columns: 1fr 0.7fr;
 		grid-column-gap: 2rem;
@@ -2049,7 +1815,6 @@ section#search {
 				  text-align: center;
 				  padding:0.5rem 0 0.2rem 0;
 				  border:1px solid $lightgray;	
-				//   font-weight: normal;
 				  text-transform: uppercase;	
 				  margin:0;
 				  font-size: 0.6rem;
@@ -2070,8 +1835,6 @@ section#search {
 		.metadata{        
 			background:lighten($lightgray,13%);
 			margin-top:0;
-			//width:27%;
-			//float:left;
 			padding:0.5rem 1rem;
 			text-align:left;
 			font-size:0.8rem;
@@ -2079,25 +1842,20 @@ section#search {
 			dl dt,
 			dl dd {
 				display: block;
-				// vertical-align: top;
 				padding:0;
 				margin:0;
 			}
 			dl dt{
-				// width: 28%;
 				padding: 0 2% 10px 0;
-				// font-size: 0.6rem;
 				font-size: 14px;
 				color: darken($primary-color, 20%);
 				font-weight: 500;
 				text-transform: uppercase;
-				// display: inline-block;
 			}
 
 			dl dd{
 				margin-right:-1px;
 				padding: 0 0 1.5rem 0;
-				// font-size: 0.9rem;
 				font-size: 1rem;
 				.rich-text p{
 					font-size: 1rem;
@@ -2112,7 +1870,6 @@ section#search {
 				float: left;
 				margin:0 3% 0 0;
 				img{
-					//width:100%;
 					height:auto;
 				}
 	        }/* end .align-left */
@@ -2168,7 +1925,6 @@ section#search {
 		/* Accordion styles */
 		.accordion-wrapper{ 
 			width:100%;
-			// height:78vh;
 			height: auto;
 		}/* end .accordion-wrapper */ 
 	  }/* end .geography */
@@ -2182,9 +1938,6 @@ section#search {
 		right:0;
 		background:$black;
 		.sidebar-label{
-			// position: fixed;
-			// top:calc(100vh - 5rem);
-			// bottom: 0;
 			left:0;
 			width:100%;
 			background: $darkgray;
@@ -2372,27 +2125,6 @@ section#search {
 	.shortcutlinks {
 		margin-top: 4rem;
 	}
-	// section#search {
-	// 	.search-field {
-	// 		button {
-	// 			&.search-icon {
-	// 				&:before {
-	// 					width: 25px;
-	// 					height: 25px;
-	// 					top: 12px;
-	// 					left: 7px;
-	// 				}
-	// 				&:after {
-	// 					top: 36px;
-	// 				}
-	// 			}
-	// 			&.close-icon:after {
-	// 				margin-right: 0px;
-	// 				right: 65px;
-	// 			}
-	// 		}
-	// 	}
-	// }
 	.tabs section#content1 .photo .modal-overlay {
 		.modal-content {
 			a.modal-close {
@@ -2413,15 +2145,6 @@ section#search {
 		.geography #map {
 			height: 200px !important;
 		}
-		// .block-image figure.align-right {
-		// 	width: auto;
-		// 	margin: auto;
-		// 	text-align: center;
-		// 	float: none;
-		// 	img {
-		// 		max-width: 400px;
-		// 	}
-		// }
 	}
 
 	.timeline {
