@@ -183,7 +183,8 @@ header {
 			position: fixed;
 			top: 0;
 			right: 0;
-			width: 350px;
+			// width: 350px
+			width: 22rem;
 			height: 100%;
 			margin: 0 -350px 0 0;
 			-moz-transition: all 200ms ease-in;
@@ -914,7 +915,7 @@ section#search {
 	/* Article */
 	article {
 		margin: 5rem 0 0 0;
-		width: calc(100% - 20rem);
+		width: calc(100% - 22rem);
 		float: left;
 		text-align: justify;
 		padding: 0 3% 0 3%;
@@ -1110,7 +1111,7 @@ section#search {
 			float:left;
 			width: 60%;
 			margin-right:2%;
-			height: 78vh !important;
+			height: 76vh !important;
 			&:focus {
 				background-color: $gray;
 			}
@@ -1167,7 +1168,7 @@ section#search {
 		.accordion-wrapper{ 
 			width: auto;
 			overflow: auto;
-			height: 78vh;
+			height: 76vh;
 			.accordion {
 				position: relative;
 				overflow: hidden;
@@ -1177,7 +1178,11 @@ section#search {
 					opacity: 0;
 					z-index: -1;
 					&:checked + a label {
-						background-color: lighten($lightgray, 10%);
+						background-color: $black;
+						color: white;
+						h6 {
+							color: lighten($primary-color, 20%);
+						}
 					}
 					&:checked ~ .content {
 						max-height: 100vh;
@@ -1516,7 +1521,7 @@ section#search {
 				padding: 1rem 0 0 0;
 				background: $darkgray;
 				height: 100%;
-				width: 20rem;
+				width: 22rem;
 				position: fixed;
 				top: 0;
 				right: 0;
@@ -1534,20 +1539,22 @@ section#search {
 						font-size: 0.9rem;
 						display: block;
 						padding: 0.2rem;
-						margin: 10px;
+						margin: 10px 4px;
 						cursor: pointer;
 						text-decoration: none;
 						text-align: center;
 						color: $light-primary;
 						display: inline-block;
 						text-transform: uppercase;
-						
 						&:hover{
 							span{
 								color: lighten($secondary-color,25%);
 							}
 				
 						}
+					}
+					label:first-of-type {
+						margin-left: 10px;
 					}
 					#tab1:checked ~ #content1,
 					#tab2:checked ~ #content2,
@@ -1955,11 +1962,11 @@ section#search {
 				cursor: pointer;  
 				padding:1rem;
 				display: block;
+				font-size: 0.8em;
 				span{
 					padding: 0.2rem 0.4rem;
 					margin: 0.5rem 1rem 1rem 0;
 					text-transform: uppercase;
-					font-size: 1rem;
 					cursor: pointer;
 				}
 			}/* end label */
@@ -2088,7 +2095,7 @@ section#search {
 	
 }/* end media screen and (max-width: 800px) */
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 620px) {
 
 	/**** HEADER ****/
 	header {
