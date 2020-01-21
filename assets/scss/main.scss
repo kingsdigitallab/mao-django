@@ -243,56 +243,56 @@ header {
 			transition: all 200ms ease-in;
 			z-index: 2;
 			cursor: pointer;
+			background-color: #36534a;
 			&.menu-label {
 				position: absolute;
-				top:1rem;
+				top:0;
 				right: 1.6rem;
 				font-size: 1.3rem;
 				display: block;
-				height:1.5rem;
+				height:100%;
+				padding: 16px;
+				line-height: 1.1em;
 				.menu-text{
-					position: absolute;
-					right: 2.3rem;
-					top: -4px;
+					// position: absolute;
+					// right: 2.3rem;
+					// top: -4px;
+					// color: $white;
+					float: left;
+					color: $white;
 				}
 				.menu-icon{
 					position: relative;
-					margin: 9px 0 0 55px;
+					margin: 9px 0 0 72px;
 					text-indent: -9999px;
 					transition: all .1s ease-in;
 					width: 30px;
 					height: 3px;
-					background-color: $black;
+					background-color: $white;
 					display: block;
 					&:before{
-					content: '';
-					position: absolute;
-					top: -9px;
-					transition: all .1s ease-in;
-					width: 30px;
-					height: 3px;
-					background-color: $black;
-					display: block;
+						content: '';
+						position: absolute;
+						top: -9px;
+						transition: all .1s ease-in;
+						width: 30px;
+						height: 3px;
+						background-color: $white;
+						display: block;
 					}
 					&:after{
-					content: '';
-					position: absolute;
-					top: 8px;
-					transition: all .1s ease-in;
-					width: 30px;
-					height: 3px;
-					background-color: $black;
-					display: block;
+						content: '';
+						position: absolute;
+						top: 8px;
+						transition: all .1s ease-in;
+						width: 30px;
+						height: 3px;
+						background-color: $white;
+						display: block;
 					}
 				}
 				&:hover {
-					color: $secondary-color;
-					.menu-icon{
-						background-color:$secondary-color;
-						&:before,&:after{
-							background-color:$secondary-color;
-						}
-					}
+					background-color: $primary-color;
 				}
 			}/* end .menu-label */
 
@@ -317,11 +317,6 @@ header {
 			top:-0.3rem;
 			padding: 3px 10px;
 			border-radius:50%;
-		}
-		&:hover{
-			&:before {
-				background: darken($secondary-color,10%);
-			}
 		}
 		}/* end input#menu[type="checkbox"]:checked~label.menu-label */
 	}/* end nav */
@@ -509,9 +504,10 @@ section#search {
 				&:after {
 					content: "✕";
 					position: fixed;
-					top: 60px;
-					left: 230px;
+					top: 56px;
+					left: 219px;
 					color: $white;
+					padding: 6px 15px;
 					font-size:1.7rem;
 					// z-index: 501;
 					z-index: 4;    
@@ -580,6 +576,9 @@ section#search {
 					}
 					a{
 						color:$white;
+						&:hover {
+							text-decoration: underline;
+						}
 					}
 					.selected-filter {
 						color: $secondary-color;
@@ -1535,7 +1534,7 @@ section#search {
 						font-size: 0.9rem;
 						display: block;
 						padding: 0.2rem;
-						margin: 0.5rem 1rem 1rem 0;
+						margin: 10px;
 						cursor: pointer;
 						text-decoration: none;
 						text-align: center;
@@ -2112,10 +2111,13 @@ section#search {
 			}
 			label {
 				&.menu-label {
-					right: 1.5rem;
+					right: 0;
 					font-size: 1rem;
 					.menu-text {
-						top:0px;
+						margin-top:2px;
+					}
+					.menu-icon {
+						margin: 9px 0 0 54px;
 					}
 				}/* end .menu-label */
 			}/* end label */

@@ -82,7 +82,7 @@
     </section>
 
     <section id="content2" class="tab-content" aria-label="list view content">
-      {% for biography in biographies %}
+      {% for biography in biographies|dictsort:"title" %}
         <div class="photo">
           <a href="{% pageurl biography %}">
             <div class="photo-image">
