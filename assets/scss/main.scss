@@ -329,6 +329,12 @@ main {
 	padding-bottom: 60px;
 	min-height: 90vh;
 	display: block;
+	&#main-content {
+		.full-width-original {
+			width: 100%;
+			height: auto;
+		}
+	}
 }/* end MAIN */
 
 /**** FOOTER ****/
@@ -1043,7 +1049,7 @@ section#search {
 						color:$white;
 						&:hover{
 							border:none;
-					}
+						}
 					}
 					&:hover{
 						background:$secondary-color;
@@ -1931,7 +1937,7 @@ section#search {
 		/* Accordion styles */
 		.accordion-wrapper{ 
 			width:100%;
-			height: auto;
+			// height: auto;
 		}/* end .accordion-wrapper */ 
 	  }/* end .geography */
 
