@@ -1117,7 +1117,7 @@ section#search {
 			float:left;
 			width: 60%;
 			margin-right:2%;
-			height: 76vh !important;
+			height: 76vh;
 			&:focus {
 				background-color: $gray;
 			}
@@ -1543,7 +1543,6 @@ section#search {
 					}
 					label {
 						font-size: 0.9rem;
-						display: block;
 						padding: 0.2rem;
 						margin: 10px 4px;
 						cursor: pointer;
@@ -1561,6 +1560,7 @@ section#search {
 					}
 					label:first-of-type {
 						margin-left: 10px;
+						float: left;
 					}
 					#tab1:checked ~ #content1,
 					#tab2:checked ~ #content2,
@@ -1670,7 +1670,7 @@ section#search {
 								} 
 							}/* end h3 */
 							.source {
-								margin:0 0 0 1rem;
+								margin:0 1em 0 1rem;
 								color:lighten($primary-color,20%);
 								& > span {
 									margin:0.2rem 0 0.5rem 0;
@@ -1937,7 +1937,10 @@ section#search {
 		/* Accordion styles */
 		.accordion-wrapper{ 
 			width:100%;
-			// height: auto;
+			height: 50vh;
+			&.full-height {
+				height: auto !important;
+			}
 		}/* end .accordion-wrapper */ 
 	  }/* end .geography */
 
@@ -1994,12 +1997,12 @@ section#search {
 					+ label:after { /* close button */
 						content: "✕";
 						position: fixed;
-						right: 0;
+						right: 5px;
 						top:4rem;
 						color: $black;
-						background: $white;
+						background: lighten($light-primary, 20%);
 						z-index: 3;
-						padding:1.3rem 0.5rem 0.9rem 0.5rem;
+						padding:1.2rem 0.5rem 1.2rem 0.5rem;
 						font-size: 1.7rem;
 						line-height: 0;
 						visibility: visible;

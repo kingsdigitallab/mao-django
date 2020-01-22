@@ -10,7 +10,7 @@ $(document).ready(function () {
     });
     var val;
     // aggregated map - expand and scroll down to the dropdown with the location description
-    $(".leaflet-marker-icon").on('click', (el) => {
+    $(".leaflet-marker-icon").on('click', function(el) {
         $("input[type='checkbox']").prop('checked', false);
         if (val == undefined) {
             val = "map-tab-1";
