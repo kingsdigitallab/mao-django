@@ -333,6 +333,7 @@ main {
 		.full-width-original {
 			width: 100%;
 			height: auto;
+			max-width: 1000px;
 		}
 	}
 }/* end MAIN */
@@ -342,6 +343,19 @@ footer {
 	background-color: #36534a;
 	padding: 20px;
 	text-align: center;
+	.footer-logos {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap;
+		.footer-logo {
+			height: 100px;
+			margin-bottom: 10px;
+			&:first-child {
+				margin-right: 10px;
+			}
+		}
+	}
 	p {
 		color: white;
 		line-height: 1.2em;
@@ -2169,7 +2183,13 @@ section#search {
 			height: 30em !important;
 		}
 	}
-
+	footer {
+		.footer-logos {
+			.footer-logo {
+				height: 60px;
+			}
+		}
+	}
 }/* end media screen and (max-width: 600px) */
 
 
