@@ -1290,6 +1290,9 @@ section#search {
 						padding: 0px 40px 0px 20px;
 						outline: none;
 						width: 100%;
+						&:focus {
+							border: 1px solid $gray;
+						}
 					}
 					.search-icon {
 						display: flex;
