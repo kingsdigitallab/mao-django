@@ -199,6 +199,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.template.context_processors.static',
                 'django.contrib.messages.context_processors.messages',
+                'mao_era.context_processors.django_settings',
 
                 'activecollab_digger.context_processors.activecollab_digger',
 
