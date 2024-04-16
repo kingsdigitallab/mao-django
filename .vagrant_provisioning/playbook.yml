@@ -99,31 +99,32 @@
       path: /usr/bin/python3
       priority: 10
 
-  - name: pip | install virtualenv
-    become: yes
-    pip:
-      name: virtualenv
-      state: latest
-    tags:
-      - python
+  # - name: pip | install virtualenv
+  #   become: yes
+  #   pip:
+  #     name: virtualenv==20.0.9
+  #     state: present
+  #   tags:
+  #     - python
 
   - name: pip | setup virtualenv
     file: path={{ python.virtualenv_location }} state=directory
-  - command: virtualenv {{ python.virtualenv_location }}
+  # - command: virtualenv {{ python.virtualenv_location }}
+  - command: python -m venv {{ python.virtualenv_location }}
     tags:
       - python
 
-  - name: pip | update setuptools
-    pip:
-      name: setuptools
-      virtualenv: "{{ python.virtualenv_location }}"
-      state: latest
-    tags:
-      - python
+  # - name: pip | update setuptools
+  #   pip:
+  #     name: setuptools
+  #     virtualenv: "{{ python.virtualenv_location }}"
+  #     state: latest
+  #   tags:
+  #     - python
 
   - name: pip | update pip
     pip:
-      name: pip
+      name: "pip>=20,<21"
       virtualenv: "{{ python.virtualenv_location }}"
       state: latest
     tags:

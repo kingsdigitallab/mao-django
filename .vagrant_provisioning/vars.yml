@@ -9,6 +9,6 @@ python: {requirements: requirements-dev.txt, virtualenv_location: /home/vagrant/
 system_packages: [ack-grep, adminer, aptitude, binutils, elasticsearch, gdal-bin, git, git-core, libcairo2, libffi-dev, libgdal-dev, libgdk-pixbuf2.0-0, libjpeg-dev,
   libldap2-dev, libpango-1.0-0, libpangocairo-1.0-0, libproj-dev, libsasl2-dev, libssl-dev, libxml2-dev, libxslt-dev, nfs-common, open-vm-tools,
   openjdk-8-jre, postgis, postgresql, postgresql-client, postgresql-server-dev-all, python3-cffi, python3-dev, python3-gdal,
-  python3-pip, python3-psycopg2, python3-setuptools, shared-mime-info, vim-nox, zsh]
+  python3-pip, python3-psycopg2, python3-setuptools, python3-venv, shared-mime-info, vim-nox, zsh]
 user_home: /home/vagrant
 zsh: {oh_my_zsh: 'https://github.com/robbyrussell/oh-my-zsh.git', zshrc: zshrc}
