@@ -1,0 +1,6 @@
+services:
+  redis:
+    image: redis:${REDIS_VERSION:-7-alpine}
+    restart: unless-stopped
+    expose:
+      - ${REDIS_PORT:-6379}

@@ -1,9 +1,18 @@
 from .base import *  # noqa
 
+ALLOWED_HOSTS = ['127.0.0.1',
+                 'localhost'
+                 '[::1]',
+                 'mao-dev.kdl.kcl.ac.uk']
+
+CACHE_REDIS_DATABASE = '2'
+CACHES['default']['LOCATION'] = 'redis://127.0.0.1:6379/' + CACHE_REDIS_DATABASE
+
 DEBUG = True
 
-CSRF_COOKIE_SECURE = False
-SESSION_COOKIE_SECURE = False
+INTERNAL_IPS = INTERNAL_IPS + ['']
+
+print("IN DEV ENVIRONMENT!!!")
 
 DATABASES = {
     'default': {
@@ -11,22 +20,15 @@ DATABASES = {
         'NAME': 'mao',
         'USER': 'mao',
         'PASSWORD': 'mao',
-        'ADMINUSER': 'postgres',
-        'HOST': 'localhost'
+        'HOST': 'postgres'
     },
 }
 
-# 10.0.2.2 is the default IP for the VirtualBox Host machine
-INTERNAL_IPS = ['0.0.0.0', '127.0.0.1', '::1', '10.0.2.2']
+LOGGING_LEVEL = logging.DEBUG
 
-SECRET_KEY = '12345'
+LOGGING['loggers']['mao']['level'] = LOGGING_LEVEL
 
-FABRIC_USER = ''
-
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'django_auth_ldap.backend.LDAPBackend',
-)
+SECRET_KEY = ''
 
 # -----------------------------------------------------------------------------
 # Django Debug Toolbar
@@ -36,15 +38,9 @@ AUTHENTICATION_BACKENDS = (
 try:
     import debug_toolbar  # noqa
 
-    INSTALLED_APPS = INSTALLED_APPS + ['debug_toolbar']
+    INSTALLED_APPS = INSTALLED_APPS + ['debug_toolbar', ]
     MIDDLEWARE += [
         'debug_toolbar.middleware.DebugToolbarMiddleware']
     DEBUG_TOOLBAR_PATCH_SETTINGS = True
 except ImportError:
     pass
-
-LOGGING['loggers']['mao'] = {}
-LOGGING['loggers']['mao']['handlers'] = ['console']
-LOGGING['loggers']['mao']['level'] = logging.DEBUG
-
-

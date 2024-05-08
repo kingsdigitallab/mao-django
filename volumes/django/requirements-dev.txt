@@ -4,4 +4,3 @@ Fabric3
 flake8
 ipython
 tox
-CairoSVG==2.4.2

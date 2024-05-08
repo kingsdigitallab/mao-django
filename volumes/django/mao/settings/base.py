@@ -12,6 +12,7 @@ import getpass
 import logging
 import os
 
+
 from django_auth_ldap.config import LDAPGroupQuery
 from kdl_ldap.settings import *  # noqa
 
@@ -52,7 +53,7 @@ CACHES = {
 CSRF_COOKIE_SECURE = True
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv('DJANGO_DEBUG')=='True'
 
 # -----------------------------------------------------------------------------
 # EMAIL SETTINGS
@@ -184,7 +185,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = PROJECT_NAME + '.urls'
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 TEMPLATES = [
     {
@@ -298,6 +299,15 @@ db_engine = 'django.db.backends.postgresql_psycopg2'
 if 'django.contrib.gis' in INSTALLED_APPS:
     db_engine = 'django.contrib.gis.db.backends.postgis'
 
+DATABASES = {
+    'default': {
+        'ENGINE': db_engine,
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'HOST': os.getenv('POSTGRES_HOST')
+    },
+}
 
 AC_BASE_URL = 'https://app.activecollab.com/148987'
 AC_API_URL = AC_BASE_URL + '/api/v1/'

@@ -1,0 +1,8 @@
+services:
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy:${NGINX_PROXY_VERSION:-1.4}
+    restart: unless-stopped
+    ports:
+      - "${NGINX_PROXY_PORTS:-80:80}"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro

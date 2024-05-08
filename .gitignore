@@ -67,4 +67,5 @@ static/
 # Backup files
 *~
 
-data
+.env
+volumes/postgres_*

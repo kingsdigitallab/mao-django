@@ -1,0 +1,9 @@
+name: mao
+
+include:
+  - path: ../services/nginx-proxy.yml
+  - path: ../services/django.yml
+  - path: ../services/nginx.yml
+  - path: ../services/postgres.yml
+  # - path: ../services/elasticsearch.yml
+  - path: ../services/redis.yml
