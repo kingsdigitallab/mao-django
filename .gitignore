@@ -68,4 +68,5 @@ static/
 *~
 
 .env
+.env64
 volumes/postgres_*

@@ -30,7 +30,7 @@ PROJECT_TITLE = 'Mao Era in Objects'
 ADMINS = ()
 MANAGERS = ADMINS
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv('VIRTUAL_HOST').split(',')
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#caches
 # https://docs.djangoproject.com/en/dev/topics/cache/
