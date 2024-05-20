@@ -20,7 +20,10 @@ def biography_pdf(request, bio_id):
         bio = ObjectBiographyPage.objects.live().get(pk=bio_id)
     except ObjectBiographyPage.DoesNotExist:
         return HttpResponseNotFound()
-    html = weasyprint.HTML(url=bio.full_url)
+
+    url = "http://django:8000{}".format(bio.url)
+
+    html = weasyprint.HTML(url=url, base_url="http://nginx:8001")
     return _generate_pdf(html, bio.slug)
 
 
@@ -31,11 +34,12 @@ def full_timeline(request):
 
 
 def _generate_pdf(html, filename):
-    css = weasyprint.CSS(filename=finders.find('scss/pdf.css'))
+    css = weasyprint.CSS(
+        filename=finders.find("scss/pdf.css"), base_url="http://nginx:8001"
+    )
     doc = html.render(stylesheets=[css])
-    response = HttpResponse(doc.write_pdf(), content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="{}.pdf"'.format(
-        filename)
+    response = HttpResponse(doc.write_pdf(), content_type="application/pdf")
+    response["Content-Disposition"] = 'attachment; filename="{}.pdf"'.format(filename)
     return response
 
 
@@ -49,7 +53,7 @@ def source_pdf(request, source_id):
 
 
 def timeline(events):
-    data = {'events': []}
+    data = {"events": []}
     for event in events:
-        data['events'].append(event.get_event_data())
-    return HttpResponse(json.dumps(data), content_type='application/json')
+        data["events"].append(event.get_event_data())
+    return HttpResponse(json.dumps(data), content_type="application/json")
