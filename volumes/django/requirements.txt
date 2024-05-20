@@ -8,7 +8,6 @@ django-redis==4.11.0
 psycopg2-binary==2.8.4
 redis==3.3.11
 elasticsearch>=5.0.0,<6.0.0
-django-activecollab-digger
 django-kdl-ldap==1.2
 weasyprint==51
 gunicorn<20
