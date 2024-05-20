@@ -2,8 +2,9 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path, re_path
 
-from kdl_ldap.signal_handlers import \
-    register_signal_handlers as kdl_ldap_register_signal_handlers
+from kdl_ldap.signal_handlers import (
+    register_signal_handlers as kdl_ldap_register_signal_handlers,
+)
 
 
 kdl_ldap_register_signal_handlers()
@@ -11,13 +12,11 @@ kdl_ldap_register_signal_handlers()
 admin.autodiscover()
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('digger/', include('activecollab_digger.urls')),
-    path('documents/', include('wagtail.documents.urls')),
-    path('wagtail/', include('wagtail.admin.urls')),
-    path('mao_era/', include('mao_era.urls')),
-    path('', include('wagtail.core.urls')),
-
+    path("admin/", admin.site.urls),
+    path("documents/", include("wagtail.documents.urls")),
+    path("wagtail/", include("wagtail.admin.urls")),
+    path("mao_era/", include("mao_era.urls")),
+    path("", include("wagtail.core.urls")),
 ]
 
 # -----------------------------------------------------------------------------
@@ -26,8 +25,9 @@ urlpatterns = [
 try:
     if settings.DEBUG:
         import debug_toolbar
+
         urlpatterns = [
-            re_path(r'^__debug__/', include(debug_toolbar.urls)),
+            re_path(r"^__debug__/", include(debug_toolbar.urls)),
         ] + urlpatterns
 except ImportError:
     pass
@@ -41,6 +41,7 @@ if settings.DEBUG:
     import os.path
 
     urlpatterns += staticfiles_urlpatterns()
-    urlpatterns += static(settings.MEDIA_URL + 'images/',
-                          document_root=os.path.join(settings.MEDIA_ROOT,
-                                                     'images'))
+    urlpatterns += static(
+        settings.MEDIA_URL + "images/",
+        document_root=os.path.join(settings.MEDIA_ROOT, "images"),
+    )
