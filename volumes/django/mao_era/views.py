@@ -1,5 +1,6 @@
 import json
 
+from django.conf import settings
 from django.contrib.staticfiles import finders
 from django.http import HttpResponse, HttpResponseNotFound
 
@@ -21,9 +22,11 @@ def biography_pdf(request, bio_id):
     except ObjectBiographyPage.DoesNotExist:
         return HttpResponseNotFound()
 
-    url = "http://django:8000{}".format(bio.url)
+    url = "https://{}{}".format(settings.ALLOWED_HOSTS[0], bio.url)
 
-    html = weasyprint.HTML(url=url, base_url="http://nginx:8001")
+    html = weasyprint.HTML(
+        url=url, base_url="https://{}".format(settings.ALLOWED_HOSTS[0])
+    )
     return _generate_pdf(html, bio.slug)
 
 
@@ -35,7 +38,8 @@ def full_timeline(request):
 
 def _generate_pdf(html, filename):
     css = weasyprint.CSS(
-        filename=finders.find("scss/pdf.css"), base_url="http://nginx:8001"
+        filename=finders.find("scss/pdf.css"),
+        base_url="https://{}".format(settings.ALLOWED_HOSTS[0]),
     )
     doc = html.render(stylesheets=[css])
     response = HttpResponse(doc.write_pdf(), content_type="application/pdf")
